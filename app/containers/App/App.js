@@ -8,8 +8,6 @@ import ManageAuthorPage from 'containers/ManageAuthorPage/index';
 import MainPage from 'containers/MainPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import ParticipantPage from 'containers/ParticipantPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
 import './style.scss';
 
 const App = () => (
@@ -17,7 +15,6 @@ const App = () => (
     <Helmet titleTemplate="%s - React.js Boilerplate" defaultTitle="React.js Boilerplate">
       <meta name="description" content="A React.js Boilerplate application" />
     </Helmet>
-    <Header />
 
     <div className="container-fluid">
       <Switch>
@@ -32,7 +29,6 @@ const App = () => (
       </Switch>
     </div>
 
-    <Footer />
   </div>
 );
 
