@@ -14,7 +14,7 @@ export default class AboutPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="participant-wrapper">
         <Helmet>
           <title>Participant (web)</title>
           <meta
@@ -23,14 +23,14 @@ export default class AboutPage extends React.Component {
           />
         </Helmet>
 
-        <div className="logo-head">
-          <img src={logo} alt="logo" className="logo-image" />
-          <div className="logo-title">
+        <div className="participant-logo-head">
+          <img src={logo} alt="logo" />
+          <div>
             <span>Retrospective Dashboard</span><br />
             <p>Join the session and provide feedbacks below.</p>
           </div>
         </div>
-        <div className="logo-clear" />
+        <div className="participant-logo-clear" />
 
         <NicknameProvider />
       </div>
