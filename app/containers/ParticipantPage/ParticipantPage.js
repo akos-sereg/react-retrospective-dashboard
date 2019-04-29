@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import NicknameProvider from '../../components/NicknameProvider';
+import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 
@@ -33,6 +34,8 @@ export default class AboutPage extends React.Component {
         <div className="participant-logo-clear" />
 
         <NicknameProvider />
+        <UnpublishedFeedbackList />
+
       </div>
     );
   }
