@@ -1,0 +1,28 @@
+.logo-head {
+  position: relative;
+}
+
+.logo-image {
+  width: 80px;
+  float: left;
+  padding-bottom: 20px;
+}
+
+.logo-title {
+  float: left;
+  padding-left: 20px;
+
+  span {
+    font-family: Arial;
+    font-size: 21pt;
+  }
+
+  p {
+    font-family: Arial;
+    padding-top: 10px;
+  }
+}
+
+.logo-clear {
+  clear: both;
+}

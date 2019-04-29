@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import NicknameProvider from '../../components/NicknameProvider';
 import './style.scss';
+import logo from '../../assets/meeting-black.png';
 
 export default class AboutPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -13,7 +14,7 @@ export default class AboutPage extends React.Component {
 
   render() {
     return (
-      <div className="about-page">
+      <div>
         <Helmet>
           <title>Participant (web)</title>
           <meta
@@ -21,6 +22,15 @@ export default class AboutPage extends React.Component {
             content="Desktop Participant page"
           />
         </Helmet>
+
+        <div className="logo-head">
+          <img src={logo} alt="logo" className="logo-image" />
+          <div className="logo-title">
+            <span>Retrospective Dashboard</span><br />
+            <p>Join the session and provide feedbacks below.</p>
+          </div>
+        </div>
+        <div className="logo-clear" />
 
         <NicknameProvider />
       </div>

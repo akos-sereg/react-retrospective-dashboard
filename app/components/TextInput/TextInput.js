@@ -22,6 +22,7 @@ export default class TextInput extends React.Component {
             type="text"
             name={this.props.name}
             className="form-control"
+            autoComplete="off"
             placeholder={this.props.placeholder}
             ref={this.props.name}
             value={this.props.value}
