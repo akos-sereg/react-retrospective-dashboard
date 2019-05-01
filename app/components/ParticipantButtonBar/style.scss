@@ -1,0 +1,32 @@
+.participant-button-bar {
+  position: relative;
+  width: 100%;
+
+  .title {
+    left: 0px;
+    position: absolute;
+  }
+
+  .btn-group {
+    right: 0px;
+    position: absolute;
+  }
+}
+
+.gray-dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.green-dot {
+  height: 10px;
+  width: 10px;
+  background-color: #02AF00;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
