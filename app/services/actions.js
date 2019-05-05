@@ -1,9 +1,10 @@
-import {CONNECT_ATTEMPT_FAILED } from './constants';
+import { CONNECT_ATTEMPT_FAILED } from './constants';
 
-export function connectAttemptFailed(payload) {
-  return {
+const connectAttemptFailed = (payload) => (
+  {
     type: CONNECT_ATTEMPT_FAILED,
     payload
-  };
-}
+  });
+
+export { connectAttemptFailed };
 
