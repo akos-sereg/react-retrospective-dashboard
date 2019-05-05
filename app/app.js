@@ -11,13 +11,14 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, routerReducer } from 'react-router-dom';
 import FontFaceObserver from 'fontfaceobserver';
-import createHistory from 'history/createBrowserHistory';
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import nicknameProviderReducer from './components/NicknameProvider/reducer';
 
 // Import root app
 import App from 'containers/App';
@@ -30,8 +31,6 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 // Import CSS reset and Global Styles
 import 'styles/theme.scss';
 
-import configureStore from './configureStore';
-
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});
@@ -43,20 +42,19 @@ openSansObserver.load().then(() => {
   document.body.classList.remove('fontLoaded');
 });
 
-// Create redux store with history
-const initialState = {};
-const history = createHistory();
-const store = configureStore(initialState, history);
+const reducer = combineReducers({
+  nicknameProviderReducer,
+  // router: routerReducer
+})
+export const store = createStore(reducer);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      {/* <LanguageProvider messages={messages}> */}
       <HashRouter>
         <App />
       </HashRouter>
-      {/* </LanguageProvider> */}
     </Provider>,
     MOUNT_NODE
   );

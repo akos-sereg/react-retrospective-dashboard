@@ -1,6 +1,7 @@
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { APP_WEBSOCKET_URL } from '../utils/constants';
+import { CONNECT_ATTEMPT_FAILED } from './constants';
 
 class ParticipantApi {
   instance = null;
@@ -10,6 +11,11 @@ class ParticipantApi {
   isRunning = false;
   stompClient = null;
   socket = null;
+  dispatch = () => {};
+
+  constructor(dispatch) {
+    this.dispatch = dispatch;
+  }
 
   join(username, code, token) {
     this.code = code;
@@ -54,6 +60,7 @@ class ParticipantApi {
       // on error, retry after 3 seconds
       setTimeout(() => {
         console.error('Warning: keepalive service could not start due to websocket failure, reconnecting in 3 seconds');
+        this.dispatch({ type: CONNECT_ATTEMPT_FAILED });
         this.isRunning = false;
         this.start();
       }, 3000);
@@ -92,9 +99,9 @@ class ParticipantApi {
     }, 3000);
   }
 
-  static getInstance() {
+  static getInstance(dispatch) {
     if (ParticipantApi.instance == null) {
-      ParticipantApi.instance = new ParticipantApi();
+      ParticipantApi.instance = new ParticipantApi(dispatch);
     }
 
     return ParticipantApi.instance;

@@ -7,12 +7,7 @@ import {
   CREATE_AUTHOR_SUCCESS
 } from './constants';
 
-// The initial state of the App
-const initialState = fromJS({
-  author: {}
-});
-
-function manageAuthorReducer(state = initialState, action) {
+function manageAuthorReducer(state = {}, action) {
   switch (action.type) {
     case UPDATE_AUTHOR_SUCCESS:
       toastr.success('Author Updated.');

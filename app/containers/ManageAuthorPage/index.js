@@ -9,6 +9,7 @@ import ManageAuthorPage from './ManageAuthorPage';
 import { updateAuthor } from './actions';
 
 const mapDispatchToProps = (dispatch) => ({
+  dispatch,
   onSaveAuthor: (evt, author) => {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();
