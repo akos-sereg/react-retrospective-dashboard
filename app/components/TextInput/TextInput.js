@@ -4,13 +4,8 @@ import './style.scss';
 
 export default class TextInput extends React.Component {
   render() {
-    let wrapperClass = 'form-group wrapper';
-    if (this.props.error && this.props.error.length > 0) {
-      wrapperClass += ' has-error';
-    }
-
     return (
-      <div className={wrapperClass} style={{ width: this.props.width != null ? this.props.width : '100%' }}>
+      <div className="form-group text-input-wrapper" style={{ width: this.props.width != null ? this.props.width : '100%' }}>
         {/* eslint-disable jsx-a11y/label-has-for */}
         {
           this.props.label ?
@@ -28,7 +23,7 @@ export default class TextInput extends React.Component {
             value={this.props.value}
             onChange={this.props.onChange}
           />
-          <div className="input">{this.props.error}</div>
+          <div className="input"></div>
         </div>
       </div>
     );
@@ -41,6 +36,5 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
-  width: PropTypes.string,
-  error: PropTypes.string
+  width: PropTypes.string
 };

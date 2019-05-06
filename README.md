@@ -20,6 +20,10 @@ $ npm run build
 
 This will produce artifacts under ``build`` folder
 
+## To be improved
+
+- Using `import styles from './styles'` to avoid style name collision
+
 ## Stack and Features
 
 #### Language

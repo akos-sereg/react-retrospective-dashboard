@@ -1,14 +1,33 @@
 import { fromJS } from 'immutable';
-import { CONNECT_ATTEMPT_FAILED } from '../../services/constants';
+import {
+  BROKEN_PIPE,
+  CONNECTING,
+  CONNECTED
+} from '../../services/constants';
 
-const initialState = fromJS({ nickname: null, isConnected: true });
+const initialState = fromJS({ nickname: null, isConnected: false, isConnecting: false });
 
 function nicknameProviderReducer(state = initialState, action) {
   switch (action.type) {
-    case CONNECT_ATTEMPT_FAILED:
+    case BROKEN_PIPE:
       return {
         ...state,
-        isConnected: true
+        isConnected: false,
+        isConnecting: false,
+      };
+
+    case CONNECTING:
+      return {
+        ...state,
+        isConnected: false,
+        isConnecting: true,
+      };
+
+    case CONNECTED:
+      return {
+        ...state,
+        isConnected: true,
+        isConnecting: false,
       };
 
     default:

@@ -1,1 +1,3 @@
-export const CONNECT_ATTEMPT_FAILED = 'boilerplate/ParticipantApi/CONNECT_ATTEMPT_FAILED';
+export const BROKEN_PIPE = 'retrospective/ParticipantApi/BROKEN_PIPE';
+export const CONNECTING = 'retrospective/ParticipantApi/CONNECTING';
+export const CONNECTED = 'retrospective/ParticipantApi/CONNECTED';

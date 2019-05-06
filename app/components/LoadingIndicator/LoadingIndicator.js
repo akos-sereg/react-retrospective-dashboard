@@ -1,8 +1,8 @@
 import React from 'react';
-import './style.scss';
+import styles from './style.scss';
 
 const LoadingIndicator = () => (
-  <div className="loading-indicator">
+  <div className={styles['loading-indicator']}>
     <div />
     <div />
     <div />

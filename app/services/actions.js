@@ -1,10 +1,27 @@
-import { CONNECT_ATTEMPT_FAILED } from './constants';
+import {
+  BROKEN_PIPE,
+  CONNECTING,
+  CONNECTED,
+} from './constants';
 
-const connectAttemptFailed = (payload) => (
-  {
-    type: CONNECT_ATTEMPT_FAILED,
-    payload
-  });
+const brokenPipe = (payload) => ({
+  type: BROKEN_PIPE,
+  payload
+});
 
-export { connectAttemptFailed };
+const connecting = (payload) => ({
+  type: CONNECTING,
+  payload
+});
+
+const connected = (payload) => ({
+  type: CONNECTED,
+  payload
+});
+
+export {
+  brokenPipe,
+  connecting,
+  connected
+};
 

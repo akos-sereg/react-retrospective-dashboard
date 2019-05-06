@@ -2,8 +2,9 @@ import connect from 'react-redux/es/connect/connect';
 import NicknameProvider from './NicknameProvider';
 
 const mapStateToProps = (state) => ({
+  ...state,
   isConnected: state.nicknameProviderReducer.isConnected,
-  nickname: state.nicknameProviderReducer.nickname
+  isConnecting: state.nicknameProviderReducer.isConnecting
 });
 
 const mapDispatchToProps = (dispatch) => ({

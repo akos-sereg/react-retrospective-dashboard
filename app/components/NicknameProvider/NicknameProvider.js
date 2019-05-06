@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 import ParticipantApi from '../../services/ParticipantApi';
-import './style.scss';
+import ConnectionIndicator from '../ConnectionIndicator';
 
 class NicknameProvider extends React.Component {
   constructor(props, context) {
@@ -28,10 +28,10 @@ class NicknameProvider extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div>
         <TextInput width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
-        <Button marginTop="30px" label="Join" onClick={this.onJoinClicked} />
-        {this.props.isConnected ? 'true' : 'false'}
+        <Button marginTop="30px" label="Join" onClick={this.onJoinClicked} /><br />
+        <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>
     );
   }
@@ -39,7 +39,8 @@ class NicknameProvider extends React.Component {
 
 NicknameProvider.propTypes = {
   dispatch: PropTypes.func,
-  isConnected: PropTypes.bool
+  isConnected: PropTypes.bool,
+  isConnecting: PropTypes.bool
 };
 
 export default NicknameProvider;

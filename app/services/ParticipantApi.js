@@ -1,7 +1,11 @@
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { APP_WEBSOCKET_URL } from '../utils/constants';
-import { connectAttemptFailed } from './actions';
+import {
+  brokenPipe,
+  connecting,
+  connected
+} from './actions';
 
 class ParticipantApi {
   instance = null;
@@ -46,9 +50,12 @@ class ParticipantApi {
     // this.socket = new SockJS(APP_WEBSOCKET_URL); // <- this could be used for normal websocket transport
     this.socket = new SockJS(APP_WEBSOCKET_URL, null, { transports: ['xhr-streaming', 'xhr-polling'] });
     this.stompClient = Stomp.over(this.socket);
+
+    this.dispatch(connecting());
     this.stompClient.connect({}, () => {
       // on success
       try {
+        this.dispatch(connected());
         this.isRunning = true;
         this.stompClient.send(`/app/board/join/${this.code}/${this.token}`, {}, JSON.stringify({ username: this.username }));
       } catch (error) {
@@ -59,8 +66,8 @@ class ParticipantApi {
     }, () => {
       // on error, retry after 3 seconds
       setTimeout(() => {
+        this.dispatch(brokenPipe());
         console.error('Warning: keepalive service could not start due to websocket failure, reconnecting in 3 seconds');
-        this.dispatch(connectAttemptFailed());
         this.isRunning = false;
         this.start();
       }, 3000);
@@ -83,6 +90,7 @@ class ParticipantApi {
           setTimeout(() => {
             // we attempt to reconnect with a little delay, connection might have been restored by a previous cycle
             if (!this.stompClient.connected) {
+              this.dispatch(brokenPipe());
               console.error('Warning: keepalive message could not be sent (broken pipe), reconnecting in 3 seconds');
               this.isRunning = false;
               this.start();
