@@ -3,7 +3,7 @@ import {
   BROKEN_PIPE,
   CONNECTING,
   CONNECTED
-} from '../../services/constants';
+} from '../../utils/constants';
 
 const initialState = fromJS({ nickname: null, isConnected: false, isConnecting: false });
 

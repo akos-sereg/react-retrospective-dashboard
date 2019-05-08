@@ -2,7 +2,7 @@ import {
   BROKEN_PIPE,
   CONNECTING,
   CONNECTED,
-} from './constants';
+} from '../utils/constants';
 
 const brokenPipe = (payload) => ({
   type: BROKEN_PIPE,

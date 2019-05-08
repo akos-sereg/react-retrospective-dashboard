@@ -1,24 +1,16 @@
-/**
- * app.js
- *
- * This is the entry file for the application, only setup and boilerplate
- * code.
- */
-
-// Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
-// Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { HashRouter, routerReducer } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import FontFaceObserver from 'fontfaceobserver';
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import nicknameProviderReducer from './components/NicknameProvider/reducer';
+import participantButtonBarReducer from './components/ParticipantButtonBar/reducer';
 
 // Import root app
 import App from 'containers/App';
@@ -44,6 +36,7 @@ openSansObserver.load().then(() => {
 
 const reducer = combineReducers({
   nicknameProviderReducer,
+  participantButtonBarReducer,
   // router: routerReducer
 })
 export const store = createStore(reducer);

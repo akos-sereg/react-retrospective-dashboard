@@ -15,6 +15,7 @@ class ParticipantApi {
   isRunning = false;
   stompClient = null;
   socket = null;
+  participantState = 'in-progress'; // in-progress|ready
   dispatch = () => {};
 
   constructor(dispatch) {
