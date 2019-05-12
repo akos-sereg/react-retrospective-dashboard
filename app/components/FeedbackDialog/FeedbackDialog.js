@@ -11,13 +11,25 @@ class FeedbackDialog extends React.Component {
   constructor() {
     super();
 
-    this.state = { };
+    this.state = { commentText: null };
     this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.createFeedback = this.createFeedback.bind(this);
+    this.handleCommentTextChange = this.handleCommentTextChange.bind(this);
   }
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
     // this.subtitle.style.color = '#f00';
+  }
+
+  createFeedback() {
+    this.props.onSave({ mood: this.props.feedback.mood, comment: this.state.commentText });
+    this.props.dispatch(feedbackDialogClosing());
+  }
+
+  handleCommentTextChange(element) {
+    const text = element.target.value;
+    this.setState(() => ({ ...this.state, commentText: text }));
   }
 
   render() {
@@ -45,18 +57,18 @@ class FeedbackDialog extends React.Component {
         >
 
           <h4>Create Feedback</h4>
-          <hr align />
+          <hr align="true" />
           <GladSadMad feedback={this.props.feedback} dispatch={this.props.dispatch} />
           <div className="div-clear" />
 
           <div className="form-group">
             <label htmlFor="feedback-comment">Comment:
-              <textarea className="form-control" id="feedback-comment" />
+              <textarea onChange={(e) => this.handleCommentTextChange(e)} className="form-control" id="feedback-comment" />
             </label>
           </div>
 
           <div className="feedback-dialog-buttons">
-            <Button float="right" onClick={() => {}} label="Submit" />
+            <Button float="right" marginLeft="10" onClick={this.createFeedback} buttonType="primary" label="Create" />
             <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} label="Cancel" />
           </div>
 
@@ -70,7 +82,8 @@ class FeedbackDialog extends React.Component {
 FeedbackDialog.propTypes = {
   dispatch: PropTypes.func,
   modalIsOpen: PropTypes.bool,
-  feedback: PropTypes.object
+  feedback: PropTypes.object,
+  onSave: PropTypes.func
 };
 
 export default FeedbackDialog;

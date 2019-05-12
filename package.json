@@ -57,6 +57,7 @@
     "sockjs-client": "^1.3.0",
     "stompjs": "^2.3.3",
     "toastr": "^2.1.4",
+    "uuid": "^3.3.2",
     "warning": "^4.0.1",
     "whatwg-fetch": "2.0.4"
   },

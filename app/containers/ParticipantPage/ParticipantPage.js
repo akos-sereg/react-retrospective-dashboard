@@ -4,6 +4,7 @@ import NicknameProvider from '../../components/NicknameProvider';
 import ParticipantButtonBar from '../../components/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
 import FeedbackDialog from '../../components/FeedbackDialog';
+import commentsService from '../../services/LocalStorageOfCommentsService';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 
@@ -12,11 +13,16 @@ export default class ParticipantPage extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.handleFeedbackSave = this.handleFeedbackSave.bind(this);
   }
 
   shouldComponentUpdate() {
     // static site, no need to update anything
     return false;
+  }
+
+  handleFeedbackSave(feedback) {
+    commentsService.create(feedback);
   }
 
   render() {
@@ -45,7 +51,7 @@ export default class ParticipantPage extends React.Component {
         <ParticipantButtonBar />
         <UnpublishedFeedbackList />
 
-        <FeedbackDialog id={ParticipantPage.FEEDBACK_DIALOG_ID} />
+        <FeedbackDialog onSave={this.handleFeedbackSave} />
 
       </div>
     );

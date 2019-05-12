@@ -30,7 +30,7 @@ class NicknameProvider extends React.Component {
     return (
       <div>
         <TextInput width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
-        <Button marginTop="30px" label="Join" onClick={this.onJoinClicked} /><br />
+        <Button marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
         <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>
     );

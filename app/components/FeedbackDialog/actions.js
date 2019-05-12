@@ -1,4 +1,7 @@
-import { FEEDBACK_DIALOG_CLOSING, MOOD_SELECTED } from '../../utils/constants';
+import {
+  FEEDBACK_DIALOG_CLOSING,
+  MOOD_SELECTED,
+} from '../../utils/constants';
 
 const feedbackDialogClosing = () => ({
   type: FEEDBACK_DIALOG_CLOSING,
@@ -10,4 +13,7 @@ const moodSelected = (mood) => ({
   payload: { mood }
 });
 
-export { feedbackDialogClosing, moodSelected };
+export {
+  feedbackDialogClosing,
+  moodSelected
+};
