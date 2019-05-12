@@ -1,13 +1,10 @@
-import { fromJS } from 'immutable';
 import {
   BROKEN_PIPE,
   CONNECTING,
   CONNECTED
 } from '../../utils/constants';
 
-const initialState = fromJS({ nickname: null, isConnected: false, isConnecting: false });
-
-function nicknameProviderReducer(state = initialState, action) {
+function nicknameProviderReducer(state = {}, action) {
   switch (action.type) {
     case BROKEN_PIPE:
       return {

@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import Modal from 'react-modal';
 import { HashRouter } from 'react-router-dom';
 import FontFaceObserver from 'fontfaceobserver';
 import 'sanitize.css/sanitize.css';
@@ -11,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import nicknameProviderReducer from './components/NicknameProvider/reducer';
 import participantButtonBarReducer from './components/ParticipantButtonBar/reducer';
+import feedbackDialogReducer from './components/FeedbackDialog/reducer';
+import participantApiReducer from './services/reducer';
 
 // Import root app
 import App from 'containers/App';
@@ -37,10 +40,13 @@ openSansObserver.load().then(() => {
 const reducer = combineReducers({
   nicknameProviderReducer,
   participantButtonBarReducer,
+  participantApiReducer,
+  feedbackDialogReducer
   // router: routerReducer
 })
 export const store = createStore(reducer);
 const MOUNT_NODE = document.getElementById('app');
+Modal.setAppElement('#app')
 
 const render = () => {
   ReactDOM.render(

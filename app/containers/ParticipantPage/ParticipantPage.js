@@ -3,11 +3,16 @@ import { Helmet } from 'react-helmet';
 import NicknameProvider from '../../components/NicknameProvider';
 import ParticipantButtonBar from '../../components/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
+import FeedbackDialog from '../../components/FeedbackDialog';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 
-export default class AboutPage extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
+export default class ParticipantPage extends React.Component {
+  static FEEDBACK_DIALOG_ID = 'feedback-dialog';
+
+  constructor(props, context) {
+    super(props, context);
+  }
 
   shouldComponentUpdate() {
     // static site, no need to update anything
@@ -39,6 +44,8 @@ export default class AboutPage extends React.Component {
 
         <ParticipantButtonBar />
         <UnpublishedFeedbackList />
+
+        <FeedbackDialog id={ParticipantPage.FEEDBACK_DIALOG_ID} />
 
       </div>
     );

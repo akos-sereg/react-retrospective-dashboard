@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ParticipantApi from '../../services/ParticipantApi';
-import { userReadyStateChanged } from './actions';
+import { userReadyStateChanged, createFeedbackClicked } from './actions';
 import './style.scss';
 
 class ParticipantButtonBar extends React.Component {
@@ -9,15 +8,18 @@ class ParticipantButtonBar extends React.Component {
     super(props, context);
     this.state = { isUserReady: false };
 
-    this.participantService = ParticipantApi.getInstance(this.props.dispatch);
     this.onUserReadyStateChanged = this.onUserReadyStateChanged.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   onUserReadyStateChanged() {
     const newState = !this.state.isUserReady;
     this.setState(() => ({ ...this.state, isUserReady: newState }));
     this.props.dispatch(userReadyStateChanged(newState));
-    this.participantService.participantState = newState ? 'ready' : 'in-progress';
+  }
+
+  handleCreate() {
+    this.props.dispatch(createFeedbackClicked());
   }
 
   render() {
@@ -32,8 +34,7 @@ class ParticipantButtonBar extends React.Component {
             I am ready
           </button>
           <button id="publish-all-btn" type="button" className="btn btn-primary btn-sm" disabled="">Publish All</button>
-          <button type="button" className="btn btn-success btn-sm">Create
-          </button>
+          <button onClick={() => this.handleCreate()} type="button" className="btn btn-success btn-sm">Create</button>
         </div>
       </div>
     );
@@ -42,6 +43,7 @@ class ParticipantButtonBar extends React.Component {
 
 ParticipantButtonBar.propTypes = {
   dispatch: PropTypes.func,
+  feedbackDialogId: PropTypes.string,
 };
 
 export default ParticipantButtonBar;

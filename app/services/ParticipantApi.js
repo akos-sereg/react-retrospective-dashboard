@@ -110,6 +110,10 @@ class ParticipantApi {
 
   static getInstance(dispatch) {
     if (ParticipantApi.instance == null) {
+      if (!dispatch) {
+        return null;
+      }
+
       ParticipantApi.instance = new ParticipantApi(dispatch);
     }
 
