@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { feedbackDialogClosing } from './actions';
 import './style.scss';
+import Button from '../Button';
 
 class FeedbackDialog extends React.Component {
   constructor() {
     super();
 
-    this.state = { modalIsOpen: false };
-
+    this.state = { };
     this.afterOpenModal = this.afterOpenModal.bind(this);
   }
 
@@ -43,7 +43,13 @@ class FeedbackDialog extends React.Component {
         >
 
           <h4>Create Feedback</h4>
+          <div className="form-group">
+            <label htmlFor="feedback-comment">Comment:
+              <textarea className="form-control" id="feedback-comment" />
+            </label>
+          </div>
 
+          <Button onClick={() => {}} label="Submit" />
 
 
         </Modal>
