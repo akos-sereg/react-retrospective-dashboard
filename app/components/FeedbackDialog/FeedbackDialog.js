@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { feedbackDialogClosing } from './actions';
 import './style.scss';
+import '../../styles/global-styles.scss';
 import Button from '../Button';
+import GladSadMad from './variations/GladSadMad';
 
 class FeedbackDialog extends React.Component {
   constructor() {
@@ -43,13 +45,20 @@ class FeedbackDialog extends React.Component {
         >
 
           <h4>Create Feedback</h4>
+          <hr align />
+          <GladSadMad feedback={this.props.feedback} dispatch={this.props.dispatch} />
+          <div className="div-clear" />
+
           <div className="form-group">
             <label htmlFor="feedback-comment">Comment:
               <textarea className="form-control" id="feedback-comment" />
             </label>
           </div>
 
-          <Button onClick={() => {}} label="Submit" />
+          <div className="feedback-dialog-buttons">
+            <Button float="right" onClick={() => {}} label="Submit" />
+            <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} label="Cancel" />
+          </div>
 
 
         </Modal>
@@ -61,6 +70,7 @@ class FeedbackDialog extends React.Component {
 FeedbackDialog.propTypes = {
   dispatch: PropTypes.func,
   modalIsOpen: PropTypes.bool,
+  feedback: PropTypes.object
 };
 
 export default FeedbackDialog;
