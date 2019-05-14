@@ -6,7 +6,7 @@ import './style.scss';
 class UnpublishedFeedbackList extends React.Component {
   render() {
     const unpublishedFeedbacks = this.props.feedbacks.map((feedback) => (
-      <UnpublishedFeedback key={feedback.id} comment={feedback.comment} />
+      <UnpublishedFeedback key={feedback.id} comment={feedback.comment} mood={feedback.mood} />
     ));
 
     return (
