@@ -23,6 +23,9 @@ This will produce artifacts under ``build`` folder
 ## To be improved
 
 - Using `import styles from './styles'` to avoid style name collision
+- Create TextArea component and use in FeedbackDialog
+- Clean up app.js
+- Fix linter issues
 
 ## Stack and Features
 

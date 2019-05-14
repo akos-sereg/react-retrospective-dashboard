@@ -1,6 +1,6 @@
 import {
   FEEDBACK_DIALOG_CLOSING,
-  MOOD_SELECTED,
+  MOOD_SELECTED
 } from '../../utils/constants';
 
 const feedbackDialogClosing = () => ({

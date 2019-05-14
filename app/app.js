@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import nicknameProviderReducer from './components/NicknameProvider/reducer';
 import participantButtonBarReducer from './components/ParticipantButtonBar/reducer';
 import feedbackDialogReducer from './components/FeedbackDialog/reducer';
+import unpublishedFeedbackListReducer from './components/UnpublishedFeedbackList/reducer';
 import participantApiReducer from './services/reducer';
 
 // Import root app
@@ -41,7 +42,8 @@ const reducer = combineReducers({
   nicknameProviderReducer,
   participantButtonBarReducer,
   participantApiReducer,
-  feedbackDialogReducer
+  feedbackDialogReducer,
+  unpublishedFeedbackListReducer
   // router: routerReducer
 })
 export const store = createStore(reducer);
