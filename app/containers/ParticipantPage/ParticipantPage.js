@@ -64,14 +64,17 @@ class ParticipantPage extends React.Component {
   }
 
   async handleFeedbackPublishAll() {
+    const feedbacks = this.commentsService.getFeedbackList();
     const response = await this.participantApi.publish(
-      this.commentsService.getFeedbackList(),
+      feedbacks,
       this.state.nickname,
       this.props.match.params.code,
       this.props.match.params.token
     );
 
     if (response.code === 200) {
+      const ids = feedbacks.map((f) => f.id);
+      ids.map((id) => this.commentsService.delete(id));
       this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
     }
   }
@@ -96,10 +99,15 @@ class ParticipantPage extends React.Component {
         </div>
         <div className="div-clear" />
 
-        <NicknameProvider onJoined={this.handleJoined} />
+        <NicknameProvider
+          onJoined={this.handleJoined}
+          code={this.props.match.params.code}
+          token={this.props.match.params.token}
+        />
         <div className="div-clear" />
 
         <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} />
+
         <UnpublishedFeedbackList
           feedbacks={this.props.feedbacks}
           onDelete={this.handleFeedbackDelete}

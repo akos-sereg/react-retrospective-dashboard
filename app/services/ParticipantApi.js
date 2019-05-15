@@ -8,6 +8,7 @@
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import 'whatwg-fetch';
+import ParticipantApiMock from './ParticipantApi.Mock';
 import { APP_WEBSOCKET_URL, APP_BASE_URL } from '../utils/constants';
 import {
   brokenPipe,
@@ -30,7 +31,7 @@ class ParticipantApi {
     this.dispatch = dispatch;
   }
 
-  join(username, code, token) {
+  async join(username, code, token) {
     this.code = code;
     this.token = token;
     this.username = username;
@@ -152,7 +153,8 @@ class ParticipantApi {
         return null;
       }
 
-      ParticipantApi.instance = new ParticipantApi(dispatch);
+      // ParticipantApi.instance = new ParticipantApiMock(dispatch);
+      ParticipantApi.instance = new ParticipantApiMock(dispatch);
     }
 
     return ParticipantApi.instance;

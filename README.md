@@ -1,4 +1,4 @@
-# react-redux-boilerplate
+# react-retrospective-dashboard
 
 This project is a working standalone front-end app aiming to demonstrate best javascript practices and common usage of React / Redux. 
 
@@ -26,6 +26,8 @@ This will produce artifacts under ``build`` folder
 - Validate non-empty nickname when joining
 - Validate that we received token and code in url
 - Error Handling on Publish feedback / Publish all
+- Mock Service
+- Add toastr notification on publish and publish all and delete and edit and create
 
 ## To be improved
 
@@ -33,6 +35,8 @@ This will produce artifacts under ``build`` folder
 - Create TextArea component and use in FeedbackDialog
 - Clean up app.js
 - Fix linter issues
+- Tests to be added
+- Better UI design
 
 ## Stack and Features
 

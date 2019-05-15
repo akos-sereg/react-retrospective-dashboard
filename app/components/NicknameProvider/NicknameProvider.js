@@ -9,10 +9,11 @@ class NicknameProvider extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.participantService = ParticipantApi.getInstance(this.props.dispatch);
     this.state = {
       nickname: ''
     };
+
+    this.participantService = ParticipantApi.getInstance(this.props.dispatch);
 
     this.onJoinClicked = this.onJoinClicked.bind(this);
     this.onNicknameChanged = this.onNicknameChanged.bind(this);
@@ -20,7 +21,7 @@ class NicknameProvider extends React.Component {
 
   onJoinClicked() {
     this.props.onJoined(this.state.nickname);
-    this.participantService.join(this.state.nickname);
+    this.participantService.join(this.state.nickname, this.props.code, this.props.token);
   }
 
   onNicknameChanged(event) {
@@ -42,7 +43,9 @@ NicknameProvider.propTypes = {
   dispatch: PropTypes.func,
   onJoined: PropTypes.func.isRequired,
   isConnected: PropTypes.bool,
-  isConnecting: PropTypes.bool
+  isConnecting: PropTypes.bool,
+  code: PropTypes.string,
+  token: PropTypes.string
 };
 
 export default NicknameProvider;
