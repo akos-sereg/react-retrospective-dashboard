@@ -33,7 +33,13 @@ class FeedbackDialog extends React.Component {
   }
 
   updateFeedback() {
+    this.props.onUpdate({
+      id: this.props.feedback.id,
+      mood: this.props.feedback.mood,
+      comment: this.state.commentText,
+    });
 
+    this.props.dispatch(feedbackDialogClosing());
   }
 
   handleCommentTextChange(element) {
@@ -102,6 +108,7 @@ FeedbackDialog.propTypes = {
   modalIsOpen: PropTypes.bool,
   feedback: PropTypes.object,
   onSave: PropTypes.func,
+  onUpdate: PropTypes.func,
   mode: PropTypes.string
 };
 

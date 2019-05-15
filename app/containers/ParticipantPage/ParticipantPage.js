@@ -13,8 +13,11 @@ import logo from '../../assets/meeting-black.png';
 class ParticipantPage extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     this.handleFeedbackSave = this.handleFeedbackSave.bind(this);
+    this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this);
     this.handleFeedbackDelete = this.handleFeedbackDelete.bind(this);
+
     this.commentsService = LocalStorageOfCommentsService.getInstance(this.props.dispatch);
   }
 
@@ -24,6 +27,10 @@ class ParticipantPage extends React.Component {
 
   handleFeedbackSave(feedback) {
     this.commentsService.create(feedback);
+  }
+
+  handleFeedbackUpdate(feedback) {
+    this.commentsService.update(feedback);
   }
 
   handleFeedbackDelete(feedbackId) {
@@ -56,7 +63,7 @@ class ParticipantPage extends React.Component {
         <ParticipantButtonBar />
         <UnpublishedFeedbackList feedbacks={this.props.feedbacks} onDelete={this.handleFeedbackDelete} />
 
-        <FeedbackDialog onSave={this.handleFeedbackSave} />
+        <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} />
 
       </div>
     );

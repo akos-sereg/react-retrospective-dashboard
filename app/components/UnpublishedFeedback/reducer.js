@@ -1,15 +1,16 @@
-import { FEEDBACK_DELETED } from '../../utils/constants';
+import { FEEDBACK_UPDATED } from '../../utils/constants';
 
-function feedbackDialogReducer(state = {}, action) {
+function unpublishedFeedbackReducer(state = {}, action) {
   switch (action.type) {
-    case FEEDBACK_DELETED:
+    case FEEDBACK_UPDATED: {
       return {
         ...state,
       };
+    }
 
     default:
       return { ...state };
   }
 }
 
-export default feedbackDialogReducer;
+export default unpublishedFeedbackReducer;

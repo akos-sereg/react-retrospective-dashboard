@@ -1,8 +1,14 @@
-import { FEEDBACK_SAVED, FEEDBACK_DELETED, PAGE_LOADING } from '../../utils/constants';
+import { FEEDBACK_SAVED, FEEDBACK_UPDATED, FEEDBACK_DELETED, PAGE_LOADING } from '../../utils/constants';
 
 function unpublishedFeedbackListReducer(state = {}, action) {
   switch (action.type) {
     case FEEDBACK_SAVED:
+      return {
+        ...state,
+        feedbacks: action.payload.feedbacks,
+      };
+
+    case FEEDBACK_UPDATED:
       return {
         ...state,
         feedbacks: action.payload.feedbacks,
