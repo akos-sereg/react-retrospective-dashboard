@@ -6,6 +6,7 @@ import './style.scss';
 class ParticipantButtonBar extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     this.state = { isUserReady: false };
 
     this.onUserReadyStateChanged = this.onUserReadyStateChanged.bind(this);
@@ -33,7 +34,7 @@ class ParticipantButtonBar extends React.Component {
             <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
             I am ready
           </button>
-          <button id="publish-all-btn" type="button" className="btn btn-primary btn-sm" disabled="">Publish All</button>
+          <button onClick={this.props.onPublishAll} id="publish-all-btn" type="button" className="btn btn-primary btn-sm" disabled="">Publish All</button>
           <button onClick={this.handleCreate} type="button" className="btn btn-success btn-sm">Create</button>
         </div>
       </div>
@@ -43,6 +44,7 @@ class ParticipantButtonBar extends React.Component {
 
 ParticipantButtonBar.propTypes = {
   dispatch: PropTypes.func,
+  onPublishAll: PropTypes.func.isRequired,
   isFeedbackDialogOpen: PropTypes.bool,
 };
 

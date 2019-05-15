@@ -25,6 +25,7 @@ This will produce artifacts under ``build`` folder
 - Validate joined state when publishing / publishing all
 - Validate non-empty nickname when joining
 - Validate that we received token and code in url
+- Error Handling on Publish feedback / Publish all
 
 ## To be improved
 

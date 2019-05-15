@@ -7,7 +7,7 @@
 
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import { fetch } from 'whatwg-fetch';
+import 'whatwg-fetch';
 import { APP_WEBSOCKET_URL, APP_BASE_URL } from '../utils/constants';
 import {
   brokenPipe,
@@ -37,24 +37,24 @@ class ParticipantApi {
     this.start();
   }
 
-  publish(feedback, username, code, token) {
-    debugger;
-    fetch(`${APP_BASE_URL}/rest/participant/sticker/${code}/${token}`, {
+  async publish(feedbacks, username, code, token) {
+
+    const payload = feedbacks.map((feedback) => ({
+      comment: feedback.comment,
+      username,
+      glad: this.getGladDoubleFromMood(feedback.mood),
+      noControl: 1.0,
+      sessionCode: code,
+      sessionToken: token,
+    }));
+
+    return fetch(`${APP_BASE_URL}/rest/participant/sticker/${code}/${token}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([
-        {
-          comment: feedback.comment,
-          username,
-          glad: this.getGladDoubleFromMood(feedback.mood),
-          noControl: 1.0,
-          sessionCode: code,
-          sessionToken: token,
-        }
-      ])
+      body: JSON.stringify(payload)
     });
   }
 

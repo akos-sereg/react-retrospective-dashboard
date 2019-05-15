@@ -24,6 +24,7 @@ class ParticipantPage extends React.Component {
     this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this);
     this.handleFeedbackDelete = this.handleFeedbackDelete.bind(this);
     this.handleFeedbackPublish = this.handleFeedbackPublish.bind(this);
+    this.handleFeedbackPublishAll = this.handleFeedbackPublishAll.bind(this);
 
     this.commentsService = LocalStorageOfCommentsService.getInstance(this.props.dispatch);
     this.participantApi = ParticipantApi.getInstance(this.props.dispatch);
@@ -49,9 +50,30 @@ class ParticipantPage extends React.Component {
     this.commentsService.delete(feedbackId);
   }
 
-  handleFeedbackPublish(feedback) {
-    debugger;
-    this.participantApi.publish(feedback, this.state.nickname, this.props.match.params.code, this.props.match.params.token);
+  async handleFeedbackPublish(feedback) {
+    const response = await this.participantApi.publish(
+      [feedback],
+      this.state.nickname,
+      this.props.match.params.code,
+      this.props.match.params.token
+    );
+
+    if (response.code === 200) {
+      this.commentsService.delete(feedback.id);
+    }
+  }
+
+  async handleFeedbackPublishAll() {
+    const response = await this.participantApi.publish(
+      this.commentsService.getFeedbackList(),
+      this.state.nickname,
+      this.props.match.params.code,
+      this.props.match.params.token
+    );
+
+    if (response.code === 200) {
+      this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+    }
   }
 
   render() {
@@ -77,7 +99,7 @@ class ParticipantPage extends React.Component {
         <NicknameProvider onJoined={this.handleJoined} />
         <div className="div-clear" />
 
-        <ParticipantButtonBar />
+        <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} />
         <UnpublishedFeedbackList
           feedbacks={this.props.feedbacks}
           onDelete={this.handleFeedbackDelete}
