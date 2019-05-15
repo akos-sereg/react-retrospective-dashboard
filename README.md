@@ -20,6 +20,12 @@ $ npm run build
 
 This will produce artifacts under ``build`` folder
 
+## To be implemented
+- Validate non-empty text on create feedback / update feedback
+- Validate joined state when publishing / publishing all
+- Validate non-empty nickname when joining
+- Validate that we received token and code in url
+
 ## To be improved
 
 - Using `import styles from './styles'` to avoid style name collision

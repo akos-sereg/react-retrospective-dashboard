@@ -1,6 +1,14 @@
+/**
+ * This class is responsible for
+ *  - keeping websocket connection stable between Participant and the backend service
+ *    sending heartbeat messages along with the participant's status (ready, not ready)
+ *  - publishing feedbacks
+ */
+
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import { APP_WEBSOCKET_URL } from '../utils/constants';
+import { fetch } from 'whatwg-fetch';
+import { APP_WEBSOCKET_URL, APP_BASE_URL } from '../utils/constants';
 import {
   brokenPipe,
   connecting,
@@ -27,6 +35,36 @@ class ParticipantApi {
     this.token = token;
     this.username = username;
     this.start();
+  }
+
+  publish(feedback, username, code, token) {
+    debugger;
+    fetch(`${APP_BASE_URL}/rest/participant/sticker/${code}/${token}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([
+        {
+          comment: feedback.comment,
+          username,
+          glad: this.getGladDoubleFromMood(feedback.mood),
+          noControl: 1.0,
+          sessionCode: code,
+          sessionToken: token,
+        }
+      ])
+    });
+  }
+
+  getGladDoubleFromMood(mood) {
+    switch (mood) {
+      case 'glad': return 1.0;
+      case 'sad': return 0.5;
+      case 'mad': return 0.0;
+      default: return 1.0;
+    }
   }
 
   start() {

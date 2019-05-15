@@ -10,11 +10,25 @@ import assetMad from '../../assets/mad.png';
 class UnpublishedFeedback extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handlePublish = this.handlePublish.bind(this);
   }
 
-  handleEdit() {
+  handleDelete(event) {
+    event.preventDefault();
+    this.props.onDelete(this.props.feedback.id);
+  }
+
+  handleEdit(event) {
+    event.preventDefault();
     this.props.dispatch(editFeedback(this.props.feedback));
+  }
+
+  handlePublish(event) {
+    event.preventDefault();
+    this.props.onPublish(this.props.feedback);
   }
 
   render() {
@@ -31,8 +45,9 @@ class UnpublishedFeedback extends React.Component {
         <div className="div-clear"></div>
 
         <div className="feedback-card-actions">
-          <a href="#" onClick={() => this.props.onDelete(this.props.feedback.id)}>Delete</a><br />
-          <a href="#" onClick={this.handleEdit}>Edit</a><br />
+          <a href="#" onClick={(e) => this.handleDelete(e)}>Delete</a><br />
+          <a href="#" onClick={(e) => this.handleEdit(e)}>Edit</a><br />
+          <a href="#" onClick={(e) => this.handlePublish(e)}>Publish</a><br />
         </div>
 
       </div>
@@ -63,6 +78,7 @@ class UnpublishedFeedback extends React.Component {
 UnpublishedFeedback.propTypes = {
   dispatch: PropTypes.func,
   onDelete: PropTypes.func.isRequired,
+  onPublish: PropTypes.func.isRequired,
   feedback: PropTypes.object.isRequired,
 };
 

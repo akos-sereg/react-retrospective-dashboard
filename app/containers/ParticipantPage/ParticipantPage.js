@@ -6,6 +6,7 @@ import ParticipantButtonBar from '../../components/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
 import FeedbackDialog from '../../components/FeedbackDialog';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
+import ParticipantApi from '../../services/ParticipantApi';
 import { pageLoading } from './actions';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
@@ -14,15 +15,26 @@ class ParticipantPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      nickname: null,
+    };
+
+    this.handleJoined = this.handleJoined.bind(this);
     this.handleFeedbackSave = this.handleFeedbackSave.bind(this);
     this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this);
     this.handleFeedbackDelete = this.handleFeedbackDelete.bind(this);
+    this.handleFeedbackPublish = this.handleFeedbackPublish.bind(this);
 
     this.commentsService = LocalStorageOfCommentsService.getInstance(this.props.dispatch);
+    this.participantApi = ParticipantApi.getInstance(this.props.dispatch);
   }
 
   componentWillMount() {
     this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+  }
+
+  handleJoined(nickname) {
+    this.setState(() => ({ ...this.state, nickname }));
   }
 
   handleFeedbackSave(feedback) {
@@ -35,6 +47,11 @@ class ParticipantPage extends React.Component {
 
   handleFeedbackDelete(feedbackId) {
     this.commentsService.delete(feedbackId);
+  }
+
+  handleFeedbackPublish(feedback) {
+    debugger;
+    this.participantApi.publish(feedback, this.state.nickname, this.props.match.params.code, this.props.match.params.token);
   }
 
   render() {
@@ -57,11 +74,15 @@ class ParticipantPage extends React.Component {
         </div>
         <div className="div-clear" />
 
-        <NicknameProvider />
+        <NicknameProvider onJoined={this.handleJoined} />
         <div className="div-clear" />
 
         <ParticipantButtonBar />
-        <UnpublishedFeedbackList feedbacks={this.props.feedbacks} onDelete={this.handleFeedbackDelete} />
+        <UnpublishedFeedbackList
+          feedbacks={this.props.feedbacks}
+          onDelete={this.handleFeedbackDelete}
+          onPublish={this.handleFeedbackPublish}
+        />
 
         <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} />
 
@@ -73,6 +94,7 @@ class ParticipantPage extends React.Component {
 ParticipantPage.propTypes = {
   dispatch: PropTypes.func,
   feedbacks: PropTypes.array,
+  match: PropTypes.object.isRequired
 };
 
 export default ParticipantPage;

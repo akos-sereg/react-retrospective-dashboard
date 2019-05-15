@@ -15,7 +15,7 @@ const App = () => (
     <div className="container-fluid">
       <Switch>
         <Route exact path="/" component={ParticipantPage} />
-        <Route path="/participant" component={ParticipantPage} />
+        <Route path="/code/:code/token/:token" component={ParticipantPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
     </div>

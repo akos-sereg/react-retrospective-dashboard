@@ -19,6 +19,7 @@ class NicknameProvider extends React.Component {
   }
 
   onJoinClicked() {
+    this.props.onJoined(this.state.nickname);
     this.participantService.join(this.state.nickname);
   }
 
@@ -39,6 +40,7 @@ class NicknameProvider extends React.Component {
 
 NicknameProvider.propTypes = {
   dispatch: PropTypes.func,
+  onJoined: PropTypes.func.isRequired,
   isConnected: PropTypes.bool,
   isConnecting: PropTypes.bool
 };
