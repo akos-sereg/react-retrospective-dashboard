@@ -1,5 +1,5 @@
 import uuidv4 from 'uuid/v4';
-import { feedbackSaved } from './actions';
+import { feedbackSaved, feedbackDeleted } from './actions';
 
 class LocalStorageOfCommentsService {
   static LOCAL_STORAGE_KEY = 'retro-board-feedbacks';
@@ -18,8 +18,13 @@ class LocalStorageOfCommentsService {
     localStorage.setItem(LocalStorageOfCommentsService.LOCAL_STORAGE_KEY, JSON.stringify(persistedFeedbacks));
 
     this.dispatch(feedbackSaved(feedback, this.getFeedbackList()));
-
     return feedback;
+  }
+
+  delete(feedbackId) {
+    const comments = this.getFeedbackList().filter((comment) => comment.id !== feedbackId);
+    localStorage.setItem(LocalStorageOfCommentsService.LOCAL_STORAGE_KEY, JSON.stringify(comments));
+    this.dispatch(feedbackDeleted(feedbackId, this.getFeedbackList()));
   }
 
   getFeedbackList() {
@@ -42,7 +47,6 @@ class LocalStorageOfCommentsService {
 
     return LocalStorageOfCommentsService.instance;
   }
-
 }
 
 export default LocalStorageOfCommentsService;

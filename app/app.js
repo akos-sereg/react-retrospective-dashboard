@@ -14,6 +14,8 @@ import nicknameProviderReducer from './components/NicknameProvider/reducer';
 import participantButtonBarReducer from './components/ParticipantButtonBar/reducer';
 import feedbackDialogReducer from './components/FeedbackDialog/reducer';
 import unpublishedFeedbackListReducer from './components/UnpublishedFeedbackList/reducer';
+import unpublishedFeedbackReducer from './components/UnpublishedFeedback/reducer';
+import participantPageReducer from './containers/ParticipantPage/reducer';
 import participantApiReducer from './services/reducer';
 
 // Import root app
@@ -43,8 +45,9 @@ const reducer = combineReducers({
   participantButtonBarReducer,
   participantApiReducer,
   feedbackDialogReducer,
-  unpublishedFeedbackListReducer
-  // router: routerReducer
+  unpublishedFeedbackListReducer,
+  unpublishedFeedbackReducer,
+  participantPageReducer
 })
 export const store = createStore(reducer);
 const MOUNT_NODE = document.getElementById('app');

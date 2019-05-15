@@ -6,6 +6,7 @@ import ParticipantButtonBar from '../../components/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
 import FeedbackDialog from '../../components/FeedbackDialog';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
+import { pageLoading } from './actions';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 
@@ -13,16 +14,20 @@ class ParticipantPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.handleFeedbackSave = this.handleFeedbackSave.bind(this);
-    this.commentsService = new LocalStorageOfCommentsService(this.props.dispatch);
+    this.handleFeedbackDelete = this.handleFeedbackDelete.bind(this);
+    this.commentsService = LocalStorageOfCommentsService.getInstance(this.props.dispatch);
   }
 
-  shouldComponentUpdate() {
-    // static site, no need to update anything
-    return false;
+  componentWillMount() {
+    this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
   }
 
   handleFeedbackSave(feedback) {
     this.commentsService.create(feedback);
+  }
+
+  handleFeedbackDelete(feedbackId) {
+    this.commentsService.delete(feedbackId);
   }
 
   render() {
@@ -49,7 +54,7 @@ class ParticipantPage extends React.Component {
         <div className="div-clear" />
 
         <ParticipantButtonBar />
-        <UnpublishedFeedbackList />
+        <UnpublishedFeedbackList feedbacks={this.props.feedbacks} onDelete={this.handleFeedbackDelete} />
 
         <FeedbackDialog onSave={this.handleFeedbackSave} />
 
@@ -60,6 +65,7 @@ class ParticipantPage extends React.Component {
 
 ParticipantPage.propTypes = {
   dispatch: PropTypes.func,
+  feedbacks: PropTypes.array,
 };
 
 export default ParticipantPage;

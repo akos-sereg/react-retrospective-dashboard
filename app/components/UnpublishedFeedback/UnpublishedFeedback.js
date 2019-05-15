@@ -17,9 +17,14 @@ class UnpublishedFeedback extends React.Component {
           <div className="comment-image"><img src={moodIndicator} width="60" alt="mood indicator" /></div>
           <div className="comment-text">{this.props.comment}</div>
 
-
         </blockquote>
         <div className="div-clear"></div>
+
+        <div className="feedback-card-actions">
+          <a href="#" onClick={() => this.props.onDelete(this.props.id)}>Delete</a><br />
+          <a href="#">Edit</a><br />
+        </div>
+
       </div>
     );
   }
@@ -47,6 +52,8 @@ class UnpublishedFeedback extends React.Component {
 
 UnpublishedFeedback.propTypes = {
   // dispatch: PropTypes.func,
+  onDelete: PropTypes.func.isRequired,
+  id: PropTypes.string,
   comment: PropTypes.string,
   mood: PropTypes.string,
 };

@@ -1,9 +1,12 @@
 import connect from 'react-redux/es/connect/connect';
 import ParticipantPage from './ParticipantPage';
 
-const mapStateToProps = (state) => ({
-  ...state,
-});
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    feedbacks: state.participantPageReducer.feedbacks,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,

@@ -1,6 +1,19 @@
 .quote-container {
   margin-top: 50px;
   position: relative;
+
+  .feedback-card-actions {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 320px;
+  }
+}
+
+.quote-container:hover {
+  .feedback-card-actions {
+    display: inline;
+  }
 }
 
 .note {
