@@ -11,9 +11,14 @@ class FeedbackDialog extends React.Component {
   constructor() {
     super();
 
-    this.state = { commentText: null };
+    this.state = {
+      commentText: null,
+      mode: 'create' // create | update
+    };
+
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.createFeedback = this.createFeedback.bind(this);
+    this.updateFeedback = this.updateFeedback.bind(this);
     this.handleCommentTextChange = this.handleCommentTextChange.bind(this);
   }
 
@@ -25,6 +30,10 @@ class FeedbackDialog extends React.Component {
   createFeedback() {
     this.props.onSave({ mood: this.props.feedback.mood, comment: this.state.commentText });
     this.props.dispatch(feedbackDialogClosing());
+  }
+
+  updateFeedback() {
+
   }
 
   handleCommentTextChange(element) {
@@ -63,12 +72,21 @@ class FeedbackDialog extends React.Component {
 
           <div className="form-group">
             <label htmlFor="feedback-comment">Comment:
-              <textarea onChange={(e) => this.handleCommentTextChange(e)} className="form-control" id="feedback-comment" />
+              <textarea
+                defaultValue={this.props.feedback ? this.props.feedback.comment : null}
+                onChange={(e) => this.handleCommentTextChange(e)}
+                className="form-control"
+                id="feedback-comment"
+              />
             </label>
           </div>
 
           <div className="feedback-dialog-buttons">
-            <Button float="right" marginLeft="10" onClick={this.createFeedback} buttonType="primary" label="Create" />
+            {this.props.mode === 'create' ?
+              (<Button float="right" marginLeft="10" onClick={this.createFeedback} buttonType="primary" label="Create" />)
+              :
+              (<Button float="right" marginLeft="10" onClick={this.updateFeedback} buttonType="primary" label="Update" />)}
+
             <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} label="Cancel" />
           </div>
 
@@ -83,7 +101,8 @@ FeedbackDialog.propTypes = {
   dispatch: PropTypes.func,
   modalIsOpen: PropTypes.bool,
   feedback: PropTypes.object,
-  onSave: PropTypes.func
+  onSave: PropTypes.func,
+  mode: PropTypes.string
 };
 
 export default FeedbackDialog;

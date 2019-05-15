@@ -11,6 +11,7 @@ export const MOOD_SELECTED = 'retrospective/FeedbackDialog/GladSadMad/MOOD_SELEC
 export const FEEDBACK_SAVED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_SAVED';
 export const FEEDBACK_DELETED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_DELETED';
 export const PAGE_LOADING = 'retrospective/ParticipantPage/PAGE_LOADING';
+export const EDIT_FEEDBACK_CLICKED = 'retrospective/UnpublishedFeedback/EDIT_FEEDBACK_CLICKED';
 
 // core
 export const RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount';

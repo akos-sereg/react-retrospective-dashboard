@@ -4,17 +4,11 @@ import UnpublishedFeedback from '../UnpublishedFeedback';
 import './style.scss';
 
 class UnpublishedFeedbackList extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     const unpublishedFeedbacks = this.props.feedbacks ? this.props.feedbacks.map((feedback) => (
       <UnpublishedFeedback
         key={feedback.id}
-        id={feedback.id}
-        comment={feedback.comment}
-        mood={feedback.mood}
+        feedback={feedback}
         onDelete={this.props.onDelete}
       />
     )) : (<div />);
@@ -27,7 +21,7 @@ class UnpublishedFeedbackList extends React.Component {
 }
 
 UnpublishedFeedbackList.propTypes = {
-  dispatch: PropTypes.func,
+  // dispatch: PropTypes.func,
   feedbacks: PropTypes.array,
   onDelete: PropTypes.func
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { editFeedback } from './actions';
 import './style.scss';
 import '../../styles/global-styles.scss';
 import assetGlad from '../../assets/glad.png';
@@ -7,6 +8,15 @@ import assetSad from '../../assets/sad.png';
 import assetMad from '../../assets/mad.png';
 
 class UnpublishedFeedback extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
+
+  handleEdit() {
+    this.props.dispatch(editFeedback(this.props.feedback));
+  }
+
   render() {
     const moodIndicator = this.getMoodInficatorAsset();
 
@@ -15,14 +25,14 @@ class UnpublishedFeedback extends React.Component {
         <blockquote className="note yellow">
 
           <div className="comment-image"><img src={moodIndicator} width="60" alt="mood indicator" /></div>
-          <div className="comment-text">{this.props.comment}</div>
+          <div className="comment-text">{this.props.feedback.comment}</div>
 
         </blockquote>
         <div className="div-clear"></div>
 
         <div className="feedback-card-actions">
-          <a href="#" onClick={() => this.props.onDelete(this.props.id)}>Delete</a><br />
-          <a href="#">Edit</a><br />
+          <a href="#" onClick={() => this.props.onDelete(this.props.feedback.id)}>Delete</a><br />
+          <a href="#" onClick={this.handleEdit}>Edit</a><br />
         </div>
 
       </div>
@@ -31,7 +41,7 @@ class UnpublishedFeedback extends React.Component {
 
   getMoodInficatorAsset = () => {
     let moodIndicator = null;
-    switch (this.props.mood) {
+    switch (this.props.feedback.mood) {
       case 'glad':
         moodIndicator = assetGlad;
         break;
@@ -51,11 +61,9 @@ class UnpublishedFeedback extends React.Component {
 }
 
 UnpublishedFeedback.propTypes = {
-  // dispatch: PropTypes.func,
+  dispatch: PropTypes.func,
   onDelete: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  comment: PropTypes.string,
-  mood: PropTypes.string,
+  feedback: PropTypes.object.isRequired,
 };
 
 export default UnpublishedFeedback;

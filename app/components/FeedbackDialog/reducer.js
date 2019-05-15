@@ -1,7 +1,8 @@
 import {
   CREATE_FEEDBACK_CLICKED,
   FEEDBACK_DIALOG_CLOSING,
-  MOOD_SELECTED
+  MOOD_SELECTED,
+  EDIT_FEEDBACK_CLICKED,
 } from '../../utils/constants';
 
 function feedbackDialogReducer(state = {}, action) {
@@ -10,8 +11,9 @@ function feedbackDialogReducer(state = {}, action) {
       return {
         ...state,
         modalIsOpen: true,
+        mode: 'create',
         feedback: {
-          ...state.feedback,
+          comment: '',
           mood: 'glad'
         }
       };
@@ -29,6 +31,14 @@ function feedbackDialogReducer(state = {}, action) {
           ...state.feedback,
           mood: action.payload.mood
         }
+      };
+
+    case EDIT_FEEDBACK_CLICKED:
+      return {
+        ...state,
+        modalIsOpen: true,
+        mode: 'update',
+        feedback: action.payload.feedback
       };
 
     default:
