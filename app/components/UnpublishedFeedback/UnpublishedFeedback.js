@@ -6,6 +6,9 @@ import '../../styles/global-styles.scss';
 import assetGlad from '../../assets/glad.png';
 import assetSad from '../../assets/sad.png';
 import assetMad from '../../assets/mad.png';
+import assetEdit from '../../assets/icons/edit.svg';
+import assetShare from '../../assets/icons/share.svg';
+import assetTrash from '../../assets/icons/trash.svg';
 
 class UnpublishedFeedback extends React.Component {
   constructor(props, context) {
@@ -45,9 +48,9 @@ class UnpublishedFeedback extends React.Component {
         <div className="div-clear"></div>
 
         <div className="feedback-card-actions">
-          <a href="#" onClick={(e) => this.handleDelete(e)}>Delete</a><br />
-          <a href="#" onClick={(e) => this.handleEdit(e)}>Edit</a><br />
-          <a href="#" onClick={(e) => this.handlePublish(e)}>Publish</a><br />
+          <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a><br />
+          <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a><br />
+          <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a><br />
         </div>
 
       </div>

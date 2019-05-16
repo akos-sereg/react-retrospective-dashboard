@@ -5,14 +5,27 @@
   .feedback-card-actions {
     display: none;
     position: absolute;
-    top: 20px;
-    left: 320px;
+    top: 30px;
+    left: 350px;
   }
 }
 
 .quote-container:hover {
   .feedback-card-actions {
     display: inline;
+
+    img {
+      margin: 5px;
+    }
+
+    a {
+      text-decoration: none;
+      opacity: 0.5;
+    }
+
+    a:hover {
+      opacity: 1.0;
+    }
   }
 }
 

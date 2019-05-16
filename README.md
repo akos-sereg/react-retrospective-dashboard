@@ -37,6 +37,7 @@ This will produce artifacts under ``build`` folder
 - Fix linter issues
 - Tests to be added
 - Better UI design
+- Automation testing support
 
 ## Stack and Features
 
