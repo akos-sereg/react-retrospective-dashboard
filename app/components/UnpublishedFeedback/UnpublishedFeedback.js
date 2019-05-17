@@ -23,7 +23,13 @@ class UnpublishedFeedback extends React.Component {
 
   handleDelete(event) {
     event.preventDefault();
-    this.props.onDelete(this.props.feedback.id);
+
+    this.props.dispatch(confirmationDialogOpening(
+      'Delete',
+      'Are you sure you want to Delete?',
+      () => {
+        this.props.onDelete(this.props.feedback.id);
+      }));
   }
 
   handleEdit(event) {
