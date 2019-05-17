@@ -11,11 +11,10 @@
   padding: 10px;
 }
 
-.participant-center-content-2 {
-  margin: auto;
-  width: 100%;
-
-  padding: 10px;
+.participant-feedback-container {
+  float: left;
+  position: relative;
+  left: 50%;
 }
 
 .participant-logo-head {
@@ -51,4 +50,5 @@
 
 .participant-buttons-selection {
   margin-top: 20px;
+  height: 45px;
 }

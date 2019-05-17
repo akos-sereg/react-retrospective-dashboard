@@ -137,7 +137,7 @@ class ParticipantPage extends React.Component {
         </div>
 
 
-        <div className="participant-center-content-2">
+        <div className="participant-feedback-container">
           <UnpublishedFeedbackList
             feedbacks={this.props.feedbacks}
             onDelete={this.handleFeedbackDelete}
