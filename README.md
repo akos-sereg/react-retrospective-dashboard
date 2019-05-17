@@ -1,8 +1,11 @@
 # react-retrospective-dashboard
 
-This project is a working standalone front-end app aiming to demonstrate best javascript practices and common usage of React / Redux. 
+This web app is supposed to be the replacement of an existing Angular-based web app 
+used by https://www.retrospective-dashboard.org - participant screen.
 
-It is using the latest React + Redux as of November 2018.
+Right now it is in ALPHA, as long as "To be implemented" section has any element.
+
+The goal is to support `Glad / Sad / Mad` type board, then we can add support for more boards.
 
 ## Usage
 ```
