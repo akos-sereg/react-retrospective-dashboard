@@ -67,7 +67,7 @@ class FeedbackDialog extends React.Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={() => this.props.dispatch(feedbackDialogClosing())}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Feedback Modal"
           overlayClassName="feedback-dialog-overlay"
         >
 

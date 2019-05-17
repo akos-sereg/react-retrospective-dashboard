@@ -15,6 +15,7 @@ import participantButtonBarReducer from './components/ParticipantButtonBar/reduc
 import feedbackDialogReducer from './components/FeedbackDialog/reducer';
 import unpublishedFeedbackListReducer from './components/UnpublishedFeedbackList/reducer';
 import unpublishedFeedbackReducer from './components/UnpublishedFeedback/reducer';
+import confirmationDialogReducer from './components/ConfirmationDialog/reducer';
 import participantPageReducer from './containers/ParticipantPage/reducer';
 import participantApiReducer from './services/reducer';
 
@@ -47,7 +48,8 @@ const reducer = combineReducers({
   feedbackDialogReducer,
   unpublishedFeedbackListReducer,
   unpublishedFeedbackReducer,
-  participantPageReducer
+  participantPageReducer,
+  confirmationDialogReducer
 })
 export const store = createStore(reducer);
 const MOUNT_NODE = document.getElementById('app');

@@ -26,7 +26,7 @@ class ParticipantButtonBar extends React.Component {
   render() {
     const userReadyIndicatorClasses = this.state.isUserReady ? 'green-dot' : 'gray-dot';
 
-    return this.props.isFeedbackDialogOpen ? (<div />) : (
+    return this.props.isAnyDialogOpen ? (<div />) : (
       <div className="participant-button-bar" role="group" aria-label="...">
         <div className="title"><h4>Your comments for retrospective</h4></div>
         <div className="btn-group">
@@ -45,7 +45,7 @@ class ParticipantButtonBar extends React.Component {
 ParticipantButtonBar.propTypes = {
   dispatch: PropTypes.func,
   onPublishAll: PropTypes.func.isRequired,
-  isFeedbackDialogOpen: PropTypes.bool,
+  isAnyDialogOpen: PropTypes.bool,
 };
 
 export default ParticipantButtonBar;

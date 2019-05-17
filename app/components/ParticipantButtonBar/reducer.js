@@ -1,7 +1,9 @@
 import {
   READY_STATE_CHANGED,
   CREATE_FEEDBACK_CLICKED,
-  FEEDBACK_DIALOG_CLOSING
+  FEEDBACK_DIALOG_CLOSING,
+  CONFIRMATION_DIALOG_OPENING,
+  CONFIRMATION_DIALOG_CLOSING,
 } from '../../utils/constants';
 
 function participantButtonBarReducer(state = {}, action) {
@@ -12,16 +14,18 @@ function participantButtonBarReducer(state = {}, action) {
         isUserReady: action.payload.isUserReady,
       };
 
+    case CONFIRMATION_DIALOG_OPENING:
     case CREATE_FEEDBACK_CLICKED:
       return {
         ...state,
-        isFeedbackDialogOpen: true,
+        isAnyDialogOpen: true,
       };
 
+    case CONFIRMATION_DIALOG_CLOSING:
     case FEEDBACK_DIALOG_CLOSING:
       return {
         ...state,
-        isFeedbackDialogOpen: false,
+        isAnyDialogOpen: false,
       };
 
     default:

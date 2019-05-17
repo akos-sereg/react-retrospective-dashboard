@@ -13,6 +13,8 @@ export const FEEDBACK_DELETED = 'retrospective/LocalStorageOfCommentsService/FEE
 export const FEEDBACK_UPDATED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_UPDATED';
 export const PAGE_LOADING = 'retrospective/ParticipantPage/PAGE_LOADING';
 export const EDIT_FEEDBACK_CLICKED = 'retrospective/UnpublishedFeedback/EDIT_FEEDBACK_CLICKED';
+export const CONFIRMATION_DIALOG_CLOSING = 'retrospective/ConfirmationDialog/CONFIRMATION_DIALOG_CLOSING';
+export const CONFIRMATION_DIALOG_OPENING = 'retrospective/ConfirmationDialog/CONFIRMATION_DIALOG_OPENING';
 
 // core
 export const RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount';

@@ -5,11 +5,14 @@ import NicknameProvider from '../../components/NicknameProvider';
 import ParticipantButtonBar from '../../components/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
 import FeedbackDialog from '../../components/FeedbackDialog';
+import Footer from '../../components/Footer';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
 import ParticipantApi from '../../services/ParticipantApi';
 import { pageLoading } from './actions';
+import { confirmationDialogOpening } from '../../components/ConfirmationDialog/actions';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -64,7 +67,25 @@ class ParticipantPage extends React.Component {
   }
 
   async handleFeedbackPublishAll() {
-    const feedbacks = this.commentsService.getFeedbackList();
+
+    // confirmation
+    this.props.dispatch(confirmationDialogOpening('Publish All', 'Are you sure you want to Publish All?', async () => {
+      const feedbacks = this.commentsService.getFeedbackList();
+      const response = await this.participantApi.publish(
+        feedbacks,
+        this.state.nickname,
+        this.props.match.params.code,
+        this.props.match.params.token
+      );
+
+      if (response.code === 200) {
+        const ids = feedbacks.map((f) => f.id);
+        ids.map((id) => this.commentsService.delete(id));
+        this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+      }
+    }));
+
+    /*const feedbacks = this.commentsService.getFeedbackList();
     const response = await this.participantApi.publish(
       feedbacks,
       this.state.nickname,
@@ -76,7 +97,7 @@ class ParticipantPage extends React.Component {
       const ids = feedbacks.map((f) => f.id);
       ids.map((id) => this.commentsService.delete(id));
       this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
-    }
+    }*/
   }
 
   render() {
@@ -115,8 +136,9 @@ class ParticipantPage extends React.Component {
         />
 
         <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} />
+        <ConfirmationDialog />
 
-        <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        <Footer />
       </div>
     );
   }
