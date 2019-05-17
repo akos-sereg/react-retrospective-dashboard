@@ -70,9 +70,9 @@ class UnpublishedFeedback extends React.Component {
 
         {isPublishing ? (<div />) : (
           <div className="feedback-card-actions">
-            <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a><br />
-            <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a><br />
-            <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a><br />
+            <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a>
+            <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a>
+            <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a>
           </div>)
         }
 

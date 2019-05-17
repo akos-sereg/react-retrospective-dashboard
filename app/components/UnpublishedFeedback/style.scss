@@ -1,12 +1,18 @@
 .quote-container {
   margin-bottom: 50px;
   position: relative;
+  width: 350px;
+  float: left;
 
   .feedback-card-actions {
     display: none;
     position: absolute;
-    top: 30px;
-    left: 350px;
+    bottom: -30px;
+    left: 0px;
+
+    a {
+      margin-right: 20px;
+    }
   }
 }
 
