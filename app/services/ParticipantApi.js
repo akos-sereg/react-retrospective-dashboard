@@ -13,7 +13,8 @@ import { APP_WEBSOCKET_URL, APP_BASE_URL } from '../utils/constants';
 import {
   brokenPipe,
   connecting,
-  connected
+  connected,
+  publishingFeedbacks
 } from './actions';
 
 class ParticipantApi {
@@ -39,6 +40,8 @@ class ParticipantApi {
   }
 
   async publish(feedbacks, username, code, token) {
+
+    this.dispatch(publishingFeedbacks(feedbacks.map((f) => f.id)));
 
     const payload = feedbacks.map((feedback) => ({
       comment: feedback.comment,

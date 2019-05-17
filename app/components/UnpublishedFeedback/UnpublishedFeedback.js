@@ -9,6 +9,8 @@ import assetMad from '../../assets/mad.png';
 import assetEdit from '../../assets/icons/edit.svg';
 import assetShare from '../../assets/icons/share.svg';
 import assetTrash from '../../assets/icons/trash.svg';
+import {confirmationDialogOpening} from "../ConfirmationDialog/actions";
+import {pageLoading} from "../../containers/ParticipantPage/actions";
 
 class UnpublishedFeedback extends React.Component {
   constructor(props, context) {
@@ -31,14 +33,27 @@ class UnpublishedFeedback extends React.Component {
 
   handlePublish(event) {
     event.preventDefault();
-    this.props.onPublish(this.props.feedback);
+
+    this.props.dispatch(confirmationDialogOpening(
+      'Publish',
+      'Are you sure you want to Publish?',
+      () => {
+        this.props.onPublish(this.props.feedback);
+      }));
   }
 
   render() {
     const moodIndicator = this.getMoodInficatorAsset();
+    const isPublishing = this.props.publishingFeedbackIds
+      && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
+
+    const classNames = ['quote-container'];
+    if (isPublishing) {
+      classNames.push('feedback-publishing');
+    }
 
     return (
-      <div className="quote-container">
+      <div className={classNames.join(' ')}>
         <blockquote className="note yellow">
 
           <div className="comment-image"><img src={moodIndicator} width="60" alt="mood indicator" /></div>
@@ -47,11 +62,13 @@ class UnpublishedFeedback extends React.Component {
         </blockquote>
         <div className="div-clear"></div>
 
-        <div className="feedback-card-actions">
-          <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a><br />
-          <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a><br />
-          <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a><br />
-        </div>
+        {isPublishing ? (<div />) : (
+          <div className="feedback-card-actions">
+            <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a><br />
+            <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a><br />
+            <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a><br />
+          </div>)
+        }
 
       </div>
     );
@@ -83,6 +100,7 @@ UnpublishedFeedback.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onPublish: PropTypes.func.isRequired,
   feedback: PropTypes.object.isRequired,
+  publishingFeedbackIds: PropTypes.array
 };
 
 export default UnpublishedFeedback;

@@ -3,6 +3,7 @@ import UnpublishedFeedback from './UnpublishedFeedback';
 
 const mapStateToProps = (state) => ({
   ...state,
+  publishingFeedbackIds: state.unpublishedFeedbackReducer.publishingFeedbackIds,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,4 @@
-import { brokenPipe, connected, connecting } from './actions';
+import { brokenPipe, connected, connecting, publishingFeedbacks } from './actions';
 
 export default class ParticipantApiMock {
   constructor(dispatch, emulateJoinFailure = false, emulatePublishFailure = false) {
@@ -19,6 +19,8 @@ export default class ParticipantApiMock {
   }
 
   async publish(feedbacks, username, code, token) {
+    this.dispatch(publishingFeedbacks(feedbacks.map((f) => f.id)));
+
     await this.delay(2);
 
     if (this.emulatePublishFailure) {

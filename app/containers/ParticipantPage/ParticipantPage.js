@@ -67,37 +67,24 @@ class ParticipantPage extends React.Component {
   }
 
   async handleFeedbackPublishAll() {
+    this.props.dispatch(confirmationDialogOpening(
+      'Publish All',
+      'Are you sure you want to Publish All?',
+      async () => {
+        const feedbacks = this.commentsService.getFeedbackList();
+        const response = await this.participantApi.publish(
+          feedbacks,
+          this.state.nickname,
+          this.props.match.params.code,
+          this.props.match.params.token
+        );
 
-    // confirmation
-    this.props.dispatch(confirmationDialogOpening('Publish All', 'Are you sure you want to Publish All?', async () => {
-      const feedbacks = this.commentsService.getFeedbackList();
-      const response = await this.participantApi.publish(
-        feedbacks,
-        this.state.nickname,
-        this.props.match.params.code,
-        this.props.match.params.token
-      );
-
-      if (response.code === 200) {
-        const ids = feedbacks.map((f) => f.id);
-        ids.map((id) => this.commentsService.delete(id));
-        this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
-      }
-    }));
-
-    /*const feedbacks = this.commentsService.getFeedbackList();
-    const response = await this.participantApi.publish(
-      feedbacks,
-      this.state.nickname,
-      this.props.match.params.code,
-      this.props.match.params.token
-    );
-
-    if (response.code === 200) {
-      const ids = feedbacks.map((f) => f.id);
-      ids.map((id) => this.commentsService.delete(id));
-      this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
-    }*/
+        if (response.code === 200) {
+          const ids = feedbacks.map((f) => f.id);
+          ids.map((id) => this.commentsService.delete(id));
+          this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+        }
+      }));
   }
 
   render() {

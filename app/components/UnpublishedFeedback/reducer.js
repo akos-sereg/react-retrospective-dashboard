@@ -1,4 +1,4 @@
-import { FEEDBACK_UPDATED } from '../../utils/constants';
+import { FEEDBACK_UPDATED, PUBLISHING_FEEDBACKS } from '../../utils/constants';
 
 function unpublishedFeedbackReducer(state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,12 @@ function unpublishedFeedbackReducer(state = {}, action) {
         ...state,
       };
     }
+
+    case PUBLISHING_FEEDBACKS:
+      return {
+        ...state,
+        publishingFeedbackIds: action.payload.feedbackIds
+      };
 
     default:
       return { ...state };

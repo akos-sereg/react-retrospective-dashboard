@@ -28,6 +28,7 @@ This will produce artifacts under ``build`` folder
 - Error Handling on Publish feedback / Publish all
 - Mock Service
 - Add toastr notification on publish and publish all and delete and edit and create
+- On Publish All / Publish error, set "publishing" array empty
 
 ## To be improved
 

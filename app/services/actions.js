@@ -5,6 +5,7 @@ import {
   FEEDBACK_SAVED,
   FEEDBACK_DELETED,
   FEEDBACK_UPDATED,
+  PUBLISHING_FEEDBACKS,
 } from '../utils/constants';
 
 const brokenPipe = (payload) => ({
@@ -28,7 +29,7 @@ const feedbackSaved = (feedback, feedbacks) => ({
 });
 
 const feedbackUpdated = (feedback, feedbacks) => ({
-  type: FEEDBACK_SAVED,
+  type: FEEDBACK_UPDATED,
   payload: { feedback, feedbacks }
 });
 
@@ -37,12 +38,18 @@ const feedbackDeleted = (feedbackId, feedbacks) => ({
   payload: { feedbackId, feedbacks }
 });
 
+const publishingFeedbacks = (feedbackIds) => ({
+  type: PUBLISHING_FEEDBACKS,
+  payload: { feedbackIds }
+});
+
 export {
   brokenPipe,
   connecting,
   connected,
   feedbackSaved,
   feedbackUpdated,
-  feedbackDeleted
+  feedbackDeleted,
+  publishingFeedbacks
 };
 
