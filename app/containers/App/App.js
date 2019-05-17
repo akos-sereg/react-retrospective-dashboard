@@ -8,11 +8,11 @@ import './style.scss';
 
 const App = () => (
   <div>
-    <Helmet titleTemplate="%s - React.js Boilerplate" defaultTitle="React.js Boilerplate">
-      <meta name="description" content="A React.js Boilerplate application" />
+    <Helmet titleTemplate="%s" defaultTitle="Retrospective Dashboard">
+      <meta name="description" content="Retrospective Dashboard" />
     </Helmet>
 
-    <div className="container-fluid">
+    <div>
       <Switch>
         <Route exact path="/" component={ParticipantPage} />
         <Route path="/code/:code/token/:token" component={ParticipantPage} />

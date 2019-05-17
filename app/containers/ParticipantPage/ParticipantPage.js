@@ -105,7 +105,7 @@ class ParticipantPage extends React.Component {
 
   render() {
     return (
-      <div className="participant-wrapper">
+      <div className="participant-container">
         <Helmet>
           <title>Participant (web)</title>
           <meta
@@ -114,7 +114,7 @@ class ParticipantPage extends React.Component {
           />
         </Helmet>
 
-        <div className="participant-logo-head">
+        <div className="participant-logo-head participant-center-content">
           <img src={logo} alt="logo" />
           <div>
             <span>Retrospective Dashboard</span><br />
@@ -123,20 +123,27 @@ class ParticipantPage extends React.Component {
         </div>
         <div className="div-clear" />
 
-        <NicknameProvider
-          onJoined={this.handleJoined}
-          code={this.props.match.params.code}
-          token={this.props.match.params.token}
-        />
-        <div className="div-clear" />
+        <div className="participant-nickname-selection participant-center-content">
+          <NicknameProvider
+            onJoined={this.handleJoined}
+            code={this.props.match.params.code}
+            token={this.props.match.params.token}
+          />
+          <div className="div-clear" />
+        </div>
 
-        <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} />
+        <div className="participant-buttons-selection participant-center-content">
+          <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} />
+        </div>
 
-        <UnpublishedFeedbackList
-          feedbacks={this.props.feedbacks}
-          onDelete={this.handleFeedbackDelete}
-          onPublish={this.handleFeedbackPublish}
-        />
+
+        <div className="participant-center-content">
+          <UnpublishedFeedbackList
+            feedbacks={this.props.feedbacks}
+            onDelete={this.handleFeedbackDelete}
+            onPublish={this.handleFeedbackPublish}
+          />
+        </div>
 
         <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} />
         <ConfirmationDialog />
