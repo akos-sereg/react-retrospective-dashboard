@@ -4,7 +4,8 @@ import ParticipantButtonBar from './ParticipantButtonBar';
 const mapStateToProps = (state) => ({
   ...state,
   isUserReady: state.participantButtonBarReducer.isConnected,
-  isAnyDialogOpen: state.participantButtonBarReducer.isAnyDialogOpen
+  isAnyDialogOpen: state.participantButtonBarReducer.isAnyDialogOpen,
+  isJoinClicked: state.participantButtonBarReducer.isJoinClicked
 });
 
 const mapDispatchToProps = (dispatch) => ({

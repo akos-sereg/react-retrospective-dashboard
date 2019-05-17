@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { userReadyStateChanged, createFeedbackClicked } from './actions';
 import './style.scss';
 
@@ -9,14 +10,23 @@ class ParticipantButtonBar extends React.Component {
 
     this.state = { isUserReady: false };
 
-    this.onUserReadyStateChanged = this.onUserReadyStateChanged.bind(this);
+    this.handleUserReadyStateChange = this.handleUserReadyStateChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
   }
 
-  onUserReadyStateChanged() {
+  handleUserReadyStateChange() {
+    if (!this.props.isJoinClicked) {
+      toastr.warning('Enter your nickname and Join first');
+      return;
+    }
+
     const newState = !this.state.isUserReady;
     this.setState(() => ({ ...this.state, isUserReady: newState }));
     this.props.dispatch(userReadyStateChanged(newState));
+
+    if (this.props.isJoinClicked) {
+      toastr.success('Your status will be reflected on the board soon', newState ? 'Ready' : 'Still writing ...');
+    }
   }
 
   handleCreate() {
@@ -30,7 +40,7 @@ class ParticipantButtonBar extends React.Component {
       <div className="participant-button-bar" role="group" aria-label="...">
         <div className="title"><h4>Your comments for retrospective</h4></div>
         <div className="btn-group">
-          <button onClick={() => this.onUserReadyStateChanged()} type="button" className="btn btn-default btn-sm">
+          <button onClick={() => this.handleUserReadyStateChange()} type="button" className="btn btn-default btn-sm">
             <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
             I am ready
           </button>
@@ -46,6 +56,7 @@ ParticipantButtonBar.propTypes = {
   dispatch: PropTypes.func,
   onPublishAll: PropTypes.func.isRequired,
   isAnyDialogOpen: PropTypes.bool,
+  isJoinClicked: PropTypes.bool,
 };
 
 export default ParticipantButtonBar;

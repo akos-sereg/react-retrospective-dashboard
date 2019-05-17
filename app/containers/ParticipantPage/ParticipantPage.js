@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Helmet } from 'react-helmet';
 import NicknameProvider from '../../components/NicknameProvider';
 import ParticipantButtonBar from '../../components/ParticipantButtonBar';
@@ -12,7 +13,7 @@ import { pageLoading } from './actions';
 import { confirmationDialogOpening } from '../../components/ConfirmationDialog/actions';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
-import ConfirmationDialog from "../../components/ConfirmationDialog";
+import ConfirmationDialog from '../../components/ConfirmationDialog';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -43,17 +44,25 @@ class ParticipantPage extends React.Component {
 
   handleFeedbackSave(feedback) {
     this.commentsService.create(feedback);
+    toastr.success('Feedback has been saved to browser\'s Local Storage');
   }
 
   handleFeedbackUpdate(feedback) {
     this.commentsService.update(feedback);
+    toastr.success('Feedback has been updated');
   }
 
   handleFeedbackDelete(feedbackId) {
     this.commentsService.delete(feedbackId);
+    toastr.success('Feedback has been deleted');
   }
 
   async handleFeedbackPublish(feedback) {
+    if (this.state.nickname == null || this.state.nickname.length === 0) {
+      toastr.warning('Enter your nickname and join first');
+      return;
+    }
+
     const response = await this.participantApi.publish(
       [feedback],
       this.state.nickname,
@@ -62,11 +71,17 @@ class ParticipantPage extends React.Component {
     );
 
     if (response.code === 200) {
+      toastr.success('Feedback has been Published');
       this.commentsService.delete(feedback.id);
     }
   }
 
   async handleFeedbackPublishAll() {
+    if (this.state.nickname == null || this.state.nickname.length === 0) {
+      toastr.warning('Enter your nickname and join first');
+      return;
+    }
+
     this.props.dispatch(confirmationDialogOpening(
       'Publish All',
       'Are you sure you want to Publish All?',
@@ -81,6 +96,7 @@ class ParticipantPage extends React.Component {
 
         if (response.code === 200) {
           const ids = feedbacks.map((f) => f.id);
+          toastr.success(ids.length === 1 ? 'Feedback has been Published' : 'Feedbacks have been Published');
           ids.map((id) => this.commentsService.delete(id));
           this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
         }

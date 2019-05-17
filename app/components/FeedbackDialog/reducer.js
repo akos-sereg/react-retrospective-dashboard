@@ -15,7 +15,8 @@ function feedbackDialogReducer(state = {}, action) {
         feedback: {
           comment: '',
           mood: 'glad'
-        }
+        },
+        commentText: '',
       };
 
     case FEEDBACK_DIALOG_CLOSING:

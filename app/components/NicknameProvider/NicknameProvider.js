@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 import ParticipantApi from '../../services/ParticipantApi';
 import ConnectionIndicator from '../ConnectionIndicator';
+import { joinClicked } from './actions';
 
 class NicknameProvider extends React.Component {
   constructor(props, context) {
@@ -20,8 +22,14 @@ class NicknameProvider extends React.Component {
   }
 
   onJoinClicked() {
+    if (this.state.nickname.length === 0) {
+      toastr.warning('Nickname is empty')
+      return;
+    }
+
     this.props.onJoined(this.state.nickname);
     this.participantService.join(this.state.nickname, this.props.code, this.props.token);
+    this.props.dispatch(joinClicked());
   }
 
   onNicknameChanged(event) {

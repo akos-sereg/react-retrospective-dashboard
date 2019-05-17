@@ -6,6 +6,7 @@ const mapStateToProps = (state) => ({
   modalIsOpen: state.feedbackDialogReducer.modalIsOpen,
   feedback: state.feedbackDialogReducer.feedback,
   mode: state.feedbackDialogReducer.mode,
+  commentText: state.feedbackDialogReducer.commentText,
 });
 
 const mapDispatchToProps = (dispatch) => ({

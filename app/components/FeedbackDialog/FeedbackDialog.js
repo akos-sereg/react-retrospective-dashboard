@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import toastr from 'toastr';
 import { feedbackDialogClosing } from './actions';
 import './style.scss';
 import '../../styles/global-styles.scss';
@@ -12,7 +13,7 @@ class FeedbackDialog extends React.Component {
     super();
 
     this.state = {
-      commentText: null,
+      commentText: '',
       mode: 'create' // create | update
     };
 
@@ -28,11 +29,21 @@ class FeedbackDialog extends React.Component {
   }
 
   createFeedback() {
+    if (this.state.commentText.length === 0) {
+      toastr.warning('Comment is empty');
+      return;
+    }
+
     this.props.onSave({ mood: this.props.feedback.mood, comment: this.state.commentText });
     this.props.dispatch(feedbackDialogClosing());
   }
 
   updateFeedback() {
+    if (this.state.commentText.length === 0) {
+      toastr.warning('Comment is empty');
+      return;
+    }
+
     this.props.onUpdate({
       id: this.props.feedback.id,
       mood: this.props.feedback.mood,

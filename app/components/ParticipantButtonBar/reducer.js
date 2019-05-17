@@ -4,6 +4,7 @@ import {
   FEEDBACK_DIALOG_CLOSING,
   CONFIRMATION_DIALOG_OPENING,
   CONFIRMATION_DIALOG_CLOSING,
+  JOIN_CLICKED,
 } from '../../utils/constants';
 
 function participantButtonBarReducer(state = {}, action) {
@@ -26,6 +27,12 @@ function participantButtonBarReducer(state = {}, action) {
       return {
         ...state,
         isAnyDialogOpen: false,
+      };
+
+    case JOIN_CLICKED:
+      return {
+        ...state,
+        isJoinClicked: true,
       };
 
     default:
