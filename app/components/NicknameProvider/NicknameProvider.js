@@ -27,6 +27,11 @@ class NicknameProvider extends React.Component {
       return;
     }
 
+    if (!this.props.code || !this.props.token) {
+      toastr.error('Incorrect URL, token and code are missing from URL. In this mode, you can only prepare your feedbacks for the next Retrospective.')
+      return;
+    }
+
     this.props.onJoined(this.state.nickname);
     this.participantService.join(this.state.nickname, this.props.code, this.props.token);
     this.props.dispatch(joinClicked());
