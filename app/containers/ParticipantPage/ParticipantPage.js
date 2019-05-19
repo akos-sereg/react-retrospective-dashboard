@@ -70,7 +70,8 @@ class ParticipantPage extends React.Component {
       this.props.match.params.token
     );
 
-    if (response.code === 200) {
+    const responseBody = JSON.parse(await response.text());
+    if (response.status === 200 && responseBody.errorCode === 0) {
       toastr.success('Feedback has been Published');
       this.commentsService.delete(feedback.id);
     }
@@ -94,7 +95,8 @@ class ParticipantPage extends React.Component {
           this.props.match.params.token
         );
 
-        if (response.code === 200) {
+        const responseBody = JSON.parse(await response.text());
+        if (response.status === 200 && responseBody.errorCode === 0) {
           const ids = feedbacks.map((f) => f.id);
           toastr.success(ids.length === 1 ? 'Feedback has been Published' : 'Feedbacks have been Published');
           ids.map((id) => this.commentsService.delete(id));

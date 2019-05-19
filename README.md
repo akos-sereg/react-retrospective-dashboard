@@ -26,6 +26,7 @@ This will produce artifacts under ``build`` folder
 ## To be implemented
 - Error Handling on Publish feedback / Publish all
 - On Publish All / Publish error, set "publishing" array empty
+- Remember username on page refresh
 
 ## To be improved
 
