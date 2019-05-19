@@ -23,6 +23,11 @@ $ npm run build
 
 This will produce artifacts under ``build`` folder
 
+## Development
+
+For local development, use mocked service. In file `app/services/ParticipantApi.js`, look for method `getInstance`, 
+and use `ParticipantApi.instance = new ParticipantApiMock(dispatch);` to instantiate the service.
+
 ## To be implemented
 - Error Handling on Publish feedback / Publish all
 - On Publish All / Publish error, set "publishing" array empty
@@ -38,6 +43,8 @@ This will produce artifacts under ``build`` folder
 - Better UI design
 - Automation testing support
 - Kill react-helmet
+- Disable STOMP console logs
+- Clone with lib in ParticipantApi instead of JSON parse/serialize
 
 ## Stack and Features
 
