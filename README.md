@@ -13,7 +13,7 @@ $ npm install
 $ npm start
 ```
 
-Then open http://localhost:3000/
+Then open http://localhost:3000/#/code/1/token/2
 
 For production build, run the following command:
 
