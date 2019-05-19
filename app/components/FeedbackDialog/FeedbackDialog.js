@@ -9,11 +9,14 @@ import Button from '../Button';
 import GladSadMad from './variations/GladSadMad';
 
 class FeedbackDialog extends React.Component {
+  static COMMENT_MAX_CHAR = 150;
+
   constructor() {
     super();
 
     this.state = {
       commentText: '',
+      commentCharsLeft: FeedbackDialog.COMMENT_MAX_CHAR,
       mode: 'create' // create | update
     };
 
@@ -24,7 +27,7 @@ class FeedbackDialog extends React.Component {
   }
 
   afterOpenModal() {
-    this.setState(() => ({ ...this.state, commentText: '' }));
+    this.setState(() => ({ ...this.state, commentText: '', commentCharsLeft: FeedbackDialog.COMMENT_MAX_CHAR }));
   }
 
   createFeedback() {
@@ -54,7 +57,7 @@ class FeedbackDialog extends React.Component {
 
   handleCommentTextChange(element) {
     const text = element.target.value;
-    this.setState(() => ({ ...this.state, commentText: text }));
+    this.setState(() => ({ ...this.state, commentText: text, commentCharsLeft: (FeedbackDialog.COMMENT_MAX_CHAR - text.length) }));
   }
 
   render() {
@@ -87,8 +90,9 @@ class FeedbackDialog extends React.Component {
           <div className="div-clear" />
 
           <div className="form-group">
-            <label htmlFor="feedback-comment">Comment:
+            <label htmlFor="feedback-comment">Comment ({this.state.commentCharsLeft} characters left)
               <textarea
+                maxLength={FeedbackDialog.COMMENT_MAX_CHAR}
                 defaultValue={this.props.feedback ? this.props.feedback.comment : null}
                 onChange={(e) => this.handleCommentTextChange(e)}
                 className="form-control"
