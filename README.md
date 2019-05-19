@@ -33,8 +33,9 @@ This configuration is the default.
 ## Release
 
 1. Update `app/utils/constants.js`, set `APP_WEBSOCKET_URL` and `APP_BASE_URL` parameters correctly
-2. $ npm run build
-3. Copy content of `/build` folder and paste it under `src/main/webapp/resources/participant-web-v2` in backend project (not open-source) 
+2. Make sure that `app/services/ParticipantApi.js` is not using the Mock service 
+3. `$ npm run build`
+4. Copy content of `/build` folder and paste it under `src/main/webapp/resources/participant-web-v2` in backend project (not open-source) 
 
 ## To be implemented
 - Error Handling on Publish feedback / Publish all
