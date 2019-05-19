@@ -63,15 +63,14 @@ class ParticipantPage extends React.Component {
       return;
     }
 
-    const response = await this.participantApi.publish(
+    const isPublished = await this.participantApi.publish(
       [feedback],
       this.state.nickname,
       this.props.match.params.code,
       this.props.match.params.token
     );
 
-    const responseBody = JSON.parse(await response.text());
-    if (response.status === 200 && responseBody.errorCode === 0) {
+    if (isPublished) {
       toastr.success('Feedback has been Published');
       this.commentsService.delete(feedback.id);
     }
@@ -88,15 +87,14 @@ class ParticipantPage extends React.Component {
       'Are you sure you want to Publish All?',
       async () => {
         const feedbacks = this.commentsService.getFeedbackList();
-        const response = await this.participantApi.publish(
+        const isPublished = await this.participantApi.publish(
           feedbacks,
           this.state.nickname,
           this.props.match.params.code,
           this.props.match.params.token
         );
 
-        const responseBody = JSON.parse(await response.text());
-        if (response.status === 200 && responseBody.errorCode === 0) {
+        if (isPublished) {
           const ids = feedbacks.map((f) => f.id);
           toastr.success(ids.length === 1 ? 'Feedback has been Published' : 'Feedbacks have been Published');
           ids.map((id) => this.commentsService.delete(id));

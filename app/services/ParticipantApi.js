@@ -40,7 +40,6 @@ class ParticipantApi {
   }
 
   async publish(feedbacks, username, code, token) {
-
     this.dispatch(publishingFeedbacks(feedbacks.map((f) => f.id)));
 
     const payload = feedbacks.map((feedback) => ({
@@ -52,7 +51,7 @@ class ParticipantApi {
       sessionToken: token,
     }));
 
-    return fetch(`${APP_BASE_URL}/rest/participant/sticker/${code}/${token}`, {
+    const response = await fetch(`${APP_BASE_URL}/rest/participant/sticker/${code}/${token}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -60,6 +59,17 @@ class ParticipantApi {
       },
       body: JSON.stringify(payload)
     });
+
+    const responseBody = JSON.parse(await response.text());
+    if (response.status === 200 && responseBody.errorCode === 0) {
+      // notify scrum master's board about the update
+      const stickers = JSON.parse(JSON.stringify(feedbacks));
+      stickers.map((s) => { s.id = null; return null; }); // removing id, backend does not use it
+      this.stompClient.send(`/app/board/sticker/${this.code}/${this.token}`, {}, JSON.stringify({ stickers: stickers }));
+      return true;
+    }
+
+    return false;
   }
 
   getGladDoubleFromMood(mood) {
