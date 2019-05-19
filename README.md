@@ -24,9 +24,9 @@ $ npm run build
 This will produce artifacts under ``build`` folder
 
 ## To be implemented
-- Validate that we received token and code in url
 - Error Handling on Publish feedback / Publish all
 - On Publish All / Publish error, set "publishing" array empty
+- Limit input to 150 chars
 
 ## To be improved
 
@@ -37,6 +37,7 @@ This will produce artifacts under ``build`` folder
 - Tests to be added
 - Better UI design
 - Automation testing support
+- Kill react-helmet
 
 ## Stack and Features
 

@@ -103,6 +103,10 @@ class ParticipantPage extends React.Component {
       }));
   }
 
+  isFeedbackListEmpty() {
+    return !this.props.feedbacks || this.props.feedbacks.length === 0;
+  }
+
   render() {
     return (
       <div className="participant-container">
@@ -137,7 +141,7 @@ class ParticipantPage extends React.Component {
         </div>
 
 
-        <div className="participant-feedback-container">
+        <div className={this.isFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
           <UnpublishedFeedbackList
             feedbacks={this.props.feedbacks}
             onDelete={this.handleFeedbackDelete}

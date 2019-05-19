@@ -9,8 +9,7 @@ import assetMad from '../../assets/mad.png';
 import assetEdit from '../../assets/icons/edit.svg';
 import assetShare from '../../assets/icons/share.svg';
 import assetTrash from '../../assets/icons/trash.svg';
-import {confirmationDialogOpening} from "../ConfirmationDialog/actions";
-import {pageLoading} from "../../containers/ParticipantPage/actions";
+import { confirmationDialogOpening } from '../ConfirmationDialog/actions';
 
 class UnpublishedFeedback extends React.Component {
   constructor(props, context) {
