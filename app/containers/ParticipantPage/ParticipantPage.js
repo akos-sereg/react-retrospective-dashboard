@@ -82,6 +82,11 @@ class ParticipantPage extends React.Component {
       return;
     }
 
+    if (this.props.feedbacks.length === 0) {
+      toastr.warning('Nothing to be Published');
+      return;
+    }
+
     this.props.dispatch(confirmationDialogOpening(
       'Publish All',
       'Are you sure you want to Publish All?',
