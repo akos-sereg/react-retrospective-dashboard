@@ -12,7 +12,8 @@ class NicknameProvider extends React.Component {
     super(props, context);
 
     this.state = {
-      nickname: ''
+      nickname: '',
+      isJoined: false,
     };
 
     this.participantService = ParticipantApi.getInstance(this.props.dispatch);
@@ -35,6 +36,8 @@ class NicknameProvider extends React.Component {
     this.props.onJoined(this.state.nickname);
     this.participantService.join(this.state.nickname, this.props.code, this.props.token);
     this.props.dispatch(joinClicked());
+
+    this.setState(() => ({ ...this.state, isJoined: true }));
   }
 
   onNicknameChanged(event) {
@@ -44,8 +47,8 @@ class NicknameProvider extends React.Component {
   render() {
     return (
       <div>
-        <TextInput width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
-        <Button marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
+        <TextInput isDisabled={this.state.isJoined} width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
+        <Button isDisabled={this.state.isJoined} marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
         <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>
     );

@@ -22,6 +22,7 @@ export default class TextInput extends React.Component {
             ref={this.props.name}
             value={this.props.value}
             onChange={this.props.onChange}
+            disabled={this.props.isDisabled}
           />
           <div className="input"></div>
         </div>
@@ -36,5 +37,6 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.string,
+  isDisabled: PropTypes.bool
 };

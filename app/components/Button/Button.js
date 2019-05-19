@@ -28,6 +28,7 @@ class Button extends React.Component {
         type="submit"
         value={this.props.label}
         className={classNames.join(' ')}
+        disabled={this.props.isDisabled}
         onClick={(event) => this.props.onClick(event)}
       />
     );
@@ -41,6 +42,7 @@ Button.propTypes = {
   marginTop: PropTypes.string,
   float: PropTypes.string,
   marginLeft: PropTypes.string,
+  isDisabled: PropTypes.bool
 };
 
 export default Button;
