@@ -26,3 +26,6 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 // backend
 export const APP_WEBSOCKET_URL = 'http://local.retrospective-dashboard:8080/ws';
 export const APP_BASE_URL = 'http://local.retrospective-dashboard:8080';
+
+// export const APP_WEBSOCKET_URL = 'https://www.retrospective-dashboard.org/ws';
+// export const APP_BASE_URL = 'https://www.retrospective-dashboard.org';

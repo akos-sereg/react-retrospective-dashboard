@@ -1,11 +1,11 @@
 # react-retrospective-dashboard
 
-This web app is supposed to be the replacement of an existing Angular-based web app 
+This web app is supposed to be the replacement of the existing Angular-based web app 
 used by https://www.retrospective-dashboard.org - participant screen.
 
-Right now it is in ALPHA, as long as "To be implemented" section has any element.
+Right now it is in Beta, as long as "To be implemented" section in this Readme.md has any element.
 
-The goal is to support `Glad / Sad / Mad` type board, then we can add support for more boards.
+Currently it only supports `Glad / Sad / Mad` board, which is the most popular one.
 
 ## Usage
 ```
@@ -28,10 +28,19 @@ This will produce artifacts under ``build`` folder
 For local development, use mocked service. In file `app/services/ParticipantApi.js`, look for method `getInstance`, 
 and use `ParticipantApi.instance = new ParticipantApiMock(dispatch);` to instantiate the service.
 
+This configuration is the default.
+
+## Release
+
+1. Update `app/utils/constants.js`, set `APP_WEBSOCKET_URL` and `APP_BASE_URL` parameters correctly
+2. $ npm run build
+3. Copy content of `/build` folder and paste it under `src/main/webapp/resources/participant-web-v2` in backend project (not open-source) 
+
 ## To be implemented
 - Error Handling on Publish feedback / Publish all
 - On Publish All / Publish error, set "publishing" array empty
 - Remember username on page refresh
+- `APP_WEBSOCKET_URL` and `APP_BASE_URL` parameters to be set for prod in case `npm run build` is executed
 
 ## To be improved
 
