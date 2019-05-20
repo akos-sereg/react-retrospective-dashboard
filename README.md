@@ -40,7 +40,6 @@ This configuration is the default.
 ## To be implemented
 - Error Handling on Publish feedback / Publish all
 - On Publish All / Publish error, set "publishing" array empty
-- Remember username on page refresh
 - `APP_WEBSOCKET_URL` and `APP_BASE_URL` parameters to be set for prod in case `npm run build` is executed
 
 ## To be improved

@@ -6,13 +6,15 @@ import Button from '../Button/Button';
 import ParticipantApi from '../../services/ParticipantApi';
 import ConnectionIndicator from '../ConnectionIndicator';
 import { joinClicked } from './actions';
+import { getCookie, setCookie } from '../../utils/cookies';
+import { COOKIE_USERNAME } from '../../utils/constants';
 
 class NicknameProvider extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      nickname: '',
+      nickname: getCookie(COOKIE_USERNAME) ? getCookie(COOKIE_USERNAME) : '',
       isJoined: false,
     };
 
@@ -38,6 +40,7 @@ class NicknameProvider extends React.Component {
     this.props.dispatch(joinClicked());
 
     this.setState(() => ({ ...this.state, isJoined: true }));
+    setCookie(COOKIE_USERNAME, this.state.nickname);
   }
 
   onNicknameChanged(event) {
@@ -47,7 +50,7 @@ class NicknameProvider extends React.Component {
   render() {
     return (
       <div>
-        <TextInput isDisabled={this.state.isJoined} width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
+        <TextInput value={this.state.nickname} isDisabled={this.state.isJoined} width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
         <Button isDisabled={this.state.isJoined} marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
         <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>
