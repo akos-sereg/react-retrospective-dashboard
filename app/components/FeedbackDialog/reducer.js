@@ -39,7 +39,8 @@ function feedbackDialogReducer(state = {}, action) {
         ...state,
         modalIsOpen: true,
         mode: 'update',
-        feedback: action.payload.feedback
+        feedback: action.payload.feedback,
+        commentText: action.payload.feedback.comment,
       };
 
     default:

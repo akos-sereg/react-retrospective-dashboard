@@ -27,7 +27,11 @@ class FeedbackDialog extends React.Component {
   }
 
   afterOpenModal() {
-    this.setState(() => ({ ...this.state, commentText: '', commentCharsLeft: FeedbackDialog.COMMENT_MAX_CHAR }));
+    this.setState(() => ({
+      ...this.state,
+      commentText: this.props.feedback ? this.props.feedback.comment : '',
+      commentCharsLeft: FeedbackDialog.COMMENT_MAX_CHAR
+    }));
   }
 
   createFeedback() {
