@@ -48,10 +48,10 @@ This configuration is the default.
 - Create TextArea component and use in FeedbackDialog
 - Clean up app.js
 - Fix linter issues
-- Tests to be added
-- Better UI design
+- Tests to be added (JEST Snapshot Tests) - https://jestjs.io/docs/en/tutorial-react
 - Automation testing support
 - Kill react-helmet
+- Kill commentText from `FeedbackDialog`
 - Disable STOMP console logs
 - Clone with lib in ParticipantApi instead of JSON parse/serialize
 
@@ -70,6 +70,7 @@ This configuration is the default.
 - Webpack
 - Sourcemap
 - Jest
+- Enzyme
 - ESLint - ``npm run lint``
 
 #### User Interface
@@ -82,6 +83,12 @@ Run the following command
 
 ```
 $ npm run test
+```
+
+... or just run
+
+``` 
+$ jest --coverage
 ``` 
 
 It generates a coverage report as well. You can set coverage expectations in ``config/jest.config.js``
