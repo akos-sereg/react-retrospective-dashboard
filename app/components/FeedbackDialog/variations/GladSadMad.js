@@ -12,28 +12,51 @@ class GladSadMad extends React.Component {
     this.selectMood = this.selectMood.bind(this);
   }
 
+  getClassNames() {
+    const classNames = {};
+    if (this.props.feedback) {
+      switch (this.props.feedback.mood) {
+        case 'glad':
+          classNames.glad = 'feedback-mood-highlight';
+          break;
+        case 'sad':
+          classNames.sad = 'feedback-mood-highlight';
+          break;
+        case 'mad':
+          classNames.mad = 'feedback-mood-highlight';
+          break;
+        default:
+          classNames.glad = 'feedback-mood-highlight';
+      }
+    } else {
+      classNames.glad = 'feedback-mood-highlight';
+    }
+
+    return classNames;
+  }
+
   selectMood(event, mood) {
-    event.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
+
     this.props.dispatch(moodSelected(mood));
   }
 
   render() {
-    const classNames = {};
-    classNames.glad = this.props.feedback && this.props.feedback.mood === 'glad' ? 'feedback-mood-highlight' : '';
-    classNames.sad = this.props.feedback && this.props.feedback.mood === 'sad' ? 'feedback-mood-highlight' : '';
-    classNames.mad = this.props.feedback && this.props.feedback.mood === 'mad' ? 'feedback-mood-highlight' : '';
+    const classNames = this.getClassNames();
 
     return (
       <div className="gsm-float-left">
-        <div onClick={(e) => this.selectMood(e, 'glad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.glad}>
+        <div onClick={(e) => this.selectMood(e, 'glad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.glad} test-id="glad-selector">
           <img height="120" src={assetGlad} alt="Glad" />
           <p>SELECTED</p>
         </div>
-        <div onClick={(e) => this.selectMood(e, 'sad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.sad}>
+        <div onClick={(e) => this.selectMood(e, 'sad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.sad} test-id="sad-selector">
           <img height="120" src={assetSad} alt="Sad" />
           <p>SELECTED</p>
         </div>
-        <div onClick={(e) => this.selectMood(e, 'mad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.mad}>
+        <div onClick={(e) => this.selectMood(e, 'mad')} onKeyPress={() => {}} role="button" tabIndex="0" className={classNames.mad} test-id="mad-selector">
           <img height="120" src={assetMad} alt="Mad" />
           <p>SELECTED</p>
         </div>
