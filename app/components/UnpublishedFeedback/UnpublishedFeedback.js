@@ -20,15 +20,24 @@ class UnpublishedFeedback extends React.Component {
     this.handlePublish = this.handlePublish.bind(this);
   }
 
-  handleDelete(event) {
-    event.preventDefault();
+  getMoodInficatorAsset() {
+    let moodIndicator = null;
+    switch (this.props.feedback.mood) {
+      case 'glad':
+        moodIndicator = assetGlad;
+        break;
+      case 'sad':
+        moodIndicator = assetSad;
+        break;
+      case 'mad':
+        moodIndicator = assetMad;
+        break;
+      default:
+        moodIndicator = assetGlad;
+        break;
+    }
 
-    this.props.dispatch(confirmationDialogOpening(
-      'Delete',
-      'Are you sure you want to Delete?',
-      () => {
-        this.props.onDelete(this.props.feedback.id);
-      }));
+    return moodIndicator;
   }
 
   handleEdit(event) {
@@ -44,6 +53,17 @@ class UnpublishedFeedback extends React.Component {
       'Are you sure you want to Publish?',
       () => {
         this.props.onPublish(this.props.feedback);
+      }));
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+
+    this.props.dispatch(confirmationDialogOpening(
+      'Delete',
+      'Are you sure you want to Delete?',
+      () => {
+        this.props.onDelete(this.props.feedback.id);
       }));
   }
 
@@ -77,26 +97,6 @@ class UnpublishedFeedback extends React.Component {
 
       </div>
     );
-  }
-
-  getMoodInficatorAsset = () => {
-    let moodIndicator = null;
-    switch (this.props.feedback.mood) {
-      case 'glad':
-        moodIndicator = assetGlad;
-        break;
-      case 'sad':
-        moodIndicator = assetSad;
-        break;
-      case 'mad':
-        moodIndicator = assetMad;
-        break;
-      default:
-        moodIndicator = assetGlad;
-        break;
-    }
-
-    return moodIndicator;
   }
 }
 

@@ -58,6 +58,13 @@
       "redux-saga/yield-effects": 2,
       "jsx-a11y/anchor-is-valid": 0
     },
+    "overrides": [{
+      "files": [ "*.js" ],
+      "rules": {
+        "react/prefer-stateless-function": "off",
+        "class-methods-use-this": "off"
+      }
+    }],
     "settings": {
       "import/resolver": {
         "webpack": {

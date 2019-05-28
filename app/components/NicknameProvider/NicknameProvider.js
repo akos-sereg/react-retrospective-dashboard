@@ -26,12 +26,12 @@ class NicknameProvider extends React.Component {
 
   onJoinClicked() {
     if (this.state.nickname.length === 0) {
-      toastr.warning('Nickname is empty')
+      toastr.warning('Nickname is empty');
       return;
     }
 
     if (!this.props.code || !this.props.token) {
-      toastr.error('Incorrect URL, token and code are missing from URL. In this mode, you can only prepare your feedbacks for the next Retrospective.')
+      toastr.error('Incorrect URL, token and code are missing from URL. In this mode, you can only prepare your feedbacks for the next Retrospective.');
       return;
     }
 

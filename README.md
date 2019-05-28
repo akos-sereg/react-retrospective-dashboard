@@ -43,9 +43,6 @@ This configuration is the default.
 
 - Using `import styles from './styles'` to avoid style name collision
 - Create TextArea component and use in FeedbackDialog
-- Clean up app.js
-- Fix linter issues
-- Tests to be added (JEST Snapshot Tests) - https://jestjs.io/docs/en/tutorial-react
 - Automation testing support
 - Kill react-helmet
 - Kill commentText from `FeedbackDialog`

@@ -14,13 +14,14 @@ function participantPageReducer(state = {}, action) {
 
     case FEEDBACK_DELETED:
     case FEEDBACK_SAVED:
-    case FEEDBACK_UPDATED:
+    case FEEDBACK_UPDATED: {
       const service = LocalStorageOfCommentsService.getInstance();
       let feedbacks = [];
       if (service != null) {
         feedbacks = service.getFeedbackList();
       }
       return { ...state, feedbacks };
+    }
 
     default:
       return { ...state };

@@ -45,7 +45,7 @@ class ParticipantApi {
     const payload = feedbacks.map((feedback) => ({
       comment: feedback.comment,
       username,
-      glad: this.getGladDoubleFromMood(feedback.mood),
+      glad: ParticipantApi.getGladDoubleFromMood(feedback.mood),
       noControl: 1.0,
       sessionCode: code,
       sessionToken: token,
@@ -65,14 +65,14 @@ class ParticipantApi {
       // notify scrum master's board about the update
       const stickers = JSON.parse(JSON.stringify(feedbacks));
       stickers.map((s) => { s.id = null; return null; }); // removing id, backend does not use it
-      this.stompClient.send(`/app/board/sticker/${this.code}/${this.token}`, {}, JSON.stringify({ stickers: stickers }));
+      this.stompClient.send(`/app/board/sticker/${this.code}/${this.token}`, {}, JSON.stringify({ stickers }));
       return true;
     }
 
     return false;
   }
 
-  getGladDoubleFromMood(mood) {
+  static getGladDoubleFromMood(mood) {
     switch (mood) {
       case 'glad': return 1.0;
       case 'sad': return 0.5;

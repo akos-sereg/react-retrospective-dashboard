@@ -9,7 +9,6 @@ function unpublishedFeedbackReducer(state = {}, action) {
     }
 
     case PUBLISHING_FEEDBACKS:
-      debugger;
       return {
         ...state,
         publishingFeedbackIds: action.payload.feedbackIds

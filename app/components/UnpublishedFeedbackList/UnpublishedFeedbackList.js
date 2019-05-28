@@ -15,7 +15,7 @@ class UnpublishedFeedbackList extends React.Component {
     )) : (<div />);
 
     if (this.props.feedbacks && this.props.feedbacks.length === 0) {
-      unpublishedFeedbacks = (<div className="nothing-to-publish">No feedback to be published yet.<br />click on "Create" button ...</div>);
+      unpublishedFeedbacks = (<div className="nothing-to-publish">No feedback to be published yet.<br />click on &quot;Create&quot; button ...</div>);
     }
 
     return (

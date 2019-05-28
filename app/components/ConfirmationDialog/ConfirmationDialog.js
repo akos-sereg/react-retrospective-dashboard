@@ -12,16 +12,11 @@ class ConfirmationDialog extends React.Component {
     this.handleConfirm = this.handleConfirm.bind(this);
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.subtitle.style.color = '#f00';
-  }
-
   handleConfirm() {
     try {
       this.props.onConfirmed();
     } catch (error) {
-      console.log(error);
+      // do not panic on error, user code is broken
     }
 
     this.props.dispatch(confirmationDialogClosing());
@@ -44,7 +39,6 @@ class ConfirmationDialog extends React.Component {
       <div>
         <Modal
           isOpen={this.props.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
           onRequestClose={() => this.props.dispatch(confirmationDialogClosing())}
           style={customStyles}
           contentLabel="Confirmation Modal"

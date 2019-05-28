@@ -7,7 +7,7 @@ export default class ParticipantApiMock {
     this.emulatePublishFailure = emulatePublishFailure;
   }
 
-  async join(username, code, token) {
+  async join() {
     this.dispatch(connecting());
     await this.delay(4);
 
@@ -18,7 +18,7 @@ export default class ParticipantApiMock {
     }
   }
 
-  async publish(feedbacks, username, code, token) {
+  async publish(feedbacks) {
     this.dispatch(publishingFeedbacks(feedbacks.map((f) => f.id)));
 
     await this.delay(2);
