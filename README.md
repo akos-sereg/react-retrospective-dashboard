@@ -38,7 +38,6 @@ This configuration is the default.
 4. Copy content of `/build` folder and paste it under `src/main/webapp/resources/participant-web-v2` in backend project (not open-source) 
 
 ## To be implemented
-- `APP_WEBSOCKET_URL` and `APP_BASE_URL` parameters to be set for prod in case `npm run build` is executed
 
 ## To be improved
 

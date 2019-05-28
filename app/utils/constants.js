@@ -25,8 +25,13 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 export const COOKIE_USERNAME = 'username';
 
 // backend
-export const APP_WEBSOCKET_URL = 'http://local.retrospective-dashboard:8080/ws';
-export const APP_BASE_URL = 'http://local.retrospective-dashboard:8080';
+let CONFIG_APP_WEBSOCKET_URL = 'http://local.retrospective-dashboard:8080/ws';
+let CONFIG_APP_BASE_URL = 'http://local.retrospective-dashboard:8080/ws';
 
-// export const APP_WEBSOCKET_URL = 'https://www.retrospective-dashboard.org/ws';
-// export const APP_BASE_URL = 'https://www.retrospective-dashboard.org';
+if (process.env.NODE_ENV === 'production') {
+  CONFIG_APP_WEBSOCKET_URL = 'https://www.retrospective-dashboard.org/ws';
+  CONFIG_APP_BASE_URL = 'https://www.retrospective-dashboard.org';
+}
+
+export const APP_WEBSOCKET_URL = CONFIG_APP_WEBSOCKET_URL;
+export const APP_BASE_URL = CONFIG_APP_BASE_URL;
