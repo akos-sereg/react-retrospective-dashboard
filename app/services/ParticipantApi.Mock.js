@@ -24,10 +24,10 @@ export default class ParticipantApiMock {
     await this.delay(2);
 
     if (this.emulatePublishFailure) {
-      return { code: 500 };
+      return false;
     }
 
-    return { code: 200 };
+    return true;
   }
 
   async delay(seconds) {

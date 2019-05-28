@@ -14,6 +14,7 @@ import { confirmationDialogOpening } from '../../components/ConfirmationDialog/a
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
+import { publishingFeedbacks } from '../../services/actions';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -73,6 +74,9 @@ class ParticipantPage extends React.Component {
     if (isPublished) {
       toastr.success('Feedback has been Published');
       this.commentsService.delete(feedback.id);
+    } else {
+      toastr.error('Feedback has not been published due to a server error. Please try again later.');
+      this.props.dispatch(publishingFeedbacks([]));
     }
   }
 
@@ -104,6 +108,9 @@ class ParticipantPage extends React.Component {
           toastr.success(ids.length === 1 ? 'Feedback has been Published' : 'Feedbacks have been Published');
           ids.map((id) => this.commentsService.delete(id));
           this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+        } else {
+          toastr.error('Feedbacks have not been published due to a server error. Please try again later.');
+          this.props.dispatch(publishingFeedbacks([]));
         }
       }));
   }

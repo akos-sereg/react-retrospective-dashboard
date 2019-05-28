@@ -167,7 +167,7 @@ class ParticipantApi {
       }
 
       // ParticipantApi.instance = new ParticipantApi(dispatch);
-      ParticipantApi.instance = new ParticipantApiMock(dispatch);
+      ParticipantApi.instance = new ParticipantApiMock(dispatch, false, true);
     }
 
     return ParticipantApi.instance;
