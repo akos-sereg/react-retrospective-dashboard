@@ -166,8 +166,11 @@ class ParticipantApi {
         return null;
       }
 
-      // ParticipantApi.instance = new ParticipantApi(dispatch);
-      ParticipantApi.instance = new ParticipantApiMock(dispatch, false, true);
+      if (process.env.NODE_ENV === 'production') {
+        ParticipantApi.instance = new ParticipantApi(dispatch);
+      } else {
+        ParticipantApi.instance = new ParticipantApiMock(dispatch, false, true);
+      }
     }
 
     return ParticipantApi.instance;
