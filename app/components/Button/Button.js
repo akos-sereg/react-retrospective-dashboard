@@ -25,6 +25,7 @@ class Button extends React.Component {
     return (
       <input
         style={styles}
+        test-id={this.props.testId}
         type="submit"
         value={this.props.label}
         className={classNames.join(' ')}
@@ -42,6 +43,7 @@ Button.propTypes = {
   marginTop: PropTypes.string,
   float: PropTypes.string,
   marginLeft: PropTypes.string,
+  testId: PropTypes.string,
   isDisabled: PropTypes.bool
 };
 

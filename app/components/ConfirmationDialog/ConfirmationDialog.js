@@ -46,13 +46,14 @@ class ConfirmationDialog extends React.Component {
         >
 
           <h4>{this.props.title}</h4>
-          {this.props.text}
+          <div test-id="confirmation-dialog-text">{this.props.text}</div>
 
           <hr align="true" />
           <Button
             float="right"
             buttonType="primary"
             label="OK"
+            testId="confirmation-dialog-ok"
             onClick={() => this.handleConfirm()}
             marginLeft="10"
           />
