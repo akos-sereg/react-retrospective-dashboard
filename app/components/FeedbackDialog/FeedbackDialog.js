@@ -101,17 +101,18 @@ class FeedbackDialog extends React.Component {
                 onChange={(e) => this.handleCommentTextChange(e)}
                 className="form-control"
                 id="feedback-comment"
+                test-id="feedback-comment"
               />
             </label>
           </div>
 
           <div className="feedback-dialog-buttons">
             {this.props.mode === 'create' ?
-              (<Button float="right" marginLeft="10" onClick={this.createFeedback} buttonType="primary" label="Create" />)
+              (<Button float="right" marginLeft="10" testId="feedback-dialog-create" onClick={this.createFeedback} buttonType="primary" label="Create" />)
               :
-              (<Button float="right" marginLeft="10" onClick={this.updateFeedback} buttonType="primary" label="Update" />)}
+              (<Button float="right" marginLeft="10" testId="feedback-dialog-update" onClick={this.updateFeedback} buttonType="primary" label="Update" />)}
 
-            <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} label="Cancel" />
+            <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} testId="feedback-dialog-close" label="Cancel" />
           </div>
 
 

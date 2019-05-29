@@ -61,6 +61,7 @@ class ConfirmationDialog extends React.Component {
           <Button
             float="right"
             buttonType="default"
+            testId="confirmation-dialog-close"
             label="Cancel"
             onClick={() => this.props.dispatch(confirmationDialogClosing())}
           />
