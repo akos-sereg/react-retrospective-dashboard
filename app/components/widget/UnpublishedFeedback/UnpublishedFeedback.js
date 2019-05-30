@@ -22,14 +22,14 @@ class UnpublishedFeedback extends React.Component {
 
   getMoodInficatorAsset() {
     let moodIndicator = null;
-    switch (this.props.feedback.mood) {
-      case 'glad':
+    switch (this.props.feedback.glad) {
+      case 1.0:
         moodIndicator = assetGlad;
         break;
-      case 'sad':
+      case 0.5:
         moodIndicator = assetSad;
         break;
-      case 'mad':
+      case 0.0:
         moodIndicator = assetMad;
         break;
       default:
@@ -41,12 +41,17 @@ class UnpublishedFeedback extends React.Component {
   }
 
   handleEdit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     this.props.dispatch(editFeedback(this.props.feedback));
   }
 
   handlePublish(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     this.props.dispatch(confirmationDialogOpening(
       'Publish',
@@ -57,7 +62,9 @@ class UnpublishedFeedback extends React.Component {
   }
 
   handleDelete(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     this.props.dispatch(confirmationDialogOpening(
       'Delete',
@@ -89,9 +96,9 @@ class UnpublishedFeedback extends React.Component {
 
         {isPublishing ? (<div />) : (
           <div className="feedback-card-actions">
-            <a href="#" onClick={(e) => this.handleDelete(e)}><img alt="edit" src={assetTrash} width="20" /> Delete</a>
-            <a href="#" onClick={(e) => this.handleEdit(e)}><img alt="edit" src={assetEdit} width="20" /> Edit</a>
-            <a href="#" onClick={(e) => this.handlePublish(e)}><img alt="edit" src={assetShare} width="20" /> Publish</a>
+            <a href="#" onClick={(e) => this.handleDelete(e)} test-id="uf-delete"><img alt="delete" src={assetTrash} width="20" /> Delete</a>
+            <a href="#" onClick={(e) => this.handleEdit(e)} test-id="uf-edit"><img alt="edit" src={assetEdit} width="20" /> Edit</a>
+            <a href="#" onClick={(e) => this.handlePublish(e)} test-id="uf-publish"><img alt="publish" src={assetShare} width="20" /> Publish</a>
           </div>)
         }
 

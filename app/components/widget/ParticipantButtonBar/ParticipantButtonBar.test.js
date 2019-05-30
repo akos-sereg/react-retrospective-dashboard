@@ -26,10 +26,10 @@ describe('<ParticipantButtonBar /> rendering', () => {
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const component = shallow(<ParticipantButtonBar onPublishAll={onPublishAll} dispatch={dispatch} />);
 
-    const publishAllButton = component.find('button[test-id="pbb-create"]').first();
+    const createButton = component.find('button[test-id="pbb-create"]').first();
 
     // act
-    publishAllButton.simulate('click');
+    createButton.simulate('click');
 
     // assert
     expect(state.publishAllClicked).toEqual(false);
@@ -44,10 +44,10 @@ describe('<ParticipantButtonBar /> rendering', () => {
     const component = shallow(<ParticipantButtonBar onPublishAll={onPublishAll} dispatch={dispatch} />);
     component.setProps({ isJoinClicked: false });
 
-    const publishAllButton = component.find('button[test-id="pbb-toggle-state"]').first();
+    const toggleStateButton = component.find('button[test-id="pbb-toggle-state"]').first();
 
     // act
-    publishAllButton.simulate('click');
+    toggleStateButton.simulate('click');
 
     // assert
     expect(state.publishAllClicked).toEqual(false);
@@ -62,20 +62,20 @@ describe('<ParticipantButtonBar /> rendering', () => {
     const component = shallow(<ParticipantButtonBar onPublishAll={onPublishAll} dispatch={dispatch} />);
     component.setProps({ isJoinClicked: true });
 
-    const publishAllButton = component.find('button[test-id="pbb-toggle-state"]').first();
+    const toggleStateButton = component.find('button[test-id="pbb-toggle-state"]').first();
 
     // act
-    publishAllButton.simulate('click');
+    toggleStateButton.simulate('click');
 
     // assert
     expect(state.publishAllClicked).toEqual(false);
     expect(state.lastDispatchedAction.type).toEqual(READY_STATE_CHANGED);
     expect(state.lastDispatchedAction.payload.isUserReady).toEqual(true);
 
-    // act II
-    publishAllButton.simulate('click');
+    // act - continue toggle
+    toggleStateButton.simulate('click');
 
-    // assert II
+    // assert
     expect(state.lastDispatchedAction.type).toEqual(READY_STATE_CHANGED);
     expect(state.lastDispatchedAction.payload.isUserReady).toEqual(false);
   });
