@@ -1,4 +1,4 @@
-import { FEEDBACK_UPDATED, PUBLISHING_FEEDBACKS } from '../../utils/constants';
+import { FEEDBACK_UPDATED, PUBLISHING_FEEDBACKS } from '../../../utils/constants';
 
 function unpublishedFeedbackReducer(state = {}, action) {
   switch (action.type) {

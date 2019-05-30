@@ -1,4 +1,4 @@
-import { CONFIRMATION_DIALOG_CLOSING, CONFIRMATION_DIALOG_OPENING } from '../../utils/constants';
+import { CONFIRMATION_DIALOG_CLOSING, CONFIRMATION_DIALOG_OPENING } from '../../../utils/constants';
 
 const confirmationDialogClosing = () => ({
   type: CONFIRMATION_DIALOG_CLOSING,

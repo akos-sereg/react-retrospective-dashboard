@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import Button from '../Button';
+import Button from '../../core/Button/index';
 import { confirmationDialogClosing } from './actions';
-import '../../styles/global-styles.scss';
+import '../../../styles/global-styles.scss';
 
 class ConfirmationDialog extends React.Component {
   constructor(props, context) {

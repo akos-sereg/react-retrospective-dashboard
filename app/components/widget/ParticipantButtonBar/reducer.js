@@ -5,7 +5,7 @@ import {
   CONFIRMATION_DIALOG_OPENING,
   CONFIRMATION_DIALOG_CLOSING,
   JOIN_CLICKED,
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 function participantButtonBarReducer(state = {}, action) {
   switch (action.type) {

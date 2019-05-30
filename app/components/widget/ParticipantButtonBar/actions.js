@@ -1,4 +1,4 @@
-import { READY_STATE_CHANGED, CREATE_FEEDBACK_CLICKED } from '../../utils/constants';
+import { READY_STATE_CHANGED, CREATE_FEEDBACK_CLICKED } from '../../../utils/constants';
 
 const userReadyStateChanged = (isUserReady) => ({
   type: READY_STATE_CHANGED,

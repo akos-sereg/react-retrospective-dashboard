@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FEEDBACK_DIALOG_CLOSING } from '../../utils/constants';
+import { FEEDBACK_DIALOG_CLOSING } from '../../../utils/constants';
 import FeedbackDialog from './FeedbackDialog';
-import Button from '../Button';
+import Button from '../../core/Button/index';
 
 describe('<FeedbackDialog /> rendering', () => {
   it('create mode, textarea is empty by default', () => {

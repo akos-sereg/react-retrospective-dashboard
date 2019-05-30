@@ -48,6 +48,7 @@ This configuration is the default.
 - Kill commentText from `FeedbackDialog`
 - Disable STOMP console logs
 - Clone with lib in ParticipantApi instead of JSON parse/serialize
+- Extract events from constants near to components
 
 ## Stack and Features
 

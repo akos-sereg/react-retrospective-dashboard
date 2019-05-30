@@ -2,7 +2,7 @@ import {
   BROKEN_PIPE,
   CONNECTING,
   CONNECTED
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 function nicknameProviderReducer(state = {}, action) {
   switch (action.type) {

@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { editFeedback } from './actions';
 import './style.scss';
-import '../../styles/global-styles.scss';
-import assetGlad from '../../assets/glad.png';
-import assetSad from '../../assets/sad.png';
-import assetMad from '../../assets/mad.png';
-import assetEdit from '../../assets/icons/edit.svg';
-import assetShare from '../../assets/icons/share.svg';
-import assetTrash from '../../assets/icons/trash.svg';
-import { confirmationDialogOpening } from '../ConfirmationDialog/actions';
+import '../../../styles/global-styles.scss';
+import assetGlad from '../../../assets/glad.png';
+import assetSad from '../../../assets/sad.png';
+import assetMad from '../../../assets/mad.png';
+import assetEdit from '../../../assets/icons/edit.svg';
+import assetShare from '../../../assets/icons/share.svg';
+import assetTrash from '../../../assets/icons/trash.svg';
+import { confirmationDialogOpening } from '../../dialog/ConfirmationDialog/actions';
 
 class UnpublishedFeedback extends React.Component {
   constructor(props, context) {

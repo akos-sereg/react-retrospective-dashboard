@@ -1,7 +1,7 @@
 import {
   CONFIRMATION_DIALOG_CLOSING,
   CONFIRMATION_DIALOG_OPENING
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 function confirmationDialogReducer(state = {}, action) {
   switch (action.type) {

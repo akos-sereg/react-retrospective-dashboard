@@ -1,4 +1,4 @@
-import { JOIN_CLICKED } from '../../utils/constants';
+import { JOIN_CLICKED } from '../../../utils/constants';
 
 const joinClicked = () => ({
   type: JOIN_CLICKED,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import UnpublishedFeedback from '../UnpublishedFeedback';
+import UnpublishedFeedback from '../UnpublishedFeedback/index';
 import './style.scss';
 
 class UnpublishedFeedbackList extends React.Component {

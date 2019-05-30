@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, shallow } from 'enzyme';
-import { MOOD_SELECTED } from '../../../utils/constants';
+import { MOOD_SELECTED } from '../../../../utils/constants';
 import GladSadMad from './GladSadMad';
 
 describe('<GladSadMad /> rendering', () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CONFIRMATION_DIALOG_CLOSING } from '../../utils/constants';
+import { CONFIRMATION_DIALOG_CLOSING } from '../../../utils/constants';
 import ConfirmationDialog from './ConfirmationDialog';
-import Button from '../Button';
+import Button from '../../core/Button/index';
 
 describe('<ConfirmationDialog /> rendering', () => {
   it('should display title and text', () => {

@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import toastr from 'toastr';
 import { feedbackDialogClosing } from './actions';
 import './style.scss';
-import '../../styles/global-styles.scss';
-import Button from '../Button';
+import '../../../styles/global-styles.scss';
+import Button from '../../core/Button';
 import GladSadMad from './variations/GladSadMad';
 
 class FeedbackDialog extends React.Component {

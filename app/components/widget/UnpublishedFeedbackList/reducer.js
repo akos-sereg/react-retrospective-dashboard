@@ -1,4 +1,4 @@
-import { FEEDBACK_SAVED, FEEDBACK_UPDATED, FEEDBACK_DELETED, PAGE_LOADING } from '../../utils/constants';
+import { FEEDBACK_SAVED, FEEDBACK_UPDATED, FEEDBACK_DELETED, PAGE_LOADING } from '../../../utils/constants';
 
 function unpublishedFeedbackListReducer(state = {}, action) {
   switch (action.type) {

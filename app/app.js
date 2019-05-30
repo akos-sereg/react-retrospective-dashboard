@@ -14,12 +14,12 @@ import { HashRouter } from 'react-router-dom';
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import nicknameProviderReducer from './components/NicknameProvider/reducer';
-import participantButtonBarReducer from './components/ParticipantButtonBar/reducer';
-import feedbackDialogReducer from './components/FeedbackDialog/reducer';
-import unpublishedFeedbackListReducer from './components/UnpublishedFeedbackList/reducer';
-import unpublishedFeedbackReducer from './components/UnpublishedFeedback/reducer';
-import confirmationDialogReducer from './components/ConfirmationDialog/reducer';
+import nicknameProviderReducer from './components/widget/NicknameProvider/reducer';
+import participantButtonBarReducer from './components/widget/ParticipantButtonBar/reducer';
+import feedbackDialogReducer from './components/dialog/FeedbackDialog/reducer';
+import unpublishedFeedbackListReducer from './components/widget/UnpublishedFeedbackList/reducer';
+import unpublishedFeedbackReducer from './components/widget/UnpublishedFeedback/reducer';
+import confirmationDialogReducer from './components/dialog/ConfirmationDialog/reducer';
 import participantPageReducer from './containers/ParticipantPage/reducer';
 import participantApiReducer from './services/reducer';
 

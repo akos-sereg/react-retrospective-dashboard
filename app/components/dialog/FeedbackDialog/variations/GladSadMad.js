@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../style.scss';
 import { moodSelected } from '../actions';
-import assetGlad from '../../../assets/glad.png';
-import assetSad from '../../../assets/sad.png';
-import assetMad from '../../../assets/mad.png';
+import assetGlad from '../../../../assets/glad.png';
+import assetSad from '../../../../assets/sad.png';
+import assetMad from '../../../../assets/mad.png';
 
 class GladSadMad extends React.Component {
   constructor(props, context) {

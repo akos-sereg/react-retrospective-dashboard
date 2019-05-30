@@ -3,7 +3,7 @@ import {
   FEEDBACK_DIALOG_CLOSING,
   MOOD_SELECTED,
   EDIT_FEEDBACK_CLICKED,
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 function feedbackDialogReducer(state = {}, action) {
   switch (action.type) {

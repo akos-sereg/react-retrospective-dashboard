@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NicknameProvider from './NicknameProvider';
-import Button from '../Button';
-import ParticipantApiMock from '../../services/ParticipantApi.Mock';
-import { JOIN_CLICKED } from '../../utils/constants';
+import Button from '../../core/Button/index';
+import ParticipantApiMock from '../../../services/ParticipantApi.Mock';
+import { JOIN_CLICKED } from '../../../utils/constants';
 
 describe('<NicknameProvider /> rendering', () => {
   it('join with empty nickname', () => {

@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Helmet } from 'react-helmet';
-import NicknameProvider from '../../components/NicknameProvider';
-import ParticipantButtonBar from '../../components/ParticipantButtonBar';
-import UnpublishedFeedbackList from '../../components/UnpublishedFeedbackList';
-import FeedbackDialog from '../../components/FeedbackDialog';
-import Footer from '../../components/Footer';
+import NicknameProvider from '../../components/widget/NicknameProvider';
+import ParticipantButtonBar from '../../components/widget/ParticipantButtonBar';
+import UnpublishedFeedbackList from '../../components/widget/UnpublishedFeedbackList';
+import FeedbackDialog from '../../components/dialog/FeedbackDialog';
+import Footer from '../../components/widget/Footer';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
 import ParticipantApi from '../../services/ParticipantApi';
 import { pageLoading } from './actions';
-import { confirmationDialogOpening } from '../../components/ConfirmationDialog/actions';
+import { confirmationDialogOpening } from '../../components/dialog/ConfirmationDialog/actions';
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
-import ConfirmationDialog from '../../components/ConfirmationDialog';
+import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks } from '../../services/actions';
 
 class ParticipantPage extends React.Component {

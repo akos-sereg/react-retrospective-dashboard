@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import TextInput from '../TextInput/TextInput';
-import Button from '../Button/Button';
-import ParticipantApi from '../../services/ParticipantApi';
-import ConnectionIndicator from '../ConnectionIndicator';
+import TextInput from '../../core/TextInput/TextInput';
+import Button from '../../core/Button/Button';
+import ParticipantApi from '../../../services/ParticipantApi';
+import ConnectionIndicator from '../ConnectionIndicator/index';
 import { joinClicked } from './actions';
-import { getCookie, setCookie } from '../../utils/cookies';
-import { COOKIE_USERNAME } from '../../utils/constants';
+import { getCookie, setCookie } from '../../../utils/cookies';
+import { COOKIE_USERNAME } from '../../../utils/constants';
 
 class NicknameProvider extends React.Component {
   constructor(props, context) {

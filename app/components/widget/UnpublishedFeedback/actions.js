@@ -1,4 +1,4 @@
-import { EDIT_FEEDBACK_CLICKED } from '../../utils/constants';
+import { EDIT_FEEDBACK_CLICKED } from '../../../utils/constants';
 
 const editFeedback = (feedback) => ({
   type: EDIT_FEEDBACK_CLICKED,
