@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { FEEDBACK_DIALOG_CLOSING } from '../../../utils/constants';
 import FeedbackDialog from './FeedbackDialog';
 import Button from '../../core/Button/index';
+import { findButtonByTestId } from '../../../utils/testUtils';
 
 describe('<FeedbackDialog /> rendering', () => {
   it('create mode, textarea is empty by default', () => {
@@ -43,13 +44,8 @@ describe('<FeedbackDialog /> rendering', () => {
     component.setState({ commentText: 'hello world' });
 
     // act
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const saveButton = button.shallow().find('input[test-id="feedback-dialog-create"]');
-      if (saveButton.length === 1) {
-        saveButton.simulate('click');
-      }
-    });
+    const saveButton = findButtonByTestId(component.find(Button), 'feedback-dialog-create');
+    saveButton.simulate('click');
 
     // assert
     expect(state.saveCalled).toEqual(true);
@@ -76,13 +72,8 @@ describe('<FeedbackDialog /> rendering', () => {
     component.setState({ commentText: 'abcdefghij' });
 
     // act
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const saveButton = button.shallow().find('input[test-id="feedback-dialog-update"]');
-      if (saveButton.length === 1) {
-        saveButton.simulate('click');
-      }
-    });
+    const saveButton = findButtonByTestId(component.find(Button), 'feedback-dialog-update');
+    saveButton.simulate('click');
 
     // assert
     expect(state.saveCalled).toEqual(false);
@@ -108,13 +99,8 @@ describe('<FeedbackDialog /> rendering', () => {
     component.setProps({ mode: 'create', feedback: null });
 
     // act
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const saveButton = button.shallow().find('input[test-id="feedback-dialog-close"]');
-      if (saveButton.length === 1) {
-        saveButton.simulate('click');
-      }
-    });
+    const saveButton = findButtonByTestId(component.find(Button), 'feedback-dialog-close');
+    saveButton.simulate('click');
 
     // assert
     expect(state.saveCalled).toEqual(false);

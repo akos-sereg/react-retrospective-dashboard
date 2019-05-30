@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { CONFIRMATION_DIALOG_CLOSING } from '../../../utils/constants';
 import ConfirmationDialog from './ConfirmationDialog';
 import Button from '../../core/Button/index';
+import { findButtonByTestId } from '../../../utils/testUtils';
 
 describe('<ConfirmationDialog /> rendering', () => {
   it('should display title and text', () => {
@@ -25,13 +26,8 @@ describe('<ConfirmationDialog /> rendering', () => {
 
     // act
     const component = shallow(<ConfirmationDialog title="a" text="b" onConfirmed={onConfirm} dispatch={dispatch} />);
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const confirmButton = button.shallow().find('input[test-id="confirmation-dialog-ok"]');
-      if (confirmButton.length === 1) {
-        confirmButton.simulate('click');
-      }
-    });
+    const confirmButton = findButtonByTestId(component.find(Button), 'confirmation-dialog-ok');
+    confirmButton.simulate('click');
 
     // assert
     expect(state.confirmed).toEqual(true);
@@ -53,13 +49,8 @@ describe('<ConfirmationDialog /> rendering', () => {
 
     // act
     const component = shallow(<ConfirmationDialog title="a" text="b" onConfirmed={onConfirm} dispatch={dispatch} />);
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const confirmButton = button.shallow().find('input[test-id="confirmation-dialog-ok"]');
-      if (confirmButton.length === 1) {
-        confirmButton.simulate('click');
-      }
-    });
+    const confirmButton = findButtonByTestId(component.find(Button), 'confirmation-dialog-ok');
+    confirmButton.simulate('click');
 
     // assert
     expect(state.confirmed).toEqual(true);
@@ -77,13 +68,8 @@ describe('<ConfirmationDialog /> rendering', () => {
 
     // act
     const component = shallow(<ConfirmationDialog title="a" text="b" onConfirmed={onConfirm} dispatch={dispatch} />);
-    const buttons = component.find(Button);
-    buttons.forEach((button) => {
-      const closeButton = button.shallow().find('input[test-id="confirmation-dialog-close"]');
-      if (closeButton.length === 1) {
-        closeButton.simulate('click');
-      }
-    });
+    const closeButton = findButtonByTestId(component.find(Button), 'confirmation-dialog-close');
+    closeButton.simulate('click');
 
     // assert
     expect(state.confirmed).toEqual(false);
