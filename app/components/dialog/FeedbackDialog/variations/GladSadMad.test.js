@@ -35,7 +35,7 @@ describe('<GladSadMad /> rendering', () => {
   it('should default to Glad when invalid feedback data is passed', () => {
     // arrange
     const mockDispatch = () => { };
-    const feedback = { mood: 'invalid' };
+    const feedback = { glad: -1 };
 
     // act
     const component = render(<GladSadMad dispatch={mockDispatch} feedback={feedback} />);
@@ -49,7 +49,7 @@ describe('<GladSadMad /> rendering', () => {
   it('should default to Glad when Glad feedback data is passed', () => {
     // arrange
     const mockDispatch = () => { };
-    const feedback = { mood: 'glad' };
+    const feedback = { glad: 1.0 };
 
     // act
     const component = render(<GladSadMad dispatch={mockDispatch} feedback={feedback} />);
@@ -63,7 +63,7 @@ describe('<GladSadMad /> rendering', () => {
   it('should default to Sad when Sad feedback data is passed', () => {
     // arrange
     const mockDispatch = () => { };
-    const feedback = { mood: 'sad' };
+    const feedback = { glad: 0.5 };
 
     // act
     const component = render(<GladSadMad dispatch={mockDispatch} feedback={feedback} />);
@@ -77,7 +77,7 @@ describe('<GladSadMad /> rendering', () => {
   it('should default to Mad when Mad feedback data is passed', () => {
     // arrange
     const mockDispatch = () => { };
-    const feedback = { mood: 'mad' };
+    const feedback = { glad: 0.0 };
 
     // act
     const component = render(<GladSadMad dispatch={mockDispatch} feedback={feedback} />);
@@ -92,7 +92,7 @@ describe('<GladSadMad /> rendering', () => {
     // arrange
     const actionsTriggered = [];
     const mockDispatch = (action) => { actionsTriggered.push(action); };
-    const feedback = { mood: 'mad' };
+    const feedback = { glad: 0.0 };
 
     const component = shallow(<GladSadMad />);
     component.setProps({ feedback, dispatch: mockDispatch });
@@ -103,6 +103,6 @@ describe('<GladSadMad /> rendering', () => {
     // assert
     expect(actionsTriggered.length).toBe(1);
     expect(actionsTriggered[0].type).toBe(MOOD_SELECTED);
-    expect(actionsTriggered[0].payload.mood).toBe('glad');
+    expect(actionsTriggered[0].payload.glad).toBe(1.0);
   });
 });

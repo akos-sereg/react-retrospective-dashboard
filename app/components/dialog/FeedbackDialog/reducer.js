@@ -14,7 +14,7 @@ function feedbackDialogReducer(state = {}, action) {
         mode: 'create',
         feedback: {
           comment: '',
-          mood: 'glad'
+          glad: 1.0
         },
         commentText: '',
       };
@@ -30,7 +30,7 @@ function feedbackDialogReducer(state = {}, action) {
         ...state,
         feedback: {
           ...state.feedback,
-          mood: action.payload.mood
+          glad: action.payload.glad
         }
       };
 

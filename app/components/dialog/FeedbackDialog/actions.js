@@ -8,9 +8,9 @@ const feedbackDialogClosing = () => ({
   payload: { }
 });
 
-const moodSelected = (mood) => ({
+const moodSelected = (glad) => ({
   type: MOOD_SELECTED,
-  payload: { mood }
+  payload: { glad }
 });
 
 export {

@@ -40,12 +40,12 @@ class ParticipantButtonBar extends React.Component {
       <div className="participant-button-bar" role="group" aria-label="...">
         <div className="title"><h4>Your comments for retrospective</h4></div>
         <div className="btn-group">
-          <button onClick={() => this.handleUserReadyStateChange()} type="button" className="btn btn-default btn-sm">
+          <button onClick={() => this.handleUserReadyStateChange()} type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
             <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
             I am ready
           </button>
           <button onClick={this.props.onPublishAll} id="publish-all-btn" test-id="publish-all" type="button" className="btn btn-primary btn-sm" disabled="">Publish All</button>
-          <button onClick={this.handleCreate} type="button" className="btn btn-success btn-sm">Create</button>
+          <button onClick={this.handleCreate} type="button" className="btn btn-success btn-sm" test-id="pbb-create">Create</button>
         </div>
       </div>
     );
