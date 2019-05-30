@@ -50,7 +50,14 @@ class NicknameProvider extends React.Component {
   render() {
     return (
       <div>
-        <TextInput value={this.state.nickname} isDisabled={this.state.isJoined} width="300px" label="Enter your nickname to join" name="nickname" onChange={(event) => this.onNicknameChanged(event)} />
+        <TextInput
+          value={this.state.nickname}
+          isDisabled={this.state.isJoined}
+          width="300px"
+          label="Enter your nickname to join"
+          name="nickname"
+          onChange={(event) => this.onNicknameChanged(event)}
+        />
         <Button isDisabled={this.state.isJoined} marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
         <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>

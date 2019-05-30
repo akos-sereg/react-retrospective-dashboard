@@ -6,12 +6,13 @@ module.exports = {
     '!app/app.js',
     '!app/*/*/Loadable.{js,jsx}'
   ],
+  transformIgnorePatterns: ['node_modules/(?!(react-redux|lodash-es)/)'],
   coverageThreshold: {
     global: {
-      statements: 10,
-      branches: 10,
-      functions: 10,
-      lines: 10
+      statements: 20,
+      branches: 15,
+      functions: 25,
+      lines: 25
     }
   },
   coverageReporters: ['json', 'lcov', 'text-summary'],
