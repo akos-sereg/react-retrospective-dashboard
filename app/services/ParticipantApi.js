@@ -167,6 +167,8 @@ class ParticipantApi {
       }
 
       if (process.env.NODE_ENV === 'production') {
+        // use producation service instead of the mock always for production build
+        // this applies to artifact built with "npm run build"
         ParticipantApi.instance = new ParticipantApi(dispatch);
       } else {
         ParticipantApi.instance = new ParticipantApiMock(dispatch, false, true);

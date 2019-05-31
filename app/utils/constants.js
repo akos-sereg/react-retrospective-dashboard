@@ -29,6 +29,7 @@ let CONFIG_APP_WEBSOCKET_URL = 'http://local.retrospective-dashboard:8080/ws';
 let CONFIG_APP_BASE_URL = 'http://local.retrospective-dashboard:8080/ws';
 
 if (process.env.NODE_ENV === 'production') {
+  // override configuration for "npm run build"
   CONFIG_APP_WEBSOCKET_URL = 'https://www.retrospective-dashboard.org/ws';
   CONFIG_APP_BASE_URL = 'https://www.retrospective-dashboard.org';
 }
