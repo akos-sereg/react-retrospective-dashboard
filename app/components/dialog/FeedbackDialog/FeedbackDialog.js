@@ -40,7 +40,7 @@ class FeedbackDialog extends React.Component {
       return;
     }
 
-    this.props.onSave({ mood: this.props.feedback.mood, comment: this.state.commentText });
+    this.props.onSave({ glad: this.props.feedback.glad, comment: this.state.commentText });
     this.props.dispatch(feedbackDialogClosing());
   }
 
@@ -52,7 +52,7 @@ class FeedbackDialog extends React.Component {
 
     this.props.onUpdate({
       id: this.props.feedback.id,
-      mood: this.props.feedback.mood,
+      glad: this.props.feedback.glad,
       comment: this.state.commentText,
     });
 

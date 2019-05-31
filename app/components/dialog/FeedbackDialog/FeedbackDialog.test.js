@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FEEDBACK_DIALOG_CLOSING } from '../../../utils/constants';
+import { FEEDBACK_DIALOG_CLOSING, MOOD_SELECTED } from '../../../utils/constants';
 import FeedbackDialog from './FeedbackDialog';
+import GladSadMad from './variations/GladSadMad';
 import Button from '../../core/Button/index';
 import { findButtonByTestId } from '../../../utils/testUtils';
 
@@ -17,7 +18,7 @@ describe('<FeedbackDialog /> rendering', () => {
 
   it('update mode, textarea is populated', () => {
     // arrange
-    const feedback = { comment: 'hello world' };
+    const feedback = { comment: 'hello world', glad: 1.0 };
 
     // act
     const component = shallow(<FeedbackDialog feedback={feedback} />);
@@ -40,7 +41,7 @@ describe('<FeedbackDialog /> rendering', () => {
     const onUpdate = (feedback) => { state.updateCalled = true; state.feedback = feedback; };
     const mockDispatch = (action) => { state.lastDispatchedAction = action; };
     const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} />);
-    component.setProps({ mode: 'create', feedback: { mood: 'glad' } });
+    component.setProps({ mode: 'create', feedback: { glad: 1.0 } });
     component.setState({ commentText: 'hello world' });
 
     // act
@@ -52,7 +53,7 @@ describe('<FeedbackDialog /> rendering', () => {
     expect(state.updateCalled).toEqual(false);
     expect(state.lastDispatchedAction.type).toEqual(FEEDBACK_DIALOG_CLOSING);
     expect(state.feedback.comment).toEqual('hello world');
-    expect(state.feedback.mood).toEqual('glad');
+    expect(state.feedback.glad).toEqual(1.0);
   });
 
   it('update mode, update button action', () => {
@@ -68,8 +69,13 @@ describe('<FeedbackDialog /> rendering', () => {
     const onUpdate = (feedback) => { state.updateCalled = true; state.feedback = feedback; };
     const mockDispatch = (action) => { state.lastDispatchedAction = action; };
     const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} />);
-    component.setProps({ mode: 'update', feedback: { mood: 'sad', comment: 'abcdef' } });
+
+    const gsmComponent = component.find(GladSadMad).shallow();
+    gsmComponent.find('div[test-id="glad-selector"]').simulate('click');
+    expect(state.lastDispatchedAction.type).toEqual(MOOD_SELECTED);
+    expect(state.lastDispatchedAction.payload.glad).toEqual(1.0);
     component.setState({ commentText: 'abcdefghij' });
+    component.setProps({ mode: 'update', feedback: { glad: 1.0, comment: 'abcdef' } });
 
     // act
     const saveButton = findButtonByTestId(component.find(Button), 'feedback-dialog-update');
@@ -80,7 +86,7 @@ describe('<FeedbackDialog /> rendering', () => {
     expect(state.updateCalled).toEqual(true);
     expect(state.lastDispatchedAction.type).toEqual(FEEDBACK_DIALOG_CLOSING);
     expect(state.feedback.comment).toEqual('abcdefghij');
-    expect(state.feedback.mood).toEqual('sad');
+    expect(state.feedback.glad).toEqual(1.0);
   });
 
   it('create mode, close works', () => {
