@@ -54,6 +54,7 @@ class ConfirmationDialog extends React.Component {
             buttonType="primary"
             label="OK"
             testId="confirmation-dialog-ok"
+            automationId="dialog-confirmation-button"
             onClick={() => this.handleConfirm()}
             marginLeft="10"
           />

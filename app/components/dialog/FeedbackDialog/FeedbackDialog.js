@@ -96,6 +96,7 @@ class FeedbackDialog extends React.Component {
           <div className="form-group">
             <label htmlFor="feedback-comment">Comment ({this.state.commentCharsLeft} characters left)
               <textarea
+                automation-id="comment-textarea"
                 maxLength={FeedbackDialog.COMMENT_MAX_CHAR}
                 defaultValue={this.props.feedback ? this.props.feedback.comment : null}
                 onChange={(e) => this.handleCommentTextChange(e)}
@@ -108,9 +109,9 @@ class FeedbackDialog extends React.Component {
 
           <div className="feedback-dialog-buttons">
             {this.props.mode === 'create' ?
-              (<Button float="right" marginLeft="10" testId="feedback-dialog-create" onClick={this.createFeedback} buttonType="primary" label="Create" />)
+              (<Button float="right" marginLeft="10" testId="feedback-dialog-create" automationId="add-comment-submit-btn" onClick={this.createFeedback} buttonType="primary" label="Create" />)
               :
-              (<Button float="right" marginLeft="10" testId="feedback-dialog-update" onClick={this.updateFeedback} buttonType="primary" label="Update" />)}
+              (<Button float="right" marginLeft="10" testId="feedback-dialog-update" automationId="edit-comment-submit-btn" onClick={this.updateFeedback} buttonType="primary" label="Update" />)}
 
             <Button float="right" onClick={() => this.props.dispatch(feedbackDialogClosing())} testId="feedback-dialog-close" label="Cancel" />
           </div>

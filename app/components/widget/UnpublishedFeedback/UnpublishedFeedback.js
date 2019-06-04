@@ -22,22 +22,27 @@ class UnpublishedFeedback extends React.Component {
 
   getMoodInficatorAsset() {
     let moodIndicator = null;
+    let moodIndicatorAutomationId = null;
     switch (this.props.feedback.glad) {
       case 1.0:
         moodIndicator = assetGlad;
+        moodIndicatorAutomationId = 'image-sticker-glad';
         break;
       case 0.5:
         moodIndicator = assetSad;
+        moodIndicatorAutomationId = 'image-sticker-sad';
         break;
       case 0.0:
         moodIndicator = assetMad;
+        moodIndicatorAutomationId = 'image-sticker-mad';
         break;
       default:
         moodIndicator = assetGlad;
+        moodIndicatorAutomationId = 'image-sticker-glad';
         break;
     }
 
-    return moodIndicator;
+    return { moodIndicator, moodIndicatorAutomationId };
   }
 
   handleEdit(event) {
@@ -75,7 +80,7 @@ class UnpublishedFeedback extends React.Component {
   }
 
   render() {
-    const moodIndicator = this.getMoodInficatorAsset();
+    const { moodIndicator, moodIndicatorAutomationId } = this.getMoodInficatorAsset();
     const isPublishing = this.props.publishingFeedbackIds
       && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
 
@@ -88,17 +93,17 @@ class UnpublishedFeedback extends React.Component {
       <div className={classNames.join(' ')}>
         <blockquote className="note yellow">
 
-          <div className="comment-image"><img src={moodIndicator} width="60" alt="mood indicator" /></div>
-          <div className="comment-text">{this.props.feedback.comment}</div>
+          <div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>
+          <div className="comment-text" automation-id="sticker-comment">{this.props.feedback.comment}</div>
 
         </blockquote>
         <div className="div-clear"></div>
 
         {isPublishing ? (<div />) : (
           <div className="feedback-card-actions">
-            <a href="#" onClick={(e) => this.handleDelete(e)} test-id="uf-delete"><img alt="delete" src={assetTrash} width="20" /> Delete</a>
-            <a href="#" onClick={(e) => this.handleEdit(e)} test-id="uf-edit"><img alt="edit" src={assetEdit} width="20" /> Edit</a>
-            <a href="#" onClick={(e) => this.handlePublish(e)} test-id="uf-publish"><img alt="publish" src={assetShare} width="20" /> Publish</a>
+            <a href="#" onClick={(e) => this.handleDelete(e)} test-id="uf-delete" automation-id="comment-item-delete-btn"><img alt="delete" src={assetTrash} width="20" /> Delete</a>
+            <a href="#" onClick={(e) => this.handleEdit(e)} test-id="uf-edit" automation-id="comment-item-edit-btn"><img alt="edit" src={assetEdit} width="20" /> Edit</a>
+            <a href="#" onClick={(e) => this.handlePublish(e)} test-id="uf-publish" automation-id="comment-item-publish-btn"><img alt="publish" src={assetShare} width="20" /> Publish</a>
           </div>)
         }
 

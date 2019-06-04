@@ -56,9 +56,10 @@ class NicknameProvider extends React.Component {
           width="300px"
           label="Enter your nickname to join"
           name="nickname"
+          automationId="join-username-input"
           onChange={(event) => this.onNicknameChanged(event)}
         />
-        <Button isDisabled={this.state.isJoined} marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
+        <Button automationId="join-btn" isDisabled={this.state.isJoined} marginTop="30" label="Join" onClick={this.onJoinClicked} /><br />
         <ConnectionIndicator isConnected={this.props.isConnected} isConnecting={this.props.isConnecting} />
       </div>
     );

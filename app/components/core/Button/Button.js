@@ -26,6 +26,7 @@ class Button extends React.Component {
       <input
         style={styles}
         test-id={this.props.testId}
+        automation-id={this.props.automationId}
         type="submit"
         value={this.props.label}
         className={classNames.join(' ')}
@@ -44,6 +45,7 @@ Button.propTypes = {
   float: PropTypes.string,
   marginLeft: PropTypes.string,
   testId: PropTypes.string,
+  automationId: PropTypes.string,
   isDisabled: PropTypes.bool
 };
 

@@ -22,6 +22,7 @@ export default class TextInput extends React.Component {
             ref={this.props.name}
             value={this.props.value}
             onChange={this.props.onChange}
+            automation-id={this.props.automationId}
             disabled={this.props.isDisabled}
           />
           <div className="input"></div>
@@ -35,6 +36,7 @@ TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  automationId: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
   width: PropTypes.string,

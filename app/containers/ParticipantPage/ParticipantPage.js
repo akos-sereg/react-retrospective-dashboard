@@ -149,7 +149,7 @@ class ParticipantPage extends React.Component {
         </div>
 
         <div className="participant-buttons-selection participant-center-content">
-          <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} />
+          <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} feedbacks={this.props.feedbacks} />
         </div>
 
 
