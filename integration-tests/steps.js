@@ -210,53 +210,18 @@ const Steps = {
     await sleep.untilDialogCloses();
   },
 
+  publishAll: async function() {
+    expect(element.all(by.css('[automation-id="publish-all-btn"]')).count()).toEqual(1);
+    await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
+    await sleep.untilDialogPopsUp();
+
+    await Steps.verifyAndConfirm('OK');
+
+    expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(0);
+    expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual('true');
+  },
+
   participantPageFullFlow: async function(code, token, params) {
-
-      // edit comment
-      expect(element.all(by.css('[automation-id="comment-item-edit-btn"]')).count()).toEqual(1);
-      await element.all(by.css('[automation-id="sticker-comment"]')).get(0).click();
-      await element.all(by.css('[automation-id="comment-item-edit-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
-
-      expect(element(by.css('[automation-id="comment-textarea"]')).getAttribute('value')).toEqual("my comment 3rd column");
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys(", converted to 2nd");
-      await element(by.css('[automation-id="'+params.commentRadioButtons[1]+'"]')).click();
-
-    expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-    expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-    expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="edit-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      // verify that comment list got updated
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentIndicatorImages[1]+'"]')).count()).toEqual(1);
-      expect(element.all(by.cssContainingText('[automation-id="sticker-comment"]', "my comment 3rd column, converted to 2nd")).count()).toEqual(1);
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(null);
-
-      // publish all
-      expect(element.all(by.css('[automation-id="publish-all-btn"]')).count()).toEqual(1);
-      await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
-
-      await Steps.verifyAndConfirm('OK');
-
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(0);
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual('true');
-
-      // "I am ready" button
-      await Steps.verifyIamReady();
 
       // create a couple of other comments
       await element(by.css('button[automation-id="create-comment-btn"]')).click();

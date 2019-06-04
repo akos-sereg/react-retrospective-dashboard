@@ -36,5 +36,10 @@ describe('Glad / Sad / Mad', () => {
 
     await steps.editFeedback(0, { glad: 0.0, comment: 'my comment 3rd column' }, ', converted to 2nd', 0.5);
     await steps.verifyFeedbacks([{ glad: 0.5, comment: 'my comment 3rd column, converted to 2nd' }]);
+
+    await steps.publishAll();
+    await steps.verifyFeedbacks([]);
+
+    await steps.verifyIamReady();
   });
 });
