@@ -59,5 +59,15 @@ describe('Glad / Sad / Mad', () => {
       { glad: 1.0, comment: 'my comment 1st column' },
       { glad: 0.0, comment: 'my comment 3rd column' }
     ]);
+
+    await steps.publishFeedback(0);
+    await steps.verifyFeedbacks([
+      { glad: 1.0, comment: 'my comment 1st column' },
+      { glad: 0.0, comment: 'my comment 3rd column' }
+    ]);
+
+    await steps.joinMeeting();
+    await steps.publishAll();
+    await steps.verifyFeedbacks([]);
   });
 });

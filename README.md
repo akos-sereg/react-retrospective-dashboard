@@ -72,6 +72,8 @@ This configuration is the default.
 
 ## Testing
 
+### Unit Tests
+
 Run the following command
 
 ```
@@ -85,3 +87,38 @@ $ jest --coverage
 ``` 
 
 It generates a coverage report as well. You can set coverage expectations in ``config/jest.config.js``
+
+### End-to-End Tests with Protractor
+
+Protractor is a javascript based tool for E2E testing Angular applications, but it is 
+handy for any frontend development framework.
+
+Before running E2E tests, make sure that the website is running locally
+
+```
+$ npm start
+```
+
+#### Installing dependencies
+
+```
+$ npm install -g protractor
+$ webdriver-manager update
+```
+
+#### Launch Tests
+
+Start Selenium from command line
+
+```
+$ webdriver-manager start
+```
+
+Switch to another command line and start E2E tests
+```
+$ protractor conf.js
+```
+
+#### Notes
+
+HTML elements are being identified by `automation-id` attribute. Attribute `automation-value` is also used by some tests.

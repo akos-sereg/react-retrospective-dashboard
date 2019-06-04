@@ -236,28 +236,6 @@ const Steps = {
   deleteUsername: async function() {
     await element.all(by.css('[automation-id="join-username-input"]')).get(0).clear();
   },
-
-  participantPageFullFlow: async function(code, token, params) {
-
-      // try to publish one sticker with empty username field
-      await element.all(by.css('[automation-id="sticker-comment"]')).get(0).click();
-      await element.all(by.css('[automation-id="comment-item-publish-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
-
-      await Steps.verifyAndConfirm('OK');
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(unpublishedStickerCount);
-      element.all(by.css('[automation-id="join-username-input"]')).get(0).sendKeys('user-name');
-      await element(by.css('[automation-id="join-btn"]')).click();
-
-      // publish comments
-      await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
-
-      await element(by.css('[automation-id="dialog-confirmation-button"]')).click();
-      await sleep.untilDialogCloses();
-      await sleep.untilRestCallCompletes();
-  }
-
 };
 
 module.exports = Steps;
