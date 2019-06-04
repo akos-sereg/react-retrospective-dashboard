@@ -210,68 +210,34 @@ const Steps = {
     await sleep.untilDialogCloses();
   },
 
-  publishAll: async function() {
+  publishAll: async function(expectedToFail) {
     expect(element.all(by.css('[automation-id="publish-all-btn"]')).count()).toEqual(1);
     await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
     await sleep.untilDialogPopsUp();
 
-    await Steps.verifyAndConfirm('OK');
+    if (expectedToFail) {
+      // publishing all feedbacks is expected to fail, because - lets say - username is not set
+      return;
+    }
 
+    await Steps.verifyAndConfirm('OK');
     expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(0);
     expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual('true');
   },
 
+  reloadPage: async function() {
+    browser.driver.navigate().refresh();
+  },
+
+  verifyPresetUsername: async function(username) {
+    expect(element.all(by.css('[automation-id="join-username-input"]')).get(0).getAttribute('value')).toEqual(username);
+  },
+
+  deleteUsername: async function() {
+    await element.all(by.css('[automation-id="join-username-input"]')).get(0).clear();
+  },
+
   participantPageFullFlow: async function(code, token, params) {
-
-      // create a couple of other comments
-      await element(by.css('button[automation-id="create-comment-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment 1st column");
-      await element(by.css('[automation-id="'+params.commentRadioButtons[0]+'"]')).click();
-      await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      await element(by.css('[automation-id="create-comment-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment 3rd column");
-      await element(by.css('[automation-id="'+params.commentRadioButtons[2]+'"]')).click();
-      await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      let unpublishedStickerCount = 2;
-
-      if (params.commentRadioButtons.length > 3) {
-          await element(by.css('button[automation-id="create-comment-btn"]')).click();
-          await sleep.untilDialogPopsUp();
-
-          await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment 4th column");
-          await element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).click();
-
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[0]+'"]')).getAttribute("checked")).toEqual(null);
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[1]+'"]')).getAttribute("checked")).toEqual(null);
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[2]+'"]')).getAttribute("checked")).toEqual(null);
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual('true');
-
-          await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-          await sleep.untilDialogCloses();
-
-          expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(3);
-          expect(element.all(by.css('[automation-id="'+params.commentIndicatorImages[3]+'"]')).count()).toEqual(1);
-          expect(element.all(by.cssContainingText('[automation-id="sticker-comment"]', "my comment 4th column")).count()).toEqual(1);
-          unpublishedStickerCount++;
-      }
-
-      // refresh page and make sure comments did not get lost
-      browser.driver.navigate().refresh();
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(unpublishedStickerCount);
-      expect(element.all(by.css('[automation-id="join-username-input"]')).get(0).getAttribute('value')).toEqual('user-name');
-
-      // delete username and try to publish
-      await element.all(by.css('[automation-id="join-username-input"]')).get(0).clear();
-      await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
 
       // try to publish one sticker with empty username field
       await element.all(by.css('[automation-id="sticker-comment"]')).get(0).click();

@@ -41,5 +41,23 @@ describe('Glad / Sad / Mad', () => {
     await steps.verifyFeedbacks([]);
 
     await steps.verifyIamReady();
+
+    await steps.createFeedback(1.0, 'my comment 1st column');
+    await steps.createFeedback(0.0, 'my comment 3rd column');
+
+    await steps.reloadPage();
+    await steps.verifyPresetUsername('user-name');
+    await steps.verifyFeedbacks([
+      { glad: 1.0, comment: 'my comment 1st column' },
+      { glad: 0.0, comment: 'my comment 3rd column' }
+    ]);
+
+    await steps.deleteUsername();
+    await steps.publishAll(true);
+
+    await steps.verifyFeedbacks([
+      { glad: 1.0, comment: 'my comment 1st column' },
+      { glad: 0.0, comment: 'my comment 3rd column' }
+    ]);
   });
 });
