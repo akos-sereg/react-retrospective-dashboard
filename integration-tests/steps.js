@@ -143,8 +143,8 @@ const Steps = {
 
   deleteFeedback: async function(index) {
     const originalFeedbackCount = await element.all(by.css('[automation-id="comment-item-delete-btn"]')).count();
+    expect(originalFeedbackCount > index).toEqual(true);
 
-    expect(originalFeedbackCount >= index).toEqual(true);
     await element.all(by.css('[automation-id="sticker-comment"]')).get(index).click();
     await element.all(by.css('[automation-id="comment-item-delete-btn"]')).get(index).click();
     await sleep.untilDialogPopsUp();
@@ -157,135 +157,60 @@ const Steps = {
     expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(currentFeedbackCount == 0 ? 'true' : null);
   },
 
+  publishFeedback: async function(index) {
+    const commentPublishBtnCount = await element.all(by.css('[automation-id="comment-item-publish-btn"]')).count();
+    expect(commentPublishBtnCount > index).toEqual(true);
+
+    await element.all(by.css('[automation-id="sticker-comment"]')).get(index).click(); // focus
+    await element.all(by.css('[automation-id="comment-item-publish-btn"]')).get(index).click();
+    await sleep.untilDialogPopsUp();
+    await Steps.verifyAndConfirm('OK');
+  },
+
+  editFeedback: async function(index, oldFeedback, commentAppend, glad) {
+    const commentEditBtnCount = await element.all(by.css('[automation-id="comment-item-edit-btn"]')).count();
+    expect(commentEditBtnCount > index).toEqual(true);
+
+    await element.all(by.css('[automation-id="sticker-comment"]')).get(index).click(); // focus
+    await element.all(by.css('[automation-id="comment-item-edit-btn"]')).get(index).click();
+    await sleep.untilDialogPopsUp();
+
+    expect(element(by.css('[automation-id="comment-textarea"]')).getAttribute('value')).toEqual(oldFeedback.comment);
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(oldFeedback.glad === 1.0 ? 1 : 0);
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(oldFeedback.glad === 0.5 ? 1 : 0);
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(oldFeedback.glad === 0.0 ? 1 : 0);
+    if (this.params.commentRadioButtons.length > 3) {
+      expect(element(by.css('[automation-id="'+this.params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
+    }
+
+    await element(by.css('[automation-id="comment-textarea"]')).sendKeys(commentAppend);
+
+    let indicatorImageIndex = 0;
+    switch (glad) {
+      case 1.0:
+        indicatorImageIndex = 0;
+        break;
+      case 0.5:
+        indicatorImageIndex = 1;
+        break;
+      case 0.0:
+        indicatorImageIndex = 2;
+        break;
+    }
+    await element(by.css('[automation-id="'+this.params.commentRadioButtons[indicatorImageIndex]+'"]')).click();
+
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(glad === 1.0 ? 1 : 0);
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(glad === 0.5 ? 1 : 0);
+    expect(element.all(by.css('[automation-id="'+this.params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(glad === 0.0 ? 1 : 0);
+    if (this.params.commentRadioButtons.length > 3) {
+      expect(element(by.css('[automation-id="'+this.params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
+    }
+
+    await element(by.css('[automation-id="edit-comment-submit-btn"]')).click();
+    await sleep.untilDialogCloses();
+  },
+
   participantPageFullFlow: async function(code, token, params) {
-
-      browser.ignoreSynchronization = true; // to make sure that "angular.element(document).ready" does not fire too early
-      await browser.get(config.systemUnderTest);
-      browser.driver.manage().window().maximize();
-
-      await sleep.untilRedirected();
-
-      // join meeting
-      await Steps.joinMeeting();
-
-      // open "create sticker" dialog
-      expect(element.all(by.css('[automation-id="create-comment-btn"]')).count()).toEqual(1);
-      expect($('[automation-id="create-comment-btn"]').isDisplayed()).toBeTruthy();
-      await element(by.css('button[automation-id="create-comment-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      expect(element.all(by.css('[automation-id="comment-textarea"]')).count()).toEqual(1);
-      expect(element(by.css('[automation-id="comment-textarea"]')).getAttribute('value')).toEqual("");
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment");
-
-      // verify that GSM / SSC / SWOT / etc radio button are there and their states are correct
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"]')).count()).toEqual(1);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).count()).toEqual(1);
-      }
-
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      // save comment in local storage of the browser
-      expect(element.all(by.css('[automation-id="add-comment-submit-btn"]')).count()).toEqual(1);
-      await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentIndicatorImages[0]+'"]')).count()).toEqual(1);
-      expect(element(by.css('[automation-id="sticker-comment"]')).getText()).toEqual("my comment");
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(null);
-
-      // delete comment
-      expect(element.all(by.css('[automation-id="comment-item-delete-btn"]')).count()).toEqual(1);
-      await element(by.css('[automation-id="sticker-comment"]')).click();
-      await element(by.css('[automation-id="comment-item-delete-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      await Steps.verifyAndConfirm('OK');
-
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(0);
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual('true');
-
-      // create comment: 2nd radio button (GSM: Sad)
-      // ---------------------- >>>
-      await element(by.css('button[automation-id="create-comment-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      expect(element(by.css('[automation-id="comment-textarea"]')).getAttribute('value')).toEqual("");
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment 2nd column");
-
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="'+params.commentRadioButtons[1]+'"]')).click();
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      // verify that Sad comment was added
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentIndicatorImages[1]+'"]')).count()).toEqual(1);
-      expect(element(by.css('[automation-id="sticker-comment"]')).getText()).toEqual("my comment 2nd column");
-    expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(null);
-
-      // create 3rd comment (GSM: Mad)
-      await element(by.css('[automation-id="create-comment-btn"]')).click();
-      await sleep.untilDialogPopsUp();
-
-      expect(element(by.css('[automation-id="comment-textarea"]')).getAttribute('value')).toEqual("");
-      await element(by.css('[automation-id="comment-textarea"]')).sendKeys("my comment 3rd column");
-
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="'+params.commentRadioButtons[2]+'"]')).click();
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[0]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[1]+'"][class="feedback-mood-highlight"]')).count()).toEqual(0);
-      expect(element.all(by.css('[automation-id="'+params.commentRadioButtons[2]+'"][class="feedback-mood-highlight"]')).count()).toEqual(1);
-      if (params.commentRadioButtons.length > 3) {
-          expect(element(by.css('[automation-id="'+params.commentRadioButtons[3]+'"]')).getAttribute("checked")).toEqual(null);
-      }
-
-      await element(by.css('[automation-id="add-comment-submit-btn"]')).click();
-      await sleep.untilDialogCloses();
-
-      // verify that Mad comment was added
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(2);
-      expect(element.all(by.css('[automation-id="'+params.commentIndicatorImages[2]+'"]')).count()).toEqual(1);
-      expect(element.all(by.cssContainingText('[automation-id="sticker-comment"]', "my comment 3rd column")).count()).toEqual(1);
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(null);
-
-      // publish the first item
-      expect(element.all(by.css('[automation-id="comment-item-publish-btn"]')).count()).toEqual(2);
-      await element.all(by.css('[automation-id="sticker-comment"]')).get(0).click(); // focus
-      await element.all(by.css('[automation-id="comment-item-publish-btn"]')).get(0).click();
-      await sleep.untilDialogPopsUp();
-      await Steps.verifyAndConfirm('OK');
-
-      expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(1);
-      expect(element(by.css('[automation-id="publish-all-btn"]')).getAttribute('disabled')).toEqual(null);
 
       // edit comment
       expect(element.all(by.css('[automation-id="comment-item-edit-btn"]')).count()).toEqual(1);
