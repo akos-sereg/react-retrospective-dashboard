@@ -103,6 +103,7 @@ class ParticipantApi {
     // this.socket = new SockJS(APP_WEBSOCKET_URL); // <- this could be used for normal websocket transport
     this.socket = new SockJS(APP_WEBSOCKET_URL, null, { transports: ['xhr-streaming', 'xhr-polling'] });
     this.stompClient = Stomp.over(this.socket);
+    this.stompClient.debug = null;
 
     this.dispatch(connecting());
     this.stompClient.connect({}, () => {

@@ -41,10 +41,8 @@ This configuration is the default.
 
 - Using `import styles from './styles'` to avoid style name collision
 - Create TextArea component and use in FeedbackDialog
-- Automation testing support
 - Kill react-helmet
 - Kill commentText from `FeedbackDialog`
-- Disable STOMP console logs
 - Clone with lib in ParticipantApi instead of JSON parse/serialize
 - Extract events from constants near to components
 
