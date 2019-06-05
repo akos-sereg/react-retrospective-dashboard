@@ -20,8 +20,8 @@ const logger = {
 
     console.log(`
 ${chalk.bold('Access URLs:')}${divider}
-Localhost: ${chalk.magenta(`http://${host}:${port}`)}
-      LAN: ${chalk.magenta(`http://${ip.address()}:${port}`)}${divider}
+Localhost: ${chalk.magenta(`http://${host}:${port}/#/code/1/token/a`)}
+      LAN: ${chalk.magenta(`http://${ip.address()}:${port}/#/code/1/token/a`)}${divider}
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
     `);
   }

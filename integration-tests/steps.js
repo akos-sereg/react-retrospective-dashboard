@@ -41,8 +41,8 @@ const Steps = {
 
       // sometimes we get StaleElementReferenceError if the following two lines gets executed, hence disabling them
       // to make tests more reliable.
-      // expect($('[automation-id="i-am-ready-marker"]').getAttribute('class')).toEqual('gray-dot');
-      // expect(element(by.css('[automation-id="i-am-ready-marker"]')).getAttribute('class')).toEqual('gray-dot');
+      expect($('[automation-id="i-am-ready-marker"]').getAttribute('class')).toEqual('gray-dot');
+      expect(element(by.css('[automation-id="i-am-ready-marker"]')).getAttribute('class')).toEqual('gray-dot');
   },
 
   setup: async function(code, token, params) {
@@ -230,6 +230,7 @@ const Steps = {
   },
 
   verifyPresetUsername: async function(username) {
+    // feature: client should remember the username
     expect(element.all(by.css('[automation-id="join-username-input"]')).get(0).getAttribute('value')).toEqual(username);
   },
 

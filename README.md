@@ -116,9 +116,11 @@ $ webdriver-manager start
 
 Switch to another command line and start E2E tests
 ```
+$ cd integration-tests
 $ protractor conf.js
 ```
 
 #### Notes
 
 HTML elements are being identified by `automation-id` attribute. Attribute `automation-value` is also used by some tests.
+
