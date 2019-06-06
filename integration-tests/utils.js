@@ -67,6 +67,40 @@ exports.sleep = {
             setTimeout(function() { resolve(); }, timeouts.hashLocationRedirect);
         });
     },
+
+    /* Wait until toastr notifications go away */
+    untilToastrGoesAway: async function() {
+
+      const maxAwaitSeconds = 10;
+      const iterationSeconds = 2;
+      let awaitedSeconds = 0;
+
+      while (awaitedSeconds < maxAwaitSeconds) {
+        const notifications =
+          await element.all(by.css('[class="toast toast-success"]')).count()
+          + await element.all(by.css('[class="toast toast-info"]')).count()
+          + await element.all(by.css('[class="toast toast-error"]')).count()
+          + await element.all(by.css('[class="toast toast-warning"]')).count();
+
+        if (notifications == 0) {
+          return;
+        }
+
+        console.log(`---> waiting for ${notifications} toastr notifications to disappear`);
+
+        await this.untilSeconds(iterationSeconds);
+        awaitedSeconds += iterationSeconds;
+      }
+
+      console.log('---> was waiting for toastr notifications to go away, but they are still there');
+    },
+
+    untilSeconds: function(seconds) {
+    return new Promise(function(resolve, reject)
+    {
+      setTimeout(function() { resolve(); }, seconds * 1000);
+    });
+  },
 };
 
 exports.misc = {

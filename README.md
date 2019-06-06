@@ -122,3 +122,4 @@ $ protractor conf.js
 
 HTML elements are being identified by `automation-id` attribute. Attribute `automation-value` is also used by some tests.
 
+By default, automated tests are running in Chrome / headless mode. You can disable headless mode in conf.js.

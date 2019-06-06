@@ -12,6 +12,15 @@ const config = {
     websocketConnection: 2000,
   },
 
+  capabilities: {
+    browserName: 'chrome',
+
+    chromeOptions: {
+      /* remove the following line to run e2e tests non-headless */
+      args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
+    }
+  },
+
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
     // participant tests on web

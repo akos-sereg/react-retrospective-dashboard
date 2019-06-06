@@ -7,6 +7,7 @@ const Steps = {
   params: null,
 
   joinMeeting: async function() {
+      console.log('-> join meeting');
       expect(element.all(by.css('[automation-id="join-username-input"]')).count()).toEqual(1);
       expect($('[automation-id="join-username-input"]').isDisplayed()).toBeTruthy();
       expect(element.all(by.css('[automation-id="join-btn"]')).count()).toEqual(1);
@@ -21,6 +22,7 @@ const Steps = {
   },
 
   verifyAndConfirm: async function(actionButtonLabel) {
+      console.log('---> confirm');
       expect(element.all(by.css('[automation-id="dialog-confirmation-button"]')).count()).toEqual(1);
       expect(element(by.css('[automation-id="dialog-confirmation-button"]')).isDisplayed()).toBeTruthy();
       expect(element(by.css('[automation-id="dialog-confirmation-button"]')).getAttribute('value')).toBe(actionButtonLabel);
@@ -30,6 +32,7 @@ const Steps = {
   },
 
   verifyIamReady: async function() {
+      console.log('-> verifying "i am ready"');
       expect(element.all(by.css('[automation-id="i-am-ready-btn"]')).count()).toEqual(1);
       expect(element.all(by.css('[automation-id="i-am-ready-marker"]')).count()).toEqual(1);
       expect(element(by.css('[automation-id="i-am-ready-marker"]')).getAttribute('class')).toEqual('gray-dot');
@@ -46,21 +49,28 @@ const Steps = {
   },
 
   setup: async function(code, token, params) {
-    Steps.params = params;
-    Steps.code = code;
-    Steps.token = token;
+      console.log('-> setting up');
+      Steps.params = params;
+      Steps.code = code;
+      Steps.token = token;
 
-    browser.waitForAngularEnabled(false);
-    browser.ignoreSynchronization = true; // to make sure that "angular.element(document).ready" does not fire too early
-    browser.driver.manage().window().maximize();
+      browser.waitForAngularEnabled(false);
+      browser.ignoreSynchronization = true; // to make sure that "angular.element(document).ready" does not fire too early
+      browser.driver.manage().window().maximize();
   },
 
   navigateToGsm: async function() {
-    await browser.get(config.systemUnderTest);
-    await sleep.untilRedirected();
+      console.log('-> navigating to participant screen');
+      await browser.get(config.systemUnderTest);
+      await sleep.untilRedirected();
   },
 
   createFeedback: async function(glad, comment) {
+
+    console.log(`-> creating feedback: { glad: ${glad}, comment: ${comment} }`);
+
+    await sleep.untilToastrGoesAway();
+
     // open "create sticker" dialog
     expect(element.all(by.css('[automation-id="create-comment-btn"]')).count()).toEqual(1);
     expect($('[automation-id="create-comment-btn"]').isDisplayed()).toBeTruthy();
@@ -114,6 +124,8 @@ const Steps = {
   },
 
   verifyFeedbacks: async function(expectedFeedbacks) {
+    console.log('-> verifying feedbacks');
+
     expect(element.all(by.css('[automation-id="sticker-comment"]')).count()).toEqual(expectedFeedbacks.length);
 
     for (var i=0; i!=expectedFeedbacks.length; i++) {
@@ -142,6 +154,8 @@ const Steps = {
   },
 
   deleteFeedback: async function(index) {
+    console.log(`-> delete feedback at position ${index}`);
+
     const originalFeedbackCount = await element.all(by.css('[automation-id="comment-item-delete-btn"]')).count();
     expect(originalFeedbackCount > index).toEqual(true);
 
@@ -158,6 +172,8 @@ const Steps = {
   },
 
   publishFeedback: async function(index) {
+    console.log(`-> publish feedback at position ${index}`);
+
     const commentPublishBtnCount = await element.all(by.css('[automation-id="comment-item-publish-btn"]')).count();
     expect(commentPublishBtnCount > index).toEqual(true);
 
@@ -168,6 +184,8 @@ const Steps = {
   },
 
   editFeedback: async function(index, oldFeedback, commentAppend, glad) {
+    console.log(`-> edit feedback at position ${index}`);
+
     const commentEditBtnCount = await element.all(by.css('[automation-id="comment-item-edit-btn"]')).count();
     expect(commentEditBtnCount > index).toEqual(true);
 
@@ -211,6 +229,8 @@ const Steps = {
   },
 
   publishAll: async function(expectedToFail) {
+    console.log(`-> publish all`);
+
     expect(element.all(by.css('[automation-id="publish-all-btn"]')).count()).toEqual(1);
     await element.all(by.css('[automation-id="publish-all-btn"]')).get(0).click();
     await sleep.untilDialogPopsUp();
@@ -226,15 +246,19 @@ const Steps = {
   },
 
   reloadPage: async function() {
+    console.log(`-> reload page`);
     browser.driver.navigate().refresh();
   },
 
   verifyPresetUsername: async function(username) {
+    console.log(`-> verify preset username`);
+
     // feature: client should remember the username
     expect(element.all(by.css('[automation-id="join-username-input"]')).get(0).getAttribute('value')).toEqual(username);
   },
 
   deleteUsername: async function() {
+    console.log(`-> delete username`);
     await element.all(by.css('[automation-id="join-username-input"]')).get(0).clear();
   },
 };
