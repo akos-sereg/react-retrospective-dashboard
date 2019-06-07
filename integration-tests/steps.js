@@ -247,7 +247,7 @@ const Steps = {
 
   reloadPage: async function() {
     console.log(`-> reload page`);
-    browser.driver.navigate().refresh();
+    await browser.driver.navigate().refresh();
   },
 
   verifyPresetUsername: async function(username) {
