@@ -53,7 +53,7 @@ This configuration is the default.
 - SCSS support
 
 #### Stack
-- React v16.6.3 - released 13rd of Nov 2018
+- React v16.8.6 - released 28th of March 2019
 - Redux v4.0.1 - released 13rd of Oct 2018
 
 #### Development and Build
