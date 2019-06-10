@@ -68,7 +68,7 @@ describe('<FeedbackDialog /> rendering', () => {
     const onSave = (feedback) => { state.saveCalled = true; state.feedback = feedback; };
     const onUpdate = (feedback) => { state.updateCalled = true; state.feedback = feedback; };
     const mockDispatch = (action) => { state.lastDispatchedAction = action; };
-    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} />);
+    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} boardType="gsm" />);
 
     const gsmComponent = component.find(GladSadMad).shallow();
     gsmComponent.find('div[test-id="glad-selector"]').simulate('click');
@@ -101,7 +101,7 @@ describe('<FeedbackDialog /> rendering', () => {
     const onSave = (feedback) => { state.saveCalled = true; state.feedback = feedback; };
     const onUpdate = (feedback) => { state.updateCalled = true; state.feedback = feedback; };
     const mockDispatch = (action) => { state.lastDispatchedAction = action; };
-    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} />);
+    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} boardType="gsm" />);
     component.setProps({ mode: 'create', feedback: null });
 
     // act

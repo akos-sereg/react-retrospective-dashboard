@@ -8,8 +8,8 @@ describe('Glad / Sad / Mad', () => {
       commentIndicatorImages: ['image-sticker-glad', 'image-sticker-sad', 'image-sticker-mad']
     };
 
-    await steps.setup('1', 'a', params);
-    await steps.navigateToGsm();
+    await steps.setup('gsm', '1', 'a', params);
+    await steps.navigateToScreen();
     await steps.joinMeeting();
 
     await steps.createFeedback(null, 'my comment zero');

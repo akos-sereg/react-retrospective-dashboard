@@ -1,6 +1,6 @@
 // default config
 const config = {
-  systemUnderTest: 'http://localhost:3000/#/code/1/token/a',
+  systemUnderTest: 'http://localhost:3000/#/type/gsm/code/1/token/a',
   timeouts: {
     redirect: 5000,
     dialogPopsUp: 2000,

@@ -11,7 +11,7 @@ describe('<UnpublishedFeedbackList /> rendering', () => {
     const onPublish = () => { state.publishCalled = true; };
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const feedbacks = [{ id: '1234', comment: 'hello world', glad: 1.0 }];
-    const component = shallow(<UnpublishedFeedbackList onDelete={onDelete} onPublish={onPublish} feedbacks={feedbacks} dispatch={dispatch} />);
+    const component = shallow(<UnpublishedFeedbackList getMoodInficatorAsset={() => {}} onDelete={onDelete} onPublish={onPublish} feedbacks={feedbacks} dispatch={dispatch} />);
     component.setProps({ feedbacks });
 
     const feedbackComponents = component.find(UnpublishedFeedback);
@@ -28,7 +28,7 @@ describe('<UnpublishedFeedbackList /> rendering', () => {
     const onPublish = () => { state.publishCalled = true; };
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const feedbacks = [];
-    const component = shallow(<UnpublishedFeedbackList onDelete={onDelete} onPublish={onPublish} feedbacks={feedbacks} dispatch={dispatch} />);
+    const component = shallow(<UnpublishedFeedbackList getMoodInficatorAsset={() => {}} onDelete={onDelete} onPublish={onPublish} feedbacks={feedbacks} dispatch={dispatch} />);
     component.setProps({ feedbacks });
 
     const feedbackComponents = component.find(UnpublishedFeedback);

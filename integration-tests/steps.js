@@ -48,9 +48,10 @@ const Steps = {
       expect(element(by.css('[automation-id="i-am-ready-marker"]')).getAttribute('class')).toEqual('gray-dot');
   },
 
-  setup: async function(code, token, params) {
+  setup: async function(boardType, code, token, params) {
       console.log('-> setting up');
       Steps.params = params;
+      Steps.boardType = boardType;
       Steps.code = code;
       Steps.token = token;
 
@@ -59,7 +60,7 @@ const Steps = {
       browser.driver.manage().window().maximize();
   },
 
-  navigateToGsm: async function() {
+  navigateToScreen: async function() {
       console.log('-> navigating to participant screen');
       await browser.get(config.systemUnderTest);
       await sleep.untilRedirected();

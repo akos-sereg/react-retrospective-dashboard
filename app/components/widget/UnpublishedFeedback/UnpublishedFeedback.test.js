@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import UnpublishedFeedback from './UnpublishedFeedback';
 import { CONFIRMATION_DIALOG_OPENING, EDIT_FEEDBACK_CLICKED } from '../../../utils/constants';
 
+const moodIndicatorMock = () => ({ moodIndicator: null, moodIndicatorAutomationId: null });
+
 describe('<UnpublishedFeedback /> rendering', () => {
   it('delete clicked', () => {
     // arrange
@@ -11,7 +13,7 @@ describe('<UnpublishedFeedback /> rendering', () => {
     const onPublish = () => { state.publishCalled = true; };
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const feedback = { comment: 'hello world', glad: 1.0 };
-    const component = shallow(<UnpublishedFeedback onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
+    const component = shallow(<UnpublishedFeedback getMoodInficatorAsset={moodIndicatorMock} onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
 
     const deleteButton = component.find('a[test-id="uf-delete"]').first();
 
@@ -34,7 +36,7 @@ describe('<UnpublishedFeedback /> rendering', () => {
     const onPublish = () => { state.publishCalled = true; };
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const feedback = { comment: 'hello world', glad: 1.0 };
-    const component = shallow(<UnpublishedFeedback onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
+    const component = shallow(<UnpublishedFeedback getMoodInficatorAsset={moodIndicatorMock} onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
 
     const publishButton = component.find('a[test-id="uf-publish"]').first();
 
@@ -57,7 +59,7 @@ describe('<UnpublishedFeedback /> rendering', () => {
     const onPublish = () => { state.publishCalled = true; };
     const dispatch = (action) => { state.lastDispatchedAction = action; };
     const feedback = { comment: 'hello world', glad: 1.0 };
-    const component = shallow(<UnpublishedFeedback onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
+    const component = shallow(<UnpublishedFeedback getMoodInficatorAsset={moodIndicatorMock} onDelete={onDelete} onPublish={onPublish} feedback={feedback} dispatch={dispatch} />);
 
     const editButton = component.find('a[test-id="uf-edit"]').first();
 
