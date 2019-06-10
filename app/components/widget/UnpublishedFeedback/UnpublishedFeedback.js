@@ -20,31 +20,6 @@ class UnpublishedFeedback extends React.Component {
     this.handlePublish = this.handlePublish.bind(this);
   }
 
-  getMoodInficatorAsset() {
-    let moodIndicator = null;
-    let moodIndicatorAutomationId = null;
-    switch (this.props.feedback.glad) {
-      case 1.0:
-        moodIndicator = assetGlad;
-        moodIndicatorAutomationId = 'image-sticker-glad';
-        break;
-      case 0.5:
-        moodIndicator = assetSad;
-        moodIndicatorAutomationId = 'image-sticker-sad';
-        break;
-      case 0.0:
-        moodIndicator = assetMad;
-        moodIndicatorAutomationId = 'image-sticker-mad';
-        break;
-      default:
-        moodIndicator = assetGlad;
-        moodIndicatorAutomationId = 'image-sticker-glad';
-        break;
-    }
-
-    return { moodIndicator, moodIndicatorAutomationId };
-  }
-
   handleEdit(event) {
     if (event) {
       event.preventDefault();
@@ -80,7 +55,7 @@ class UnpublishedFeedback extends React.Component {
   }
 
   render() {
-    const { moodIndicator, moodIndicatorAutomationId } = this.getMoodInficatorAsset();
+    const { moodIndicator, moodIndicatorAutomationId } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
     const isPublishing = this.props.publishingFeedbackIds
       && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
 
@@ -117,7 +92,8 @@ UnpublishedFeedback.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onPublish: PropTypes.func.isRequired,
   feedback: PropTypes.object.isRequired,
-  publishingFeedbackIds: PropTypes.array
+  publishingFeedbackIds: PropTypes.array,
+  getMoodInficatorAsset: PropTypes.func.isRequired,
 };
 
 export default UnpublishedFeedback;

@@ -11,6 +11,7 @@ class UnpublishedFeedbackList extends React.Component {
         feedback={feedback}
         onDelete={this.props.onDelete}
         onPublish={this.props.onPublish}
+        getMoodInficatorAsset={this.props.getMoodInficatorAsset}
       />
     )) : (<div />);
 
@@ -29,7 +30,8 @@ UnpublishedFeedbackList.propTypes = {
   // dispatch: PropTypes.func,
   feedbacks: PropTypes.array,
   onDelete: PropTypes.func,
-  onPublish: PropTypes.func
+  onPublish: PropTypes.func,
+  getMoodInficatorAsset: PropTypes.func.isRequired,
 };
 
 export default UnpublishedFeedbackList;

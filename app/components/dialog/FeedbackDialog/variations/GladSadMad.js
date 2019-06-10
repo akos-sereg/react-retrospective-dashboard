@@ -96,5 +96,31 @@ GladSadMad.propTypes = {
   feedback: PropTypes.object,
 };
 
+const getMoodInficatorAsset = (glad) => {
+  let moodIndicator = null;
+  let moodIndicatorAutomationId = null;
+  switch (glad) {
+    case 1.0:
+      moodIndicator = assetGlad;
+      moodIndicatorAutomationId = 'image-sticker-glad';
+      break;
+    case 0.5:
+      moodIndicator = assetSad;
+      moodIndicatorAutomationId = 'image-sticker-sad';
+      break;
+    case 0.0:
+      moodIndicator = assetMad;
+      moodIndicatorAutomationId = 'image-sticker-mad';
+      break;
+    default:
+      moodIndicator = assetGlad;
+      moodIndicatorAutomationId = 'image-sticker-glad';
+      break;
+  }
+
+  return { moodIndicator, moodIndicatorAutomationId };
+}
+
 export default GladSadMad;
+export { getMoodInficatorAsset };
 

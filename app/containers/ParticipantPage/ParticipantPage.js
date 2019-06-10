@@ -15,6 +15,8 @@ import './style.scss';
 import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks } from '../../services/actions';
+import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
+import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -120,6 +122,19 @@ class ParticipantPage extends React.Component {
   }
 
   render() {
+    let getMoodInficatorAsset = () => {};
+    switch (this.props.match.params.boardType) {
+      case 'gsm':
+        getMoodInficatorAsset = getMoodInficatorAssetForGsm;
+        break;
+      case 'ssc':
+        getMoodInficatorAsset = getMoodInficatorAssetForSsc;
+        break;
+      default:
+        getMoodInficatorAsset = () => {};
+        break;
+    }
+
     return (
       <div className="participant-container">
         <Helmet>
@@ -158,6 +173,7 @@ class ParticipantPage extends React.Component {
             feedbacks={this.props.feedbacks}
             onDelete={this.handleFeedbackDelete}
             onPublish={this.handleFeedbackPublish}
+            getMoodInficatorAsset={getMoodInficatorAsset}
           />
         </div>
 

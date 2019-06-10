@@ -5,6 +5,9 @@ import { moodSelected } from '../actions';
 import assetStart from '../../../../assets/start.png';
 import assetStop from '../../../../assets/stop.png';
 import assetContinue from '../../../../assets/continue.png';
+import assetGlad from "../../../../assets/glad.png";
+import assetSad from "../../../../assets/sad.png";
+import assetMad from "../../../../assets/mad.png";
 
 class StartStopContinue extends React.Component {
   constructor(props, context) {
@@ -96,5 +99,31 @@ StartStopContinue.propTypes = {
   feedback: PropTypes.object,
 };
 
+const getMoodInficatorAsset = (glad) => {
+  let moodIndicator = null;
+  let moodIndicatorAutomationId = null;
+  switch (glad) {
+    case 1.0:
+      moodIndicator = assetStart;
+      moodIndicatorAutomationId = 'image-sticker-start';
+      break;
+    case 0.5:
+      moodIndicator = assetStop;
+      moodIndicatorAutomationId = 'image-sticker-stop';
+      break;
+    case 0.0:
+      moodIndicator = assetContinue;
+      moodIndicatorAutomationId = 'image-sticker-continue';
+      break;
+    default:
+      moodIndicator = assetStart;
+      moodIndicatorAutomationId = 'image-sticker-start';
+      break;
+  }
+
+  return { moodIndicator, moodIndicatorAutomationId };
+}
+
 export default StartStopContinue;
+export { getMoodInficatorAsset };
 
