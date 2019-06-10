@@ -161,7 +161,7 @@ class ParticipantPage extends React.Component {
           />
         </div>
 
-        <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} />
+        <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} boardType={this.props.match.params.boardType} />
         <ConfirmationDialog />
 
         <Footer />

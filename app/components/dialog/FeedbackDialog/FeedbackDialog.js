@@ -7,6 +7,7 @@ import './style.scss';
 import '../../../styles/global-styles.scss';
 import Button from '../../core/Button';
 import GladSadMad from './variations/GladSadMad';
+import StartStopContinue from './variations/StartStopContinue';
 
 class FeedbackDialog extends React.Component {
   static COMMENT_MAX_CHAR = 150;
@@ -90,7 +91,15 @@ class FeedbackDialog extends React.Component {
 
           <h4>Create Feedback</h4>
           <hr align="true" />
-          <GladSadMad feedback={this.props.feedback} dispatch={this.props.dispatch} />
+
+          {this.props.boardType === 'gsm' ?
+            <GladSadMad feedback={this.props.feedback} dispatch={this.props.dispatch} />
+            : <div /> }
+
+          {this.props.boardType === 'ssc' ?
+            <StartStopContinue feedback={this.props.feedback} dispatch={this.props.dispatch} />
+            : <div /> }
+
           <div className="div-clear" />
 
           <div className="form-group">
@@ -129,7 +138,8 @@ FeedbackDialog.propTypes = {
   feedback: PropTypes.object,
   onSave: PropTypes.func,
   onUpdate: PropTypes.func,
-  mode: PropTypes.string
+  mode: PropTypes.string,
+  boardType: PropTypes.string,
 };
 
 export default FeedbackDialog;
