@@ -119,7 +119,7 @@ const getMoodInficatorAsset = (glad) => {
   }
 
   return { moodIndicator, moodIndicatorAutomationId };
-}
+};
 
 export default GladSadMad;
 export { getMoodInficatorAsset };

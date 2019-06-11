@@ -78,7 +78,7 @@ Run the following command
 $ npm run test
 ```
 
-... or just run
+... or just run the following command if you dont want linter to run
 
 ``` 
 $ jest --coverage

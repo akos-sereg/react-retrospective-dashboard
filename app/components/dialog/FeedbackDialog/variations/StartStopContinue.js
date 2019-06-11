@@ -5,9 +5,6 @@ import { moodSelected } from '../actions';
 import assetStart from '../../../../assets/start.png';
 import assetStop from '../../../../assets/stop.png';
 import assetContinue from '../../../../assets/continue.png';
-import assetGlad from "../../../../assets/glad.png";
-import assetSad from "../../../../assets/sad.png";
-import assetMad from "../../../../assets/mad.png";
 
 class StartStopContinue extends React.Component {
   constructor(props, context) {
@@ -122,7 +119,7 @@ const getMoodInficatorAsset = (glad) => {
   }
 
   return { moodIndicator, moodIndicatorAutomationId };
-}
+};
 
 export default StartStopContinue;
 export { getMoodInficatorAsset };

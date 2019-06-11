@@ -16,7 +16,7 @@
     "start:prod": "cross-env NODE_ENV=production node server",
     "clean": "npm run test:clean && npm run build:clean",
     "lint": "npm run lint:js",
-    "lint:eslint": "eslint --ignore-path .gitignore",
+    "lint:eslint": "eslint --ignore-path .eslintignore",
     "eslint:fix": "eslint -- . --ignore-path .gitignore --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "pretest": "npm run test:clean && npm run lint",
