@@ -9,7 +9,7 @@ import { findButtonByTestId } from '../../../utils/testUtils';
 describe('<FeedbackDialog /> rendering', () => {
   it('create mode, textarea is empty by default', () => {
     // act
-    const component = shallow(<FeedbackDialog />);
+    const component = shallow(<FeedbackDialog boardType="gsm" />);
     component.setProps({ mode: 'create' });
 
     // assert
@@ -21,7 +21,7 @@ describe('<FeedbackDialog /> rendering', () => {
     const feedback = { comment: 'hello world', glad: 1.0 };
 
     // act
-    const component = shallow(<FeedbackDialog feedback={feedback} />);
+    const component = shallow(<FeedbackDialog boardType="gsm" feedback={feedback} />);
     component.setProps({ feedback, mode: 'update' });
 
     // assert
@@ -40,7 +40,7 @@ describe('<FeedbackDialog /> rendering', () => {
     const onSave = (feedback) => { state.saveCalled = true; state.feedback = feedback; };
     const onUpdate = (feedback) => { state.updateCalled = true; state.feedback = feedback; };
     const mockDispatch = (action) => { state.lastDispatchedAction = action; };
-    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} />);
+    const component = shallow(<FeedbackDialog onSave={onSave} onUpdate={onUpdate} dispatch={mockDispatch} boardType="gsm" />);
     component.setProps({ mode: 'create', feedback: { glad: 1.0 } });
     component.setState({ commentText: 'hello world' });
 

@@ -60,7 +60,15 @@ class ParticipantApi {
       body: JSON.stringify(payload)
     });
 
-    const responseBody = JSON.parse(await response.text());
+    let responseBody = null;
+    try {
+      responseBody = JSON.parse(await response.text());
+    } catch (error) {
+      if (response.status !== 200) {
+        console.log(error);
+      }
+    }
+
     if (response.status === 200 && responseBody.errorCode === 0) {
       // notify scrum master's board about the update
       const stickers = JSON.parse(JSON.stringify(feedbacks));

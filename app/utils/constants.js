@@ -26,10 +26,11 @@ export const COOKIE_USERNAME = 'username';
 
 // backend
 let CONFIG_APP_WEBSOCKET_URL = 'http://local.retrospective-dashboard:8080/ws';
-let CONFIG_APP_BASE_URL = 'http://local.retrospective-dashboard:8080/ws';
+let CONFIG_APP_BASE_URL = 'http://local.retrospective-dashboard:8080';
 
-if (process.env.NODE_ENV === 'production') {
-  // override configuration for "npm run build"
+if (process.env.NODE_ENV === 'production'
+  && window.location.href.indexOf('local.retrospective-dashboard') === -1) {
+  // override configuration for "npm run build" when not running locally
   CONFIG_APP_WEBSOCKET_URL = 'https://www.retrospective-dashboard.org/ws';
   CONFIG_APP_BASE_URL = 'https://www.retrospective-dashboard.org';
 }

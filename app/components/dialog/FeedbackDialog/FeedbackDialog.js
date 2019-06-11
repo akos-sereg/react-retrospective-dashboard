@@ -139,7 +139,7 @@ FeedbackDialog.propTypes = {
   onSave: PropTypes.func,
   onUpdate: PropTypes.func,
   mode: PropTypes.string,
-  boardType: PropTypes.string,
+  boardType: PropTypes.string.isRequired,
 };
 
 export default FeedbackDialog;
