@@ -171,8 +171,7 @@ class ParticipantApi {
         // this applies to artifact built with "npm run build"
         ParticipantApi.instance = new ParticipantApi(dispatch);
       } else {
-        ParticipantApi.instance = new ParticipantApi(dispatch);
-        // ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
+        ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
       }
     }
 
