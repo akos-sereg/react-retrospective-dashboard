@@ -20,8 +20,10 @@ const logger = {
 
     console.log(`
 ${chalk.bold('Access URLs:')}${divider}
-Localhost: ${chalk.magenta(`http://${host}:${port}/#/type/gsm/code/1/token/a`)}
-      LAN: ${chalk.magenta(`http://${ip.address()}:${port}/#/type/gsm/code/1/token/a`)}${divider}
+Glad Sad Mad       : ${chalk.magenta(`http://${host}:${port}/#/type/gsm/code/1/token/a`)}
+Start Stop Continue: ${chalk.magenta(`http://${host}:${port}/#/type/ssc/code/1/token/a`)}
+4 Ls               : ${chalk.magenta(`http://${host}:${port}/#/type/4ls/code/1/token/a`)}
+  
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
     `);
   }
