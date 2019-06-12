@@ -81,6 +81,37 @@
   }
 }
 
+.fourls-float-left {
+  position: relative;
+  div {
+    outline: none;
+    float: left;
+    width: 25%;
+    text-align: center;
+    border: solid 1px #ffffff;
+    padding: 10px;
+    height: 180px;
+
+    p {
+      background-color: #ffffff;
+      color: #ffffff;
+      margin-top: 15px;
+      padding: 3px;
+      border-radius: 5px;
+      font-family: "Lucida Console";
+    }
+  }
+
+  div:hover {
+    border: solid 1px #329ECD;
+    border-radius: 5px;
+
+    p {
+      background-color: #cccccc;
+    }
+  }
+}
+
 .feedback-mood-highlight {
   border: solid 2px #B2E8FF;
   border-radius: 15px;

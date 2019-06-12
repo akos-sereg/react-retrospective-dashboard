@@ -8,6 +8,7 @@ import '../../../styles/global-styles.scss';
 import Button from '../../core/Button';
 import GladSadMad from './variations/GladSadMad';
 import StartStopContinue from './variations/StartStopContinue';
+import FourLs from "./variations/FourLs";
 
 class FeedbackDialog extends React.Component {
   static COMMENT_MAX_CHAR = 150;
@@ -98,6 +99,10 @@ class FeedbackDialog extends React.Component {
 
           {this.props.boardType === 'ssc' ?
             <StartStopContinue feedback={this.props.feedback} dispatch={this.props.dispatch} />
+            : <div /> }
+
+          {this.props.boardType === '4ls' ?
+            <FourLs feedback={this.props.feedback} dispatch={this.props.dispatch} />
             : <div /> }
 
           <div className="div-clear" />

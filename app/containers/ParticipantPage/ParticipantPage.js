@@ -17,6 +17,7 @@ import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks } from '../../services/actions';
 import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
 import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
+import { getMoodInficatorAsset as getMoodInficatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -130,6 +131,9 @@ class ParticipantPage extends React.Component {
       case 'ssc':
         getMoodInficatorAsset = getMoodInficatorAssetForSsc;
         break;
+      case '4ls':
+        getMoodInficatorAsset = getMoodInficatorAssetFor4Ls;
+        break;
       default:
         getMoodInficatorAsset = () => {};
         break;
@@ -149,7 +153,9 @@ class ParticipantPage extends React.Component {
           <img src={logo} alt="logo" />
           <div>
             <span>Retrospective Dashboard</span><br />
-            <p>Join the session and provide feedbacks below.</p>
+            <p>
+              Join the session and provide feedbacks below.
+            </p>
           </div>
         </div>
         <div className="div-clear" />
