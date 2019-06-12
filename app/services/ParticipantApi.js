@@ -45,7 +45,7 @@ class ParticipantApi {
     const payload = feedbacks.map((feedback) => ({
       comment: feedback.comment,
       username,
-      glad: ParticipantApi.getGladDoubleFromMood(feedback.mood),
+      glad: feedback.glad,
       noControl: 1.0,
       sessionCode: code,
       sessionToken: token,
@@ -78,15 +78,6 @@ class ParticipantApi {
     }
 
     return false;
-  }
-
-  static getGladDoubleFromMood(mood) {
-    switch (mood) {
-      case 'glad': return 1.0;
-      case 'sad': return 0.5;
-      case 'mad': return 0.0;
-      default: return 1.0;
-    }
   }
 
   start() {
@@ -180,7 +171,8 @@ class ParticipantApi {
         // this applies to artifact built with "npm run build"
         ParticipantApi.instance = new ParticipantApi(dispatch);
       } else {
-        ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
+        ParticipantApi.instance = new ParticipantApi(dispatch);
+        // ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
       }
     }
 
