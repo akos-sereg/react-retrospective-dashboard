@@ -19,10 +19,10 @@ class StartStopContinue extends React.Component {
         case 1.0:
           classNames.start = 'feedback-mood-highlight';
           break;
-        case 0.5:
+        case 0.0:
           classNames.stop = 'feedback-mood-highlight';
           break;
-        case 0.0:
+        case 0.5:
           classNames.continue = 'feedback-mood-highlight';
           break;
         default:
@@ -62,7 +62,7 @@ class StartStopContinue extends React.Component {
         </div>
 
         <div
-          onClick={(e) => this.selectMood(e, 0.5)}
+          onClick={(e) => this.selectMood(e, 0.0)}
           onKeyPress={() => {}}
           automation-id="radio-add-comment-stop"
           role="button"
@@ -75,7 +75,7 @@ class StartStopContinue extends React.Component {
         </div>
 
         <div
-          onClick={(e) => this.selectMood(e, 0.0)}
+          onClick={(e) => this.selectMood(e, 0.5)}
           onKeyPress={() => {}}
           automation-id="radio-add-comment-continue"
           role="button"
