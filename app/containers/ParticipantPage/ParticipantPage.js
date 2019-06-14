@@ -18,6 +18,7 @@ import { publishingFeedbacks } from '../../services/actions';
 import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
 import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 import { getMoodInficatorAsset as getMoodInficatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
+import { getMoodInficatorAsset as getMoodInficatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -133,6 +134,9 @@ class ParticipantPage extends React.Component {
         break;
       case '4ls':
         getMoodInficatorAsset = getMoodInficatorAssetFor4Ls;
+        break;
+      case 'pmi':
+        getMoodInficatorAsset = getMoodInficatorAssetForPmi;
         break;
       default:
         getMoodInficatorAsset = () => {};

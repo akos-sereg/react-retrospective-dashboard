@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../style.scss';
 import { moodSelected } from '../actions';
-import assetGlad from '../../../../assets/glad.png';
+import assetGlad from '../../../../assets/favorite.png';
 import assetSad from '../../../../assets/sad.png';
-import assetMad from '../../../../assets/mad.png';
+import assetMad from '../../../../assets/vomit.png';
 
 class GladSadMad extends React.Component {
   constructor(props, context) {
@@ -58,7 +58,7 @@ class GladSadMad extends React.Component {
           test-id="glad-selector"
         >
           <img height="120" src={assetGlad} alt="Glad" />
-          <p>SELECTED</p>
+          <p>GLAD</p>
         </div>
 
         <div
@@ -71,7 +71,7 @@ class GladSadMad extends React.Component {
           test-id="sad-selector"
         >
           <img height="120" src={assetSad} alt="Sad" />
-          <p>SELECTED</p>
+          <p>SAD</p>
         </div>
 
         <div
@@ -84,7 +84,7 @@ class GladSadMad extends React.Component {
           test-id="mad-selector"
         >
           <img height="120" src={assetMad} alt="Mad" />
-          <p>SELECTED</p>
+          <p>MAD</p>
         </div>
       </div>
     );

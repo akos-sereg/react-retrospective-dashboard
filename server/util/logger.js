@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 const chalk = require('chalk');
-const ip = require('ip');
 
 const divider = chalk.gray('\n-----------------------------------');
 
@@ -23,7 +22,8 @@ ${chalk.bold('Access URLs:')}${divider}
 Glad Sad Mad       : ${chalk.magenta(`http://${host}:${port}/#/type/gsm/code/1/token/a`)}
 Start Stop Continue: ${chalk.magenta(`http://${host}:${port}/#/type/ssc/code/1/token/a`)}
 4 Ls               : ${chalk.magenta(`http://${host}:${port}/#/type/4ls/code/1/token/a`)}
-  
+PMI                : ${chalk.magenta(`http://${host}:${port}/#/type/pmi/code/1/token/a`)}
+    
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
     `);
   }
