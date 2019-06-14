@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../style.scss';
 import { moodSelected } from '../actions';
-import assetFavorite from '../../../../assets/favorite.png';
-import assetVomit from '../../../../assets/vomit.png';
-import assetThinking from '../../../../assets/thinking.png';
+import assetPlus from '../../../../assets/favorite.png';
+import assetMinus from '../../../../assets/vomit.png';
+import assetInteresting from '../../../../assets/thinking.png';
 
 class PlusMinusInteresting extends React.Component {
   constructor(props, context) {
@@ -57,7 +57,7 @@ class PlusMinusInteresting extends React.Component {
           className={classNames.plus}
           test-id="plus-selector"
         >
-          <img height="120" src={assetFavorite} alt="Plus" />
+          <img height="120" src={assetPlus} alt="Plus" />
           <p>PLUS</p>
         </div>
 
@@ -70,7 +70,7 @@ class PlusMinusInteresting extends React.Component {
           className={classNames.minus}
           test-id="minus-selector"
         >
-          <img height="120" src={assetVomit} alt="Minus" />
+          <img height="120" src={assetMinus} alt="Minus" />
           <p>MINUS</p>
         </div>
 
@@ -83,7 +83,7 @@ class PlusMinusInteresting extends React.Component {
           className={classNames.interesting}
           test-id="interesting-selector"
         >
-          <img height="120" src={assetThinking} alt="Interesting" />
+          <img height="120" src={assetInteresting} alt="Interesting" />
           <p>INTERESTING</p>
         </div>
       </div>
@@ -101,19 +101,19 @@ const getMoodInficatorAsset = (glad) => {
   let moodIndicatorAutomationId = null;
   switch (glad) {
     case 1.0:
-      moodIndicator = assetFavorite;
+      moodIndicator = assetPlus;
       moodIndicatorAutomationId = 'image-sticker-plus';
       break;
     case 0.0:
-      moodIndicator = assetVomit;
+      moodIndicator = assetMinus;
       moodIndicatorAutomationId = 'image-sticker-minus';
       break;
     case 0.5:
-      moodIndicator = assetThinking;
+      moodIndicator = assetInteresting;
       moodIndicatorAutomationId = 'image-sticker-interesting';
       break;
     default:
-      moodIndicator = assetFavorite;
+      moodIndicator = assetPlus;
       moodIndicatorAutomationId = 'image-sticker-plus';
       break;
   }
