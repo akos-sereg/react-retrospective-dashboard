@@ -2,6 +2,7 @@
 export const BROKEN_PIPE = 'retrospective/ParticipantApi/BROKEN_PIPE';
 export const CONNECTING = 'retrospective/ParticipantApi/CONNECTING';
 export const CONNECTED = 'retrospective/ParticipantApi/CONNECTED';
+export const VOTING_STARTED = 'retrospective/ParticipantApi/VOTING_STARTED'
 
 // Application
 export const READY_STATE_CHANGED = 'retrospective/ParticipantButtonBar/READY_STATE_CHANGED';

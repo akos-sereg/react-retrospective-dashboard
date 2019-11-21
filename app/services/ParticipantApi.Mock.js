@@ -1,17 +1,20 @@
 import { brokenPipe, connected, connecting, publishingFeedbacks } from './actions';
 
 export default class ParticipantApiMock {
-  constructor(dispatch, emulateJoinFailure = false, emulatePublishFailure = false) {
+  constructor(
+    dispatch,
+    simulateJoinFailure = false,
+    simulatePublishFailure = false) {
     this.dispatch = dispatch;
-    this.emulateJoinFailure = emulateJoinFailure;
-    this.emulatePublishFailure = emulatePublishFailure;
+    this.simulateJoinFailure = simulateJoinFailure;
+    this.simulatePublishFailure = simulatePublishFailure;
   }
 
   async join() {
     this.dispatch(connecting());
     await this.delay(4);
 
-    if (this.emulateJoinFailure) {
+    if (this.simulateJoinFailure) {
       this.dispatch(brokenPipe());
     } else {
       this.dispatch(connected());
@@ -23,7 +26,7 @@ export default class ParticipantApiMock {
 
     await this.delay(2);
 
-    if (this.emulatePublishFailure) {
+    if (this.simulatePublishFailure) {
       return false;
     }
 

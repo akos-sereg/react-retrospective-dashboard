@@ -14,7 +14,8 @@ import {
   brokenPipe,
   connecting,
   connected,
-  publishingFeedbacks
+  publishingFeedbacks,
+  votingStarted,
 } from './actions';
 
 class ParticipantApi {
@@ -80,6 +81,16 @@ class ParticipantApi {
     return false;
   }
 
+  onBoardEventReceived(message) {
+    const body = JSON.parse(message.body);
+    const { action } = body;
+
+    if (action === 'voting') {
+      console.log('Dispatching Voting event');
+      ParticipantApi.getInstance(null).dispatch(votingStarted());
+    }
+  }
+
   start() {
     if (this.isRunning) {
       return;
@@ -111,6 +122,7 @@ class ParticipantApi {
         this.dispatch(connected());
         this.isRunning = true;
         this.stompClient.send(`/app/board/join/${this.code}/${this.token}`, {}, JSON.stringify({ username: this.username }));
+        this.subscription = this.stompClient.subscribe(`/topic/board/${this.code}/${this.token}`, this.onBoardEventReceived);
       } catch (error) {
         console.log(error);
       }
@@ -171,7 +183,8 @@ class ParticipantApi {
         // this applies to artifact built with "npm run build"
         ParticipantApi.instance = new ParticipantApi(dispatch);
       } else {
-        ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
+        ParticipantApi.instance = new ParticipantApi(dispatch);
+        // ParticipantApi.instance = new ParticipantApiMock(dispatch, false, false);
       }
     }
 

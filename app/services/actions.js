@@ -6,6 +6,7 @@ import {
   FEEDBACK_DELETED,
   FEEDBACK_UPDATED,
   PUBLISHING_FEEDBACKS,
+  VOTING_STARTED,
 } from '../utils/constants';
 
 const brokenPipe = (payload) => ({
@@ -20,6 +21,11 @@ const connecting = (payload) => ({
 
 const connected = (payload) => ({
   type: CONNECTED,
+  payload
+});
+
+const votingStarted = (payload) => ({
+  type: VOTING_STARTED,
   payload
 });
 
@@ -50,6 +56,7 @@ export {
   feedbackSaved,
   feedbackUpdated,
   feedbackDeleted,
-  publishingFeedbacks
+  publishingFeedbacks,
+  votingStarted
 };
 

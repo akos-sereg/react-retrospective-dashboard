@@ -38,15 +38,21 @@ class ParticipantButtonBar extends React.Component {
 
     return this.props.isAnyDialogOpen ? (<div />) : (
       <div className="participant-button-bar" role="group" aria-label="...">
-        <div className="title"><h4>Your comments for retrospective</h4></div>
-        <div className="btn-group">
-          <button onClick={() => this.handleUserReadyStateChange()} automation-id="i-am-ready-btn" type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
-            <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
-            I am ready
-          </button>
-          <button onClick={this.props.onPublishAll} automation-id="publish-all-btn" id="publish-all-btn" test-id="publish-all" type="button" className="btn btn-primary btn-sm" disabled={this.props.feedbacks && this.props.feedbacks.length > 0 ? '' : 'disabled'}>Publish All</button>
-          <button onClick={this.handleCreate} automation-id="create-comment-btn" type="button" className="btn btn-success btn-sm" test-id="pbb-create">Create</button>
+        <div className="title">{this.props.votingStarted ?
+          <h4>Voting has just been announced</h4>
+          : <h4>Your comments for retrospective</h4>}
         </div>
+        {this.props.votingStarted ?
+          <div><br /><br />Now you see the feedbacks published by others. Please vote for one of these.</div> :
+          <div className="btn-group">
+            <button onClick={() => this.handleUserReadyStateChange()} automation-id="i-am-ready-btn" type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
+              <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
+              I am ready
+            </button>
+            <button onClick={this.props.onPublishAll} automation-id="publish-all-btn" id="publish-all-btn" test-id="publish-all" type="button" className="btn btn-primary btn-sm" disabled={this.props.feedbacks && this.props.feedbacks.length > 0 ? '' : 'disabled'}>Publish All</button>
+            <button onClick={this.handleCreate} automation-id="create-comment-btn" type="button" className="btn btn-success btn-sm" test-id="pbb-create">Create</button>
+          </div>
+        }
       </div>
     );
   }
@@ -58,6 +64,7 @@ ParticipantButtonBar.propTypes = {
   feedbacks: PropTypes.array,
   isAnyDialogOpen: PropTypes.bool,
   isJoinClicked: PropTypes.bool,
+  votingStarted: PropTypes.bool,
 };
 
 export default ParticipantButtonBar;

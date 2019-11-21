@@ -9,7 +9,7 @@ import Button from '../../core/Button';
 import GladSadMad from './variations/GladSadMad';
 import StartStopContinue from './variations/StartStopContinue';
 import FourLs from './variations/FourLs';
-import PlusMinusInteresting from "./variations/PlusMinusInteresting";
+import PlusMinusInteresting from './variations/PlusMinusInteresting';
 
 class FeedbackDialog extends React.Component {
   static COMMENT_MAX_CHAR = 150;

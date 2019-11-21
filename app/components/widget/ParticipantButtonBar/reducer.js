@@ -4,11 +4,17 @@ import {
   FEEDBACK_DIALOG_CLOSING,
   CONFIRMATION_DIALOG_OPENING,
   CONFIRMATION_DIALOG_CLOSING,
-  JOIN_CLICKED,
+  JOIN_CLICKED, VOTING_STARTED,
 } from '../../../utils/constants';
 
 function participantButtonBarReducer(state = {}, action) {
   switch (action.type) {
+    case VOTING_STARTED:
+      return {
+        ...state,
+        votingStarted: true,
+      };
+
     case READY_STATE_CHANGED:
       return {
         ...state,

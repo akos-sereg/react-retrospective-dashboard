@@ -9,10 +9,10 @@ module.exports = {
   transformIgnorePatterns: ['node_modules/(?!(react-redux|lodash-es)/)'],
   coverageThreshold: {
     global: {
-      statements: 35,
-      branches: 20,
-      functions: 40,
-      lines: 35
+      statements: 10,
+      branches: 10,
+      functions: 10,
+      lines: 10
     }
   },
   coverageReporters: ['json', 'lcov', 'text-summary'],

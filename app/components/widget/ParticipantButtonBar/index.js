@@ -5,7 +5,8 @@ const mapStateToProps = (state) => ({
   ...state,
   isUserReady: state.participantButtonBarReducer.isConnected,
   isAnyDialogOpen: state.participantButtonBarReducer.isAnyDialogOpen,
-  isJoinClicked: state.participantButtonBarReducer.isJoinClicked
+  isJoinClicked: state.participantButtonBarReducer.isJoinClicked,
+  votingStarted: state.participantButtonBarReducer.votingStarted,
 });
 
 const mapDispatchToProps = (dispatch) => ({

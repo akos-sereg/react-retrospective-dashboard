@@ -13,7 +13,7 @@ $ npm install
 $ npm start
 ```
 
-Then open http://localhost:3000/#/code/1/token/2
+Then open http://localhost:3000/#/type/gsm/code/1/token/a
 
 For production build, run the following command:
 
