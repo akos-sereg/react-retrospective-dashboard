@@ -1,0 +1,77 @@
+.quote-container {
+  margin-bottom: 50px;
+  position: relative;
+  width: 350px;
+  float: left;
+  left: -50%;
+
+  .feedback-card-actions {
+    display: none;
+    position: absolute;
+    bottom: -30px;
+    left: 0px;
+
+    a {
+      margin-right: 20px;
+    }
+  }
+}
+
+.feedback-publishing {
+  opacity: 0.5;
+}
+
+.quote-container:hover {
+  .feedback-card-actions {
+    display: inline;
+
+    img {
+      margin: 5px;
+    }
+
+    a {
+      text-decoration: none;
+      opacity: 0.5;
+    }
+
+    a:hover {
+      opacity: 1.0;
+    }
+  }
+}
+
+.note {
+  color: #333;
+  position: relative;
+  width: 300px;
+  height: 150px;
+  padding: 20px;
+  font-family: Arial;
+  font-size: 14px;
+  box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
+  border-left: 0px;
+}
+
+.note .author {
+  display: block;
+  margin: 40px 0 0 0;
+  text-align: right;
+}
+
+.yellow {
+  background: #eae672;
+  /*-webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  transform: rotate(2deg);*/
+}
+
+.comment-image {
+  float: left;
+  width: 70px;
+}
+
+.comment-text {
+  width: 270px;
+}

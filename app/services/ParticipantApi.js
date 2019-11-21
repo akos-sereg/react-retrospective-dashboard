@@ -17,6 +17,7 @@ import {
   publishingFeedbacks,
   votingStarted,
 } from './actions';
+import BoardApi from './BoardApi';
 
 class ParticipantApi {
   instance = null;
@@ -31,6 +32,8 @@ class ParticipantApi {
 
   constructor(dispatch) {
     this.dispatch = dispatch;
+
+    this.onBoardEventReceived = this.onBoardEventReceived.bind(this);
   }
 
   async join(username, code, token) {
@@ -81,13 +84,15 @@ class ParticipantApi {
     return false;
   }
 
-  onBoardEventReceived(message) {
+  async onBoardEventReceived(message) {
     const body = JSON.parse(message.body);
     const { action } = body;
 
     if (action === 'voting') {
       console.log('Dispatching Voting event');
-      ParticipantApi.getInstance(null).dispatch(votingStarted());
+      const boardApi = new BoardApi();
+      const boardFeedbacks = await boardApi.getStickers(this.code, this.token);
+      ParticipantApi.getInstance(null).dispatch(votingStarted({ boardFeedbacks }));
     }
   }
 

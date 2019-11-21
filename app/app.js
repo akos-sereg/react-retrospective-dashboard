@@ -22,6 +22,8 @@ import unpublishedFeedbackReducer from './components/widget/UnpublishedFeedback/
 import confirmationDialogReducer from './components/dialog/ConfirmationDialog/reducer';
 import participantPageReducer from './containers/ParticipantPage/reducer';
 import participantApiReducer from './services/reducer';
+import boardFeedbackReducer from './components/widget/BoardFeedback/reducer';
+import boardFeedbackListReducer from './components/widget/BoardFeedbackList/reducer';
 
 const reducer = combineReducers({
   nicknameProviderReducer,
@@ -31,7 +33,9 @@ const reducer = combineReducers({
   unpublishedFeedbackListReducer,
   unpublishedFeedbackReducer,
   participantPageReducer,
-  confirmationDialogReducer
+  confirmationDialogReducer,
+  boardFeedbackReducer,
+  boardFeedbackListReducer,
 });
 
 export const store = createStore(reducer);

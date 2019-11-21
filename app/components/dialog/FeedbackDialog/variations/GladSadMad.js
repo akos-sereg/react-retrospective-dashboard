@@ -108,6 +108,7 @@ const getMoodInficatorAsset = (glad) => {
       moodIndicator = assetSad;
       moodIndicatorAutomationId = 'image-sticker-sad';
       break;
+    case 0.001:
     case 0.0:
       moodIndicator = assetMad;
       moodIndicatorAutomationId = 'image-sticker-mad';

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import NicknameProvider from '../../components/widget/NicknameProvider';
 import ParticipantButtonBar from '../../components/widget/ParticipantButtonBar';
 import UnpublishedFeedbackList from '../../components/widget/UnpublishedFeedbackList';
+import BoardFeedbackList from '../../components/widget/BoardFeedbackList';
 import FeedbackDialog from '../../components/dialog/FeedbackDialog';
 import Footer from '../../components/widget/Footer';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
@@ -123,6 +124,10 @@ class ParticipantPage extends React.Component {
     return !this.props.feedbacks || this.props.feedbacks.length === 0;
   }
 
+  isBoardFeedbackListEmpty() {
+    return !this.props.boardFeedbacks || this.props.boardFeedbacks.length === 0;
+  }
+
   render() {
     let getMoodInficatorAsset = () => {};
     switch (this.props.match.params.boardType) {
@@ -177,15 +182,21 @@ class ParticipantPage extends React.Component {
           <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} feedbacks={this.props.feedbacks} />
         </div>
 
-
-        <div className={this.isFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
-          <UnpublishedFeedbackList
-            feedbacks={this.props.feedbacks}
-            onDelete={this.handleFeedbackDelete}
-            onPublish={this.handleFeedbackPublish}
-            getMoodInficatorAsset={getMoodInficatorAsset}
-          />
-        </div>
+        {this.props.votingStarted ?
+          <div className={this.isBoardFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
+            <BoardFeedbackList
+              feedbacks={this.props.boardFeedbacks}
+              getMoodInficatorAsset={getMoodInficatorAsset}
+            />
+          </div> :
+          <div className={this.isFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
+            <UnpublishedFeedbackList
+              feedbacks={this.props.feedbacks}
+              onDelete={this.handleFeedbackDelete}
+              onPublish={this.handleFeedbackPublish}
+              getMoodInficatorAsset={getMoodInficatorAsset}
+            />
+          </div>}
 
         <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} boardType={this.props.match.params.boardType} />
         <ConfirmationDialog />
@@ -199,7 +210,9 @@ class ParticipantPage extends React.Component {
 ParticipantPage.propTypes = {
   dispatch: PropTypes.func,
   feedbacks: PropTypes.array,
-  match: PropTypes.object.isRequired
+  boardFeedbacks: PropTypes.array,
+  match: PropTypes.object.isRequired,
+  votingStarted: PropTypes.bool,
 };
 
 export default ParticipantPage;
