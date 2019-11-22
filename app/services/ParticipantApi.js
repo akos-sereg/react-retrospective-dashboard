@@ -97,7 +97,7 @@ class ParticipantApi {
   }
 
   vote(feedbackId, voteState) {
-    this.stompClient.send(`/app/board/sticker/${this.code}/${this.token}/${feedbackId}/vote`, {}, JSON.stringify({ vote: voteState }));
+    this.stompClient.send(`/app/board/sticker/${this.code}/${this.token}/${feedbackId}/vote`, {}, JSON.stringify({ vote: voteState, username: this.username }));
   }
 
   start() {

@@ -40,6 +40,7 @@ This configuration is the default.
 - Voting
   - Icon for Vote link on Participant side
   - Icon for Vote link on Host side
+  - Extend Participatn Api Mock to handle voting
 
 ## To be improved
 
