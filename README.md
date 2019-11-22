@@ -37,6 +37,10 @@ This configuration is the default.
 
 ## To be implemented
 
+- Voting
+  - Icon for Vote link on Participant side
+  - Icon for Vote link on Host side
+
 ## To be improved
 
 - Using `import styles from './styles'` to avoid style name collision

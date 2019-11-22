@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ParticipantApi from './../../../services/ParticipantApi';
 import './style.scss';
 import '../../../styles/global-styles.scss';
 import assetShare from '../../../assets/icons/share.svg';
@@ -20,12 +21,13 @@ class BoardFeedback extends React.Component {
       event.preventDefault();
     }
 
+    const newVotedState = !this.state.voted;
     this.setState(() => ({
       ...this.state,
-      voted: !this.state.voted,
+      voted: newVotedState,
     }));
 
-    console.log(this.props.feedback.id);
+    ParticipantApi.getInstance(null).vote(this.props.feedback.id, newVotedState);
   }
 
   render() {
