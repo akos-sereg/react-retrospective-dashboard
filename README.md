@@ -38,7 +38,6 @@ This configuration is the default.
 ## To be implemented
 
 - Voting
-  - Make sure that on page refersh (participant), the browser picks the most recent state of the session, loads user's votes
   - Full regression test by automation
   - Allow participant to go back to posting state
   - Allow particpants for GSM, SSM, 4LS, PMI to go back to the previous client, track these cases

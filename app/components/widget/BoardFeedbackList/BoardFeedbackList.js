@@ -22,7 +22,7 @@ class BoardFeedbackList extends React.Component {
           voted={voted}
           getMoodInficatorAsset={this.props.getMoodInficatorAsset}
         />
-      )
+      );
     }) : (<div />);
 
     if (this.props.feedbacks && this.props.feedbacks.length === 0) {

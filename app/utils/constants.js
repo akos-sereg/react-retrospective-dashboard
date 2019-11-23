@@ -18,6 +18,7 @@ export const CONFIRMATION_DIALOG_CLOSING = 'retrospective/ConfirmationDialog/CON
 export const CONFIRMATION_DIALOG_OPENING = 'retrospective/ConfirmationDialog/CONFIRMATION_DIALOG_OPENING';
 export const PUBLISHING_FEEDBACKS = 'retrospective/ParticipantApi/PUBLISHING_FEEDBACKS';
 export const JOIN_CLICKED = 'retrospective/NicknameProvider/JOIN_CLICKED';
+export const SWITCH_SCREEN_FEEDBACK = 'retrospective/ParticipantButtonBar/SWITCH_SCREEN_FEEDBACK';
 
 // core
 export const RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount';

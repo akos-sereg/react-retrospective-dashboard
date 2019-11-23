@@ -1,4 +1,4 @@
-import { READY_STATE_CHANGED, CREATE_FEEDBACK_CLICKED } from '../../../utils/constants';
+import { READY_STATE_CHANGED, CREATE_FEEDBACK_CLICKED, SWITCH_SCREEN_FEEDBACK } from '../../../utils/constants';
 
 const userReadyStateChanged = (isUserReady) => ({
   type: READY_STATE_CHANGED,
@@ -10,5 +10,10 @@ const createFeedbackClicked = () => ({
   payload: { }
 });
 
-export { userReadyStateChanged, createFeedbackClicked };
+const switchScreenToFeedback = () => ({
+  type: SWITCH_SCREEN_FEEDBACK,
+  payload: { }
+});
+
+export { userReadyStateChanged, createFeedbackClicked, switchScreenToFeedback };
 

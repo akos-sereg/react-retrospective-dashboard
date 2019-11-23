@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   boardFeedbacks: state.participantPageReducer.boardFeedbacks,
   votes: state.participantPageReducer.votes,
   votingStarted: state.participantPageReducer.votingStarted,
+  votingScreenDisplayed: state.participantPageReducer.votingScreenDisplayed,
 });
 
 const mapDispatchToProps = (dispatch) => ({

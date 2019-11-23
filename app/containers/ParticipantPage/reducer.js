@@ -3,7 +3,7 @@ import {
   FEEDBACK_SAVED,
   FEEDBACK_DELETED,
   FEEDBACK_UPDATED,
-  VOTING_STARTED
+  VOTING_STARTED, SWITCH_SCREEN_FEEDBACK
 } from '../../utils/constants';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
 
@@ -18,10 +18,17 @@ function participantPageReducer(state = {}, action) {
       return { ...state, feedbacks };
     }
 
+    case SWITCH_SCREEN_FEEDBACK:
+      return {
+        ...state,
+        votingScreenDisplayed: false,
+      };
+
     case VOTING_STARTED: {
       return {
         ...state,
         votingStarted: true,
+        votingScreenDisplayed: true,
         boardFeedbacks: action.payload.boardFeedbacks,
         votes: action.payload.votes,
       };

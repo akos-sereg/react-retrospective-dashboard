@@ -190,7 +190,7 @@ class ParticipantPage extends React.Component {
           <ParticipantButtonBar onPublishAll={this.handleFeedbackPublishAll} feedbacks={this.props.feedbacks} />
         </div>
 
-        {this.props.votingStarted ?
+        {this.props.votingScreenDisplayed ?
           <div className={this.isBoardFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
             <BoardFeedbackList
               feedbacks={this.props.boardFeedbacks}
@@ -222,7 +222,8 @@ ParticipantPage.propTypes = {
   boardFeedbacks: PropTypes.array,
   votes: PropTypes.array,
   match: PropTypes.object.isRequired,
-  votingStarted: PropTypes.bool,
+  // votingStarted: PropTypes.bool,
+  votingScreenDisplayed: PropTypes.bool,
 };
 
 export default ParticipantPage;
