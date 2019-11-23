@@ -15,7 +15,7 @@ import { confirmationDialogOpening } from '../../components/dialog/ConfirmationD
 import './style.scss';
 import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
-import { publishingFeedbacks } from '../../services/actions';
+import { publishingFeedbacks, legacyClientAllowed } from '../../services/actions';
 import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
 import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 import { getMoodInficatorAsset as getMoodInficatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
@@ -36,6 +36,7 @@ class ParticipantPage extends React.Component {
     this.handleFeedbackDelete = this.handleFeedbackDelete.bind(this);
     this.handleFeedbackPublish = this.handleFeedbackPublish.bind(this);
     this.handleFeedbackPublishAll = this.handleFeedbackPublishAll.bind(this);
+    this.handleUseOldVersion = this.handleUseOldVersion.bind(this);
 
     this.commentsService = LocalStorageOfCommentsService.getInstance(this.props.dispatch);
     this.participantApi = ParticipantApi.getInstance(this.props.dispatch);
@@ -44,12 +45,27 @@ class ParticipantPage extends React.Component {
   async componentWillMount() {
     this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
 
-    const boardState = await new BoardApi().getBoardState(this.props.match.params.code, this.props.match.params.token);
+    const sessionDetails = await new BoardApi().getBoardDetails(this.props.match.params.code, this.props.match.params.token);
+    const boardState = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.boardState : null;
+    const dashboardType = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.dashboardType : null;
+
     if (boardState === 'voting') {
       ParticipantApi.getInstance(this.props.dispatch).code = this.props.match.params.code;
       ParticipantApi.getInstance(this.props.dispatch).token = this.props.match.params.token;
       ParticipantApi.getInstance(this.props.dispatch).onBoardEventReceived({ body: JSON.stringify({ action: 'voting' }) });
     }
+
+    if (dashboardType === 2 || dashboardType === 5) {
+      this.props.dispatch(legacyClientAllowed());
+    }
+  }
+
+  handleUseOldVersion(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    window.location.href = `/join-web/${this.props.match.params.code}/${this.props.match.params.token}?legacy=true`;
   }
 
   handleJoined(nickname) {
@@ -174,6 +190,11 @@ class ParticipantPage extends React.Component {
               Join the session and provide feedbacks below.
             </p>
           </div>
+          {this.props.legacyClientAllowed ? (
+            <div role="button" className="use-old-version" onClick={(e) => this.handleUseOldVersion(e)}>
+              use old version
+            </div>
+          ) : <div />}
         </div>
         <div className="div-clear" />
 
@@ -224,6 +245,7 @@ ParticipantPage.propTypes = {
   match: PropTypes.object.isRequired,
   // votingStarted: PropTypes.bool,
   votingScreenDisplayed: PropTypes.bool,
+  legacyClientAllowed: PropTypes.bool,
 };
 
 export default ParticipantPage;

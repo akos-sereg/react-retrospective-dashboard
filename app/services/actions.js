@@ -7,6 +7,7 @@ import {
   FEEDBACK_UPDATED,
   PUBLISHING_FEEDBACKS,
   VOTING_STARTED,
+  LEGACY_CLIENT_ALLOWED,
 } from '../utils/constants';
 
 const brokenPipe = (payload) => ({
@@ -49,6 +50,11 @@ const publishingFeedbacks = (feedbackIds) => ({
   payload: { feedbackIds }
 });
 
+const legacyClientAllowed = () => ({
+  type: LEGACY_CLIENT_ALLOWED,
+  payload: null,
+});
+
 export {
   brokenPipe,
   connecting,
@@ -57,6 +63,7 @@ export {
   feedbackUpdated,
   feedbackDeleted,
   publishingFeedbacks,
-  votingStarted
+  votingStarted,
+  legacyClientAllowed
 };
 

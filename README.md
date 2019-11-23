@@ -38,12 +38,13 @@ This configuration is the default.
 ## To be implemented
 
 - Voting
+  - Remove beta flag from 4LS and PMI boards
+  - Left margin for stickers when there are too many, on Feedback / Voting screens
   - Full regression test by automation
-  - Allow participant to go back to posting state
-  - Allow particpants for GSM, SSM, 4LS, PMI to go back to the previous client, track these cases
+  - Advertise "voting" support per dashboard on front page
+  - Find a better place to advertise new feature
 
   - Not required before rollout
-    - Find a better place to advertise new feature
     - Extend Participatn Api Mock to handle voting
     - Error handling: make sure we get Sentry error in case service fails to load votes when fetching session data
 

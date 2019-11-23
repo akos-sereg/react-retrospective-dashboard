@@ -41,6 +41,18 @@
   }
 }
 
+.use-old-version {
+  font-size: 7pt;
+  color: #999999;
+  float: left;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.use-old-version:hover {
+  color: #111111;
+}
+
 .participant-nickname-selection {
   background-color: #eeeeee;
   // boder: solid 1px #000000;

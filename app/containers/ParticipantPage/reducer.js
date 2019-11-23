@@ -3,7 +3,7 @@ import {
   FEEDBACK_SAVED,
   FEEDBACK_DELETED,
   FEEDBACK_UPDATED,
-  VOTING_STARTED, SWITCH_SCREEN_FEEDBACK
+  VOTING_STARTED, SWITCH_SCREEN_FEEDBACK, LEGACY_CLIENT_ALLOWED
 } from '../../utils/constants';
 import LocalStorageOfCommentsService from '../../services/LocalStorageOfCommentsService';
 
@@ -17,6 +17,12 @@ function participantPageReducer(state = {}, action) {
       }
       return { ...state, feedbacks };
     }
+
+    case LEGACY_CLIENT_ALLOWED:
+      return {
+        ...state,
+        legacyClientAllowed: true,
+      };
 
     case SWITCH_SCREEN_FEEDBACK:
       return {
