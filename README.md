@@ -40,11 +40,11 @@ This configuration is the default.
 - Voting
   - Make sure that on page refersh (participant), the browser picks the most recent state of the session, loads user's votes
   - Full regression test by automation
-  - Find a better place to advertise new feature
-  - Alert host when voting session initiated (popup window)
+  - Allow participant to go back to posting state
   - Allow particpants for GSM, SSM, 4LS, PMI to go back to the previous client, track these cases
 
   - Not required before rollout
+    - Find a better place to advertise new feature
     - Extend Participatn Api Mock to handle voting
     - Error handling: make sure we get Sentry error in case service fails to load votes when fetching session data
 

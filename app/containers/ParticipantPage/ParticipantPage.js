@@ -20,6 +20,7 @@ import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../comp
 import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 import { getMoodInficatorAsset as getMoodInficatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
 import { getMoodInficatorAsset as getMoodInficatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
+import BoardApi from '../../services/BoardApi';
 
 class ParticipantPage extends React.Component {
   constructor(props, context) {
@@ -40,8 +41,15 @@ class ParticipantPage extends React.Component {
     this.participantApi = ParticipantApi.getInstance(this.props.dispatch);
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
+
+    const boardState = await new BoardApi().getBoardState(this.props.match.params.code, this.props.match.params.token);
+    if (boardState === 'voting') {
+      ParticipantApi.getInstance(this.props.dispatch).code = this.props.match.params.code;
+      ParticipantApi.getInstance(this.props.dispatch).token = this.props.match.params.token;
+      ParticipantApi.getInstance(this.props.dispatch).onBoardEventReceived({ body: JSON.stringify({ action: 'voting' }) });
+    }
   }
 
   handleJoined(nickname) {

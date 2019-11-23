@@ -2,6 +2,24 @@ import { APP_BASE_URL } from '../utils/constants';
 
 class BoardApi {
   async getStickers(code, token) {
+    const sessionDetails = await this.getBoardDetails(code, token);
+    if (sessionDetails != null) {
+      return sessionDetails.stickers;
+    }
+
+    return [];
+  }
+
+  async getBoardState(code, token) {
+    const sessionDetails = await this.getBoardDetails(code, token);
+    if (sessionDetails != null) {
+      return sessionDetails.sessionParameters ? sessionDetails.sessionParameters.boardState : null;
+    }
+
+    return null;
+  }
+
+  async getBoardDetails(code, token) {
     const response = await fetch(`${APP_BASE_URL}/rest/host/session/${code}?token=${token}`, {
       method: 'GET',
       headers: {
@@ -20,10 +38,10 @@ class BoardApi {
     }
 
     if (response.status === 200 && responseBody.errorCode === 0) {
-      return responseBody.stickers;
+      return responseBody;
     }
 
-    return [];
+    return null;
   }
 }
 

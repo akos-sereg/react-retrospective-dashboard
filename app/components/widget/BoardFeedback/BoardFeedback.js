@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ParticipantApi from './../../../services/ParticipantApi';
+import toastr from 'toastr';
 import './style.scss';
 import '../../../styles/global-styles.scss';
 import assetStar from '../../../assets/icons/star-mini.png';
@@ -21,13 +22,19 @@ class BoardFeedback extends React.Component {
       event.preventDefault();
     }
 
+    if (ParticipantApi.getInstance(this.props.dispatch).username == null) {
+      toastr.warning('You should join first, then you can vote.');
+      return;
+    }
+
     const newVotedState = !this.state.voted;
     this.setState(() => ({
       ...this.state,
       voted: newVotedState,
     }));
 
-    ParticipantApi.getInstance(null).vote(this.props.feedback.id, newVotedState);
+    ParticipantApi.getInstance(this.props.dispatch).vote(this.props.feedback.id, newVotedState);
+    toastr.success('Your vote will be reflected on the board soon.');
   }
 
   render() {
@@ -61,6 +68,7 @@ class BoardFeedback extends React.Component {
 }
 
 BoardFeedback.propTypes = {
+  dispatch: PropTypes.func,
   feedback: PropTypes.object.isRequired,
   getMoodInficatorAsset: PropTypes.func.isRequired,
 };
