@@ -38,10 +38,12 @@ This configuration is the default.
 ## To be implemented
 
 - Voting
-  - Make sure that the feature is restricted only to new participant clients (on host side)
   - Make sure that on page refersh (participant), the browser picks the most recent state of the session, loads user's votes
   - Full regression test by automation
-  - Use new participant client everywhere
+  - Find a better place to advertise new feature
+  - Alert host when voting session initiated (popup window)
+  - Allow particpants for GSM, SSM, 4LS, PMI to go back to the previous client, track these cases
+
   - Not required before rollout
     - Extend Participatn Api Mock to handle voting
     - Error handling: make sure we get Sentry error in case service fails to load votes when fetching session data
