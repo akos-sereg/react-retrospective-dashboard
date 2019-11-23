@@ -43,7 +43,7 @@ class ParticipantButtonBar extends React.Component {
           : <h4>Your comments for retrospective</h4>}
         </div>
         {this.props.votingStarted ?
-          <div><br /><br />Now you see the feedbacks published by others. Please vote for one of these.</div> :
+          <div><br /><br />Now you see all feedbacks from the board. You can vote to multiple feedbacks.</div> :
           <div className="btn-group">
             <button onClick={() => this.handleUserReadyStateChange()} automation-id="i-am-ready-btn" type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
               <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>

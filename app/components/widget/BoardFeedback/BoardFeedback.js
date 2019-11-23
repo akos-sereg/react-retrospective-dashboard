@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ParticipantApi from './../../../services/ParticipantApi';
 import './style.scss';
 import '../../../styles/global-styles.scss';
-import assetShare from '../../../assets/icons/share.svg';
+import assetStar from '../../../assets/icons/star-mini.png';
 
 class BoardFeedback extends React.Component {
   constructor(props, context) {
@@ -52,7 +52,7 @@ class BoardFeedback extends React.Component {
         <div className="div-clear"></div>
 
         <div className="feedback-card-actions">
-          <a href="#" onClick={(e) => this.handleVote(e)} test-id="uf-publish" automation-id="comment-item-publish-btn"><img alt="publish" src={assetShare} width="20" /> {this.state.voted ? 'Unvote' : 'Vote'}</a>
+          <a href="#" onClick={(e) => this.handleVote(e)} test-id="uf-publish" automation-id="comment-item-publish-btn"><img alt="publish" src={assetStar} width="20" /> {this.state.voted ? 'Remove my vote' : 'Vote'}</a>
         </div>
 
       </div>

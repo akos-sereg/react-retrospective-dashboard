@@ -38,9 +38,12 @@ This configuration is the default.
 ## To be implemented
 
 - Voting
-  - Icon for Vote link on Participant side
-  - Icon for Vote link on Host side
   - Extend Participatn Api Mock to handle voting
+  - Make sure that the feature is restricted only to new participant clients (on host side)
+  - Make sure that on page refersh (participant), the browser picks the most recent state of the session, loads user's votes
+  - Error handling: make sure we get Sentry error in case service fails to load votes when fetching session data
+  - Full regression test by automation
+  - Use new participant client everywhere
 
 ## To be improved
 
