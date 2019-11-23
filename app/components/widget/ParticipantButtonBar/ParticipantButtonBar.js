@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { userReadyStateChanged, createFeedbackClicked, switchScreenToFeedback } from './actions';
 import './style.scss';
+import ParticipantApi from '../../../services/ParticipantApi';
 
 class ParticipantButtonBar extends React.Component {
   constructor(props, context) {
@@ -13,6 +14,15 @@ class ParticipantButtonBar extends React.Component {
     this.handleUserReadyStateChange = this.handleUserReadyStateChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleSwitchToFeedback = this.handleSwitchToFeedback.bind(this);
+    this.handleSwitchToVote = this.handleSwitchToVote.bind(this);
+  }
+
+  handleSwitchToVote(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    ParticipantApi.getInstance(this.props.dispatch).onBoardEventReceived({ body: JSON.stringify({ action: 'voting' }) });
   }
 
   handleSwitchToFeedback(event) {
@@ -59,13 +69,21 @@ class ParticipantButtonBar extends React.Component {
             </div>
           ) :
           (
-            <div className="btn-group">
-              <button onClick={() => this.handleUserReadyStateChange()} automation-id="i-am-ready-btn" type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
-                <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
-                I am ready
-              </button>
-              <button onClick={this.props.onPublishAll} automation-id="publish-all-btn" id="publish-all-btn" test-id="publish-all" type="button" className="btn btn-primary btn-sm" disabled={this.props.feedbacks && this.props.feedbacks.length > 0 ? '' : 'disabled'}>Publish All</button>
-              <button onClick={this.handleCreate} automation-id="create-comment-btn" type="button" className="btn btn-success btn-sm" test-id="pbb-create">Create</button>
+            <div>
+              <div className="btn-group">
+                <button onClick={() => this.handleUserReadyStateChange()} automation-id="i-am-ready-btn" type="button" className="btn btn-default btn-sm" test-id="pbb-toggle-state">
+                  <span automation-id="i-am-ready-marker" id="ready-marker" className={userReadyIndicatorClasses}></span>
+                  I am ready
+                </button>
+                <button onClick={this.props.onPublishAll} automation-id="publish-all-btn" id="publish-all-btn" test-id="publish-all" type="button" className="btn btn-primary btn-sm" disabled={this.props.feedbacks && this.props.feedbacks.length > 0 ? '' : 'disabled'}>Publish All</button>
+                <button onClick={this.handleCreate} automation-id="create-comment-btn" type="button" className="btn btn-success btn-sm" test-id="pbb-create">Create</button>
+              </div>
+              {this.props.votingStarted ? (
+                <div>
+                  <br /><br />
+                  <span className="switch-back">You can <a href="#" onClick={(e) => this.handleSwitchToVote(e)}>switch</a> to Voting screen, as voting has been announced by Scrum Master.</span>
+                </div>
+              ) : <div />}
             </div>
           )
         }
