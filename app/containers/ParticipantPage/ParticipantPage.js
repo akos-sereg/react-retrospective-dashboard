@@ -194,6 +194,7 @@ class ParticipantPage extends React.Component {
           <div className={this.isBoardFeedbackListEmpty() ? 'participant-center-content' : 'participant-feedback-container'}>
             <BoardFeedbackList
               feedbacks={this.props.boardFeedbacks}
+              votes={this.props.votes}
               getMoodInficatorAsset={getMoodInficatorAsset}
             />
           </div> :
@@ -219,6 +220,7 @@ ParticipantPage.propTypes = {
   dispatch: PropTypes.func,
   feedbacks: PropTypes.array,
   boardFeedbacks: PropTypes.array,
+  votes: PropTypes.array,
   match: PropTypes.object.isRequired,
   votingStarted: PropTypes.bool,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ParticipantApi from './../../../services/ParticipantApi';
 import toastr from 'toastr';
+import ParticipantApi from './../../../services/ParticipantApi';
 import './style.scss';
 import '../../../styles/global-styles.scss';
 import assetStar from '../../../assets/icons/star-mini.png';
@@ -11,10 +11,13 @@ class BoardFeedback extends React.Component {
     super(props, context);
 
     this.state = {
-      voted: false,
+      voted: this.props.voted,
     };
 
     this.handleVote = this.handleVote.bind(this);
+  }
+
+  componentDidMount() {
   }
 
   handleVote(event) {
@@ -70,6 +73,7 @@ class BoardFeedback extends React.Component {
 BoardFeedback.propTypes = {
   dispatch: PropTypes.func,
   feedback: PropTypes.object.isRequired,
+  voted: PropTypes.bool,
   getMoodInficatorAsset: PropTypes.func.isRequired,
 };
 

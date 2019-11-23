@@ -23,6 +23,7 @@ function participantPageReducer(state = {}, action) {
         ...state,
         votingStarted: true,
         boardFeedbacks: action.payload.boardFeedbacks,
+        votes: action.payload.votes,
       };
     }
     case FEEDBACK_DELETED:

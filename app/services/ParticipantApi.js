@@ -91,8 +91,12 @@ class ParticipantApi {
     if (action === 'voting') {
       console.log('Dispatching Voting event');
       const boardApi = new BoardApi();
-      const boardFeedbacks = await boardApi.getStickers(this.code, this.token);
-      ParticipantApi.getInstance(null).dispatch(votingStarted({ boardFeedbacks }));
+      const sessionDetails = await boardApi.getBoardDetails(this.code, this.token);
+      ParticipantApi.getInstance(null).dispatch(
+        votingStarted({
+          boardFeedbacks: sessionDetails.stickers,
+          votes: sessionDetails.stickerVotes
+        }));
     }
   }
 

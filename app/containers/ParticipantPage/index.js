@@ -5,6 +5,7 @@ const mapStateToProps = (state) => ({
   ...state,
   feedbacks: state.participantPageReducer.feedbacks,
   boardFeedbacks: state.participantPageReducer.boardFeedbacks,
+  votes: state.participantPageReducer.votes,
   votingStarted: state.participantPageReducer.votingStarted,
 });
 
