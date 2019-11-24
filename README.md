@@ -38,11 +38,9 @@ This configuration is the default.
 ## To be implemented
 
 - Voting
-  - Remove beta flag from 4LS and PMI boards
-  - Left margin for stickers when there are too many, on Feedback / Voting screens
   - Full regression test by automation
-  - Advertise "voting" support per dashboard on front page
-  - Find a better place to advertise new feature
+  - Facebook post about the new feature
+  - Unit tests on service and frontend side
 
   - Not required before rollout
     - Extend Participatn Api Mock to handle voting
