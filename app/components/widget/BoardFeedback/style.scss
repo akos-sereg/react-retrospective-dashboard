@@ -1,4 +1,4 @@
-.quote-container {
+.quote-container-board-feedback {
   margin-bottom: 50px;
   position: relative;
   width: 350px;
@@ -17,11 +17,7 @@
   }
 }
 
-.feedback-publishing {
-  opacity: 0.5;
-}
-
-.quote-container:hover {
+.quote-container-board-feedback:hover {
   .feedback-card-actions {
     display: inline;
 
@@ -40,11 +36,7 @@
   }
 }
 
-.voted {
-  background-color: red;
-}
-
-.note {
+.note-board-feedback {
   color: #333;
   position: relative;
   width: 300px;
@@ -56,26 +48,25 @@
   border-left: 0px;
 }
 
-.note .author {
+.note-board-feedback .author {
   display: block;
   margin: 40px 0 0 0;
   text-align: right;
 }
 
-.graybg {
+.graybg-board-feedback {
   background: #eaeeee;
-  /*-webkit-transform: rotate(2deg);
-  -moz-transform: rotate(2deg);
-  -o-transform: rotate(2deg);
-  -ms-transform: rotate(2deg);
-  transform: rotate(2deg);*/
 }
 
-.comment-image {
+.yellow-board-feedback {
+  background: #eae672;
+}
+
+.comment-image-board-feedback {
   float: left;
   width: 70px;
 }
 
-.comment-text {
+.comment-text-board-feedback {
   width: 270px;
 }

@@ -33,7 +33,8 @@ class BoardApi {
       responseBody = JSON.parse(await response.text());
     } catch (error) {
       if (response.status !== 200) {
-        console.log(error);
+        console.error(error);
+        console.error(response);
       }
     }
 

@@ -46,17 +46,20 @@ class ParticipantPage extends React.Component {
     this.props.dispatch(pageLoading(this.commentsService.getFeedbackList()));
 
     const sessionDetails = await new BoardApi().getBoardDetails(this.props.match.params.code, this.props.match.params.token);
-    const boardState = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.boardState : null;
-    const dashboardType = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.dashboardType : null;
 
-    if (boardState === 'voting') {
-      ParticipantApi.getInstance(this.props.dispatch).code = this.props.match.params.code;
-      ParticipantApi.getInstance(this.props.dispatch).token = this.props.match.params.token;
-      ParticipantApi.getInstance(this.props.dispatch).onBoardEventReceived({ body: JSON.stringify({ action: 'voting' }) });
-    }
+    if (sessionDetails) {
+      const boardState = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.boardState : null;
+      const dashboardType = sessionDetails.sessionParameters ? sessionDetails.sessionParameters.dashboardType : null;
 
-    if (dashboardType === 2 || dashboardType === 5) {
-      this.props.dispatch(legacyClientAllowed());
+      if (boardState === 'voting') {
+        ParticipantApi.getInstance(this.props.dispatch).code = this.props.match.params.code;
+        ParticipantApi.getInstance(this.props.dispatch).token = this.props.match.params.token;
+        ParticipantApi.getInstance(this.props.dispatch).onBoardEventReceived({ body: JSON.stringify({ action: 'voting' }) });
+      }
+
+      if (dashboardType === 2 || dashboardType === 5) {
+        this.props.dispatch(legacyClientAllowed());
+      }
     }
   }
 

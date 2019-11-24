@@ -42,21 +42,21 @@ class BoardFeedback extends React.Component {
 
   render() {
     const { moodIndicator, moodIndicatorAutomationId } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
-    const classNames = ['quote-container'];
-    const noteClassNames = ['note'];
+    const classNames = ['quote-container-board-feedback'];
+    const noteClassNames = ['note-board-feedback'];
 
     if (this.state.voted) {
-      noteClassNames.push('yellow');
+      noteClassNames.push('yellow-board-feedback');
     } else {
-      noteClassNames.push('graybg');
+      noteClassNames.push('graybg-board-feedback');
     }
 
     return (
       <div className={classNames.join(' ')}>
         <blockquote className={noteClassNames.join(' ')}>
 
-          <div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>
-          <div className="comment-text" automation-id="sticker-comment">{this.props.feedback.comment}</div>
+          <div className="comment-image-board-feedback"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>
+          <div className="comment-text-board-feedback" automation-id="sticker-comment">{this.props.feedback.comment}</div>
 
         </blockquote>
         <div className="div-clear"></div>
