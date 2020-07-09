@@ -124,7 +124,7 @@ class FeedbackDialog extends React.Component {
             <PlusMinusInteresting feedback={this.props.feedback} dispatch={this.props.dispatch} />
             : <div /> }
 
-          {this.props.boardType === 'custom' ?
+          {this.props.boardType === 'cus' ?
             <Custom customTitles={this.state.customTitles} feedback={this.props.feedback} dispatch={this.props.dispatch} />
             : <div /> }
 

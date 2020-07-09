@@ -171,7 +171,7 @@ class ParticipantPage extends React.Component {
       case 'pmi':
         getMoodInficatorAsset = getMoodIndicatorAssetForPmi;
         break;
-      case 'custom': {
+      case 'cus': {
         getMoodInficatorAsset = getMoodIndicatorAssetForCustom;
         break;
       }
