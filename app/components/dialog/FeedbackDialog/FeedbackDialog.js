@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import toastr from 'toastr';
+import base64 from 'react-native-base64';
 import { feedbackDialogClosing } from './actions';
 import './style.scss';
 import '../../../styles/global-styles.scss';
@@ -10,6 +11,7 @@ import GladSadMad from './variations/GladSadMad';
 import StartStopContinue from './variations/StartStopContinue';
 import FourLs from './variations/FourLs';
 import PlusMinusInteresting from './variations/PlusMinusInteresting';
+import Custom from './variations/Custom';
 
 class FeedbackDialog extends React.Component {
   static COMMENT_MAX_CHAR = 150;
@@ -20,13 +22,25 @@ class FeedbackDialog extends React.Component {
     this.state = {
       commentText: '',
       commentCharsLeft: FeedbackDialog.COMMENT_MAX_CHAR,
-      mode: 'create' // create | update
+      mode: 'create', // create | update
     };
 
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.createFeedback = this.createFeedback.bind(this);
     this.updateFeedback = this.updateFeedback.bind(this);
     this.handleCommentTextChange = this.handleCommentTextChange.bind(this);
+  }
+
+  async componentWillMount() {
+    if (this.props.customTitles) {
+      const customTitles = base64.decode(this.props.customTitles).split(';');
+      this.setState(() => ({
+        ...this.state,
+        customTitles
+      }));
+
+      Custom.customTitles = customTitles;
+    }
   }
 
   afterOpenModal() {
@@ -110,6 +124,10 @@ class FeedbackDialog extends React.Component {
             <PlusMinusInteresting feedback={this.props.feedback} dispatch={this.props.dispatch} />
             : <div /> }
 
+          {this.props.boardType === 'custom' ?
+            <Custom customTitles={this.state.customTitles} feedback={this.props.feedback} dispatch={this.props.dispatch} />
+            : <div /> }
+
           <div className="div-clear" />
 
           <div className="form-group">
@@ -150,6 +168,7 @@ FeedbackDialog.propTypes = {
   onUpdate: PropTypes.func,
   mode: PropTypes.string,
   boardType: PropTypes.string.isRequired,
+  customTitles: PropTypes.string,
 };
 
 export default FeedbackDialog;

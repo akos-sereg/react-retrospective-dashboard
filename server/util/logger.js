@@ -23,6 +23,7 @@ Glad Sad Mad       : ${chalk.magenta(`http://${host}:${port}/#/type/gsm/code/1/t
 Start Stop Continue: ${chalk.magenta(`http://${host}:${port}/#/type/ssc/code/1/token/a`)}
 4 Ls               : ${chalk.magenta(`http://${host}:${port}/#/type/4ls/code/1/token/a`)}
 PMI                : ${chalk.magenta(`http://${host}:${port}/#/type/pmi/code/1/token/a`)}
+Custom             : ${chalk.magenta(`http://${host}:${port}/#/type/custom/code/1/token/a/bGlrZWQ7ZGlzbGlrZWQ7bGVhcm5lZA==`)}
     
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
     `);

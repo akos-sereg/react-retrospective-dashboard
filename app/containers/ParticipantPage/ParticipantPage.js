@@ -16,10 +16,11 @@ import './style.scss';
 import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks, legacyClientAllowed } from '../../services/actions';
-import { getMoodInficatorAsset as getMoodInficatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
-import { getMoodInficatorAsset as getMoodInficatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
-import { getMoodInficatorAsset as getMoodInficatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
-import { getMoodInficatorAsset as getMoodInficatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForCustom } from '../../components/dialog/FeedbackDialog/variations/Custom';
 import BoardApi from '../../services/BoardApi';
 
 class ParticipantPage extends React.Component {
@@ -159,17 +160,22 @@ class ParticipantPage extends React.Component {
     let getMoodInficatorAsset = () => {};
     switch (this.props.match.params.boardType) {
       case 'gsm':
-        getMoodInficatorAsset = getMoodInficatorAssetForGsm;
+        getMoodInficatorAsset = getMoodIndicatorAssetForGsm;
         break;
       case 'ssc':
-        getMoodInficatorAsset = getMoodInficatorAssetForSsc;
+        getMoodInficatorAsset = getMoodIndicatorAssetForSsc;
         break;
       case '4ls':
-        getMoodInficatorAsset = getMoodInficatorAssetFor4Ls;
+        getMoodInficatorAsset = getMoodIndicatorAssetFor4Ls;
         break;
       case 'pmi':
-        getMoodInficatorAsset = getMoodInficatorAssetForPmi;
+        getMoodInficatorAsset = getMoodIndicatorAssetForPmi;
         break;
+      case 'custom': {
+        getMoodInficatorAsset = getMoodIndicatorAssetForCustom;
+        break;
+      }
+
       default:
         getMoodInficatorAsset = () => {};
         break;
@@ -231,7 +237,12 @@ class ParticipantPage extends React.Component {
             />
           </div>}
 
-        <FeedbackDialog onSave={this.handleFeedbackSave} onUpdate={this.handleFeedbackUpdate} boardType={this.props.match.params.boardType} />
+        <FeedbackDialog
+          onSave={this.handleFeedbackSave}
+          onUpdate={this.handleFeedbackUpdate}
+          boardType={this.props.match.params.boardType}
+          customTitles={this.props.match.params.customTitles}
+        />
         <ConfirmationDialog />
 
         <Footer />
@@ -246,7 +257,6 @@ ParticipantPage.propTypes = {
   boardFeedbacks: PropTypes.array,
   votes: PropTypes.array,
   match: PropTypes.object.isRequired,
-  // votingStarted: PropTypes.bool,
   votingScreenDisplayed: PropTypes.bool,
   legacyClientAllowed: PropTypes.bool,
 };

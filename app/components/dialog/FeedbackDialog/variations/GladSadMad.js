@@ -96,7 +96,7 @@ GladSadMad.propTypes = {
   feedback: PropTypes.object,
 };
 
-const getMoodInficatorAsset = (glad) => {
+const getMoodIndicatorAsset = (glad) => {
   let moodIndicator = null;
   let moodIndicatorAutomationId = null;
   switch (glad) {
@@ -123,5 +123,5 @@ const getMoodInficatorAsset = (glad) => {
 };
 
 export default GladSadMad;
-export { getMoodInficatorAsset };
+export { getMoodIndicatorAsset };
 

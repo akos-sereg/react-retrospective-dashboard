@@ -52,7 +52,7 @@ class UnpublishedFeedback extends React.Component {
   }
 
   render() {
-    const { moodIndicator, moodIndicatorAutomationId } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
+    const { moodIndicator, moodIndicatorAutomationId, moodIndicatorText } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
     const isPublishing = this.props.publishingFeedbackIds
       && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
 
@@ -65,8 +65,13 @@ class UnpublishedFeedback extends React.Component {
       <div className={classNames.join(' ')}>
         <blockquote className="note yellow">
 
-          <div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>
-          <div className="comment-text" automation-id="sticker-comment">{this.props.feedback.comment}</div>
+          {moodIndicator == null ? null :
+            (<div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
+
+          <div className="comment-text" automation-id="sticker-comment">
+            {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
+            {this.props.feedback.comment}
+          </div>
 
         </blockquote>
         <div className="div-clear"></div>
