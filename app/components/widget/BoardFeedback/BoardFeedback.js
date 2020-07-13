@@ -41,7 +41,7 @@ class BoardFeedback extends React.Component {
   }
 
   render() {
-    const { moodIndicator, moodIndicatorAutomationId } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
+    const { moodIndicator, moodIndicatorAutomationId, moodIndicatorText } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
     const classNames = ['quote-container-board-feedback'];
     const noteClassNames = ['note-board-feedback'];
 
@@ -55,8 +55,12 @@ class BoardFeedback extends React.Component {
       <div className={classNames.join(' ')}>
         <blockquote className={noteClassNames.join(' ')}>
 
-          <div className="comment-image-board-feedback"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>
-          <div className="comment-text-board-feedback" automation-id="sticker-comment">{this.props.feedback.comment}</div>
+          {moodIndicator == null ? null :
+            (<div className="comment-image-board-feedback"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
+          <div className="comment-text-board-feedback">
+            {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
+            <span automation-id="sticker-comment">{this.props.feedback.comment}</span>
+          </div>
 
         </blockquote>
         <div className="div-clear"></div>

@@ -50,6 +50,7 @@ class Custom extends React.Component {
           onKeyPress={() => {}}
           role="button"
           tabIndex="0"
+          automation-id="radio-add-comment-a"
           className={classNames.start}
         >
           <p>{this.props.customTitles[0]}</p>
@@ -60,6 +61,7 @@ class Custom extends React.Component {
           onKeyPress={() => {}}
           role="button"
           tabIndex="0"
+          automation-id="radio-add-comment-b"
           className={classNames.stop}
         >
           <p>{this.props.customTitles[1]}</p>
@@ -70,6 +72,7 @@ class Custom extends React.Component {
           onKeyPress={() => {}}
           role="button"
           tabIndex="0"
+          automation-id="radio-add-comment-c"
           className={classNames.continue}
         >
           <p>{this.props.customTitles[2]}</p>

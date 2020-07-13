@@ -65,12 +65,12 @@ class UnpublishedFeedback extends React.Component {
       <div className={classNames.join(' ')}>
         <blockquote className="note yellow">
 
-          {moodIndicator == null ? null :
+          {moodIndicator == null ? (<span automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} />) :
             (<div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
 
-          <div className="comment-text" automation-id="sticker-comment">
+          <div className="comment-text">
             {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
-            {this.props.feedback.comment}
+            <span automation-id="sticker-comment">{this.props.feedback.comment}</span>
           </div>
 
         </blockquote>
