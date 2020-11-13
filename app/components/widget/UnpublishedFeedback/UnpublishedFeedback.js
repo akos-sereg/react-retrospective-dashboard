@@ -52,7 +52,14 @@ class UnpublishedFeedback extends React.Component {
   }
 
   render() {
-    const { moodIndicator, moodIndicatorAutomationId, moodIndicatorText } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
+    const {
+      moodIndicatorExtracted,
+      moodIndicatorAutomationId,
+      moodIndicatorText
+    } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
+
+    const moodIndicator = this.props.feedback.giphyImage ? this.props.feedback.giphyImage : moodIndicatorExtracted;
+
     const isPublishing = this.props.publishingFeedbackIds
       && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
 

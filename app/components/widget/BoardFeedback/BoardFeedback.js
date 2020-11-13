@@ -57,7 +57,7 @@ class BoardFeedback extends React.Component {
 
           {moodIndicator == null ? null :
             (<div className="comment-image-board-feedback"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
-          <div className="comment-text-board-feedback">
+          <div className="comment-text-board-feedback" automation-id="sticker-comment-div">
             {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
             <span automation-id="sticker-comment">{this.props.feedback.comment}</span>
           </div>
@@ -66,7 +66,7 @@ class BoardFeedback extends React.Component {
         <div className="div-clear"></div>
 
         <div className="feedback-card-actions">
-          <a href="#" onClick={(e) => this.handleVote(e)} test-id="uf-publish" automation-id="comment-item-publish-btn"><img alt="publish" src={assetStar} width="20" /> {this.state.voted ? 'Remove my vote' : 'Vote'}</a>
+          <a href="#" onClick={(e) => this.handleVote(e)} test-id="uf-publish" automation-id="comment-item-vote-btn"><img alt="vote" src={assetStar} width="20" /> {this.state.voted ? 'Remove my vote' : 'Vote'}</a>
         </div>
 
       </div>

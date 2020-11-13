@@ -121,6 +121,12 @@ Start Selenium from command line
 $ webdriver-manager start
 ```
 
+Switch to another command line and start frontend app
+
+```
+$ npm start
+```
+
 Switch to another command line and start E2E tests
 ```
 $ cd integration-tests

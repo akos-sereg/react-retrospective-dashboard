@@ -9,6 +9,7 @@ export const READY_STATE_CHANGED = 'retrospective/ParticipantButtonBar/READY_STA
 export const CREATE_FEEDBACK_CLICKED = 'retrospective/ParticipantButtonBar/CREATE_FEEDBACK_CLICKED';
 export const FEEDBACK_DIALOG_CLOSING = 'retrospective/FeedbackDialog/FEEDBACK_DIALOG_CLOSING';
 export const MOOD_SELECTED = 'retrospective/FeedbackDialog/GladSadMad/MOOD_SELECTED';
+export const GIPHY_SELECTED = 'retrospective/FeedbackDialog/GladSadMad/GIPHY_SELECTED';
 export const FEEDBACK_SAVED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_SAVED';
 export const FEEDBACK_DELETED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_DELETED';
 export const FEEDBACK_UPDATED = 'retrospective/LocalStorageOfCommentsService/FEEDBACK_UPDATED';

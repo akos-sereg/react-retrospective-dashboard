@@ -1,6 +1,7 @@
 import {
   FEEDBACK_DIALOG_CLOSING,
-  MOOD_SELECTED
+  MOOD_SELECTED,
+  GIPHY_SELECTED,
 } from '../../../utils/constants';
 
 const feedbackDialogClosing = () => ({
@@ -13,7 +14,13 @@ const moodSelected = (glad) => ({
   payload: { glad }
 });
 
+const giphySelected = (giphyImage) => ({
+  type: GIPHY_SELECTED,
+  payload: { giphyImage }
+});
+
 export {
   feedbackDialogClosing,
+  giphySelected,
   moodSelected
 };

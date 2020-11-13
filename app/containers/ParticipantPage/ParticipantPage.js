@@ -17,6 +17,7 @@ import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks, legacyClientAllowed } from '../../services/actions';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForGsmGiphy } from '../../components/dialog/FeedbackDialog/variations/GladSadMadGiphy';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
@@ -171,11 +172,12 @@ class ParticipantPage extends React.Component {
       case 'pmi':
         getMoodInficatorAsset = getMoodIndicatorAssetForPmi;
         break;
-      case 'cus': {
+      case 'cus':
         getMoodInficatorAsset = getMoodIndicatorAssetForCustom;
         break;
-      }
-
+      case 'gsmg':
+        getMoodInficatorAsset = getMoodIndicatorAssetForGsmGiphy;
+        break;
       default:
         getMoodInficatorAsset = () => {};
         break;
