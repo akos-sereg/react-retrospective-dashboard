@@ -98,8 +98,13 @@ class ParticipantPage extends React.Component {
       return;
     }
 
+    const feedbackPayload = { ...feedback };
+    if (feedback.giphyImage) {
+      feedbackPayload.comment += `[GIPHY:${feedback.giphyImage}]`;
+    }
+
     const isPublished = await this.participantApi.publish(
-      [feedback],
+      [feedbackPayload],
       this.state.nickname,
       this.props.match.params.code,
       this.props.match.params.token
@@ -130,8 +135,20 @@ class ParticipantPage extends React.Component {
       'Are you sure you want to Publish All?',
       async () => {
         const feedbacks = this.commentsService.getFeedbackList();
+
+        // giphy image to be included in comment
+        const feedbacksPayload = [];
+        feedbacks.forEach((f) => {
+          const feedbackPayload = { f };
+          if (feedbackPayload.giphyImage) {
+            feedbackPayload.comment += `[GIPHY:${feedbackPayload.giphyImage}]`;
+          }
+          feedbacksPayload.push(feedbackPayload);
+        });
+
+        // send to api
         const isPublished = await this.participantApi.publish(
-          feedbacks,
+          feedbacksPayload,
           this.state.nickname,
           this.props.match.params.code,
           this.props.match.params.token
