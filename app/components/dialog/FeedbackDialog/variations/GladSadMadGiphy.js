@@ -146,6 +146,12 @@ class GladSadMadGiphy extends React.Component {
               <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" />
             </div>
             : <div />}
+
+          {this.state.giphyResultIndex == null && this.props.feedback.giphyImage ?
+            <div>
+              <img src={this.props.feedback.giphyImage} alt="Giphy" />
+            </div>
+            : <div />}
         </div>
       </div>
     );
