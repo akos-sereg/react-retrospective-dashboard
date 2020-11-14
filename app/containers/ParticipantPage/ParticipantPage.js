@@ -140,8 +140,8 @@ class ParticipantPage extends React.Component {
         const feedbacksPayload = [];
         feedbacks.forEach((f) => {
           const feedbackPayload = { f };
-          if (feedbackPayload.giphyImage) {
-            feedbackPayload.comment += `[GIPHY:${feedbackPayload.giphyImage}]`;
+          if (f.giphyImage) {
+            feedbackPayload.comment = `${f.comment}[GIPHY:${f.giphyImage}]`;
           }
           feedbacksPayload.push(feedbackPayload);
         });

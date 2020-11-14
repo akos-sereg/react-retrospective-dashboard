@@ -140,11 +140,11 @@ class GladSadMadGiphy extends React.Component {
         </div>
         <TextInput name="giphy-search" onChange={(e) => this.handleGiphySearchTextChange(e)} width="200px" />
         <Button label="Search" onClick={async (e) => this.searchGiphy(e)} buttonType="primary" size="sm" />
-        {this.state.giphyResultIndex !== null ? <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" marginLeft={12} /> : <div/>}
+        {this.state.giphyResultIndex !== null ? <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" marginLeft={12} /> : <div />}
 
         <div style={{ clear: 'both' }} />
         <div>
-          {this.state.giphyResultIndex !== null ?
+          {this.state.giphyResultIndex !== null && this.state.giphyResults && this.state.giphyResults.data && this.state.giphyResults.data.length > this.state.giphyResultIndex ?
             <div className="giphy-image-center">
               <img
                 src={this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.url}

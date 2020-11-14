@@ -187,4 +187,9 @@
 .giphy-image-center {
   text-align: center;
   width: 100%;
+
+  img {
+    border: solid 1px #111111;
+    padding: 2px;
+  }
 }
