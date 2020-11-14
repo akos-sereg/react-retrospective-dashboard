@@ -24,7 +24,7 @@ class GladSadMadGiphy extends React.Component {
     };
 
     this.giphyService = new GiphyService();
-    this.maxHeight = 150;
+    this.maxHeight = 180;
   }
 
   getClassNames() {
@@ -94,7 +94,7 @@ class GladSadMadGiphy extends React.Component {
     const classNames = this.getClassNames();
     return (
       <div>
-        <div className="gsm-float-left">
+        <div className="gsm-float-left-giphy">
           <div
             onClick={(e) => this.selectMood(e, 1.0)}
             onKeyPress={() => {}}
@@ -104,7 +104,7 @@ class GladSadMadGiphy extends React.Component {
             className={classNames.glad}
             test-id="glad-selector"
           >
-            <img height="120" src={assetGlad} alt="Glad" />
+            <img height="80" src={assetGlad} alt="Glad" />
             <p>GLAD</p>
           </div>
 
@@ -117,7 +117,7 @@ class GladSadMadGiphy extends React.Component {
             className={classNames.sad}
             test-id="sad-selector"
           >
-            <img height="120" src={assetSad} alt="Sad" />
+            <img height="80" src={assetSad} alt="Sad" />
             <p>SAD</p>
           </div>
 
@@ -130,7 +130,7 @@ class GladSadMadGiphy extends React.Component {
             className={classNames.mad}
             test-id="mad-selector"
           >
-            <img height="120" src={assetMad} alt="Mad" />
+            <img height="80" src={assetMad} alt="Mad" />
             <p>MAD</p>
           </div>
         </div>
@@ -138,26 +138,25 @@ class GladSadMadGiphy extends React.Component {
         <div style={{ width: '200px' }}>
           Search from Giphy
         </div>
-        <TextInput name="giphy-search" onChange={(e) => this.handleGiphySearchTextChange(e)} width="200" />
+        <TextInput name="giphy-search" onChange={(e) => this.handleGiphySearchTextChange(e)} width="200px" />
         <Button label="Search" onClick={async (e) => this.searchGiphy(e)} buttonType="primary" size="sm" />
+        {this.state.giphyResultIndex !== null ? <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" marginLeft={12} /> : <div/>}
 
         <div style={{ clear: 'both' }} />
         <div>
           {this.state.giphyResultIndex !== null ?
-            <div>
+            <div className="giphy-image-center">
               <img
                 src={this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.url}
                 alt="Giphy"
-                height={parseInt(this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height) > this.maxHeight ? this.maxHeight : this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height}
+                height={parseInt(this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height, 10) > this.maxHeight ? this.maxHeight : this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height}
               />
-              <div style={{ clear: 'both' }} />
-              <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" />
             </div>
             : <div />}
 
           {this.state.giphyResultIndex == null && this.props.feedback.giphyImage ?
-            <div>
-              <img src={this.props.feedback.giphyImage} alt="Giphy" />
+            <div className="giphy-image-center">
+              <img src={this.props.feedback.giphyImage} alt="Giphy" height={this.maxHeight} />
             </div>
             : <div />}
         </div>
