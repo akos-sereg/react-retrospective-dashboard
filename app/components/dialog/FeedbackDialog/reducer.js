@@ -40,7 +40,8 @@ function feedbackDialogReducer(state = {}, action) {
         ...state,
         feedback: {
           ...state.feedback,
-          giphyImage: action.payload.giphyImage
+          giphyImage: action.payload.giphyImage,
+          giphyImageHeight: action.payload.height,
         }
       };
 

@@ -14,9 +14,9 @@ const moodSelected = (glad) => ({
   payload: { glad }
 });
 
-const giphySelected = (giphyImage) => ({
+const giphySelected = (giphyImage, height) => ({
   type: GIPHY_SELECTED,
-  payload: { giphyImage }
+  payload: { giphyImage, giphyImageHeight: height }
 });
 
 export {

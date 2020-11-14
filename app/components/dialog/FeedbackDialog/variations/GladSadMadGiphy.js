@@ -24,6 +24,7 @@ class GladSadMadGiphy extends React.Component {
     };
 
     this.giphyService = new GiphyService();
+    this.maxHeight = 150;
   }
 
   getClassNames() {
@@ -62,10 +63,12 @@ class GladSadMadGiphy extends React.Component {
     const searchText = this.state.giphySearchText;
 
     const giphyResults = await this.giphyService.search(searchText);
-    debugger;
     this.setState(() => ({ ...this.state, giphyResults, giphyResultIndex: 0 }));
 
-    this.props.dispatch(giphySelected(giphyResults.data[0].images.downsized.url));
+    if (giphyResults && giphyResults.data && giphyResults.data.length > 0
+      && giphyResults.data[0].images && giphyResults.data[0].images) {
+      this.props.dispatch(giphySelected(giphyResults.data[0].images.downsized.url, giphyResults.data[0].images.downsized.height));
+    }
   }
 
   shuffle(event) {
@@ -142,7 +145,11 @@ class GladSadMadGiphy extends React.Component {
         <div>
           {this.state.giphyResultIndex !== null ?
             <div>
-              <img src={this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.url} alt="Giphy" />
+              <img
+                src={this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.url}
+                alt="Giphy"
+                height={parseInt(this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height) > this.maxHeight ? this.maxHeight : this.state.giphyResults.data[this.state.giphyResultIndex].images.downsized.height}
+              />
               <div style={{ clear: 'both' }} />
               <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" />
             </div>

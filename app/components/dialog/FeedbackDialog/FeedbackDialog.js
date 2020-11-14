@@ -90,7 +90,7 @@ class FeedbackDialog extends React.Component {
   render() {
     const customStyles = {
       content: {
-        top: '30%',
+        top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',

@@ -30,6 +30,8 @@ and use `ParticipantApi.instance = new ParticipantApiMock(dispatch);` to instant
 
 This configuration is the default.
 
+For loal development, use mocked Giphy service: `app/services/GiphyService.js`, set `useMocks` to `true`.
+
 ## Release
 
 1. `$ npm run build`
