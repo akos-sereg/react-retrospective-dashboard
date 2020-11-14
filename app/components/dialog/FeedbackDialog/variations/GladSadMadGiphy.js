@@ -54,14 +54,15 @@ class GladSadMadGiphy extends React.Component {
     this.setState(() => ({ ...this.state, giphySearchText: text }));
   }
 
-  searchGiphy(event) {
+  async searchGiphy(event) {
     if (event) {
       event.stopPropagation();
     }
 
     const searchText = this.state.giphySearchText;
 
-    const giphyResults = this.giphyService.search(searchText);
+    const giphyResults = await this.giphyService.search(searchText);
+    debugger;
     this.setState(() => ({ ...this.state, giphyResults, giphyResultIndex: 0 }));
 
     this.props.dispatch(giphySelected(giphyResults.data[0].images.downsized.url));
@@ -135,7 +136,7 @@ class GladSadMadGiphy extends React.Component {
           Search from Giphy
         </div>
         <TextInput name="giphy-search" onChange={(e) => this.handleGiphySearchTextChange(e)} width="200" />
-        <Button label="Search" onClick={(e) => this.searchGiphy(e)} buttonType="primary" size="sm" />
+        <Button label="Search" onClick={async (e) => this.searchGiphy(e)} buttonType="primary" size="sm" />
 
         <div style={{ clear: 'both' }} />
         <div>
