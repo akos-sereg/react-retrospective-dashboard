@@ -172,27 +172,28 @@ GladSadMadGiphy.propTypes = {
 
 const getMoodIndicatorAsset = (glad) => {
   let moodIndicatorAutomationId = null;
+  let moodIndicatorText = null;
   switch (glad) {
     case 1.0:
-      // moodIndicator = assetGlad;
+      moodIndicatorText = 'Glad';
       moodIndicatorAutomationId = 'image-sticker-glad';
       break;
     case 0.5:
-      // moodIndicator = assetSad;
+      moodIndicatorText = 'Sad';
       moodIndicatorAutomationId = 'image-sticker-sad';
       break;
     case 0.001:
     case 0.0:
-      // moodIndicator = assetMad;
+      moodIndicatorText = 'Mad';
       moodIndicatorAutomationId = 'image-sticker-mad';
       break;
     default:
-      // moodIndicator = assetGlad;
+      moodIndicatorText = 'Glad';
       moodIndicatorAutomationId = 'image-sticker-glad';
       break;
   }
 
-  return { moodIndicator: null, moodIndicatorAutomationId };
+  return { moodIndicator: null, moodIndicatorAutomationId, moodIndicatorText };
 };
 
 export default GladSadMadGiphy;

@@ -51,14 +51,18 @@ class UnpublishedFeedback extends React.Component {
       }));
   }
 
+  isGiphyNote() {
+    return this.props.feedback.giphyImage != null
+  }
+
   render() {
     const {
-      moodIndicatorExtracted,
+      moodIndicator,
       moodIndicatorAutomationId,
       moodIndicatorText
     } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
 
-    const moodIndicator = this.props.feedback.giphyImage ? this.props.feedback.giphyImage : moodIndicatorExtracted;
+    const moodIndicatorImage = this.props.feedback.giphyImage ? this.props.feedback.giphyImage : moodIndicator;
 
     const isPublishing = this.props.publishingFeedbackIds
       && this.props.publishingFeedbackIds.indexOf(this.props.feedback.id) !== -1;
@@ -68,12 +72,32 @@ class UnpublishedFeedback extends React.Component {
       classNames.push('feedback-publishing');
     }
 
+    const classNamesBlockQuote = ['note', 'yellow'];
+    if (!this.isGiphyNote()) {
+      classNamesBlockQuote.push('note-fixed-height');
+    }
+
     return (
       <div className={classNames.join(' ')}>
-        <blockquote className="note yellow">
+        <blockquote className={classNamesBlockQuote.join(' ')}>
+          {moodIndicatorImage == null ? (
+            <span automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} />) :
+            (
+              <div className="comment-image">
+                <img
+                  automation-id="sticker-mood-indicator-image"
+                  automation-value={moodIndicatorAutomationId}
+                  src={moodIndicatorImage}
+                  width={this.isGiphyNote() ? 250 : 60}
+                  alt="mood indicator"
+                />
+              </div>)}
 
-          {moodIndicator == null ? (<span automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} />) :
-            (<div className="comment-image"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
+          {
+            this.isGiphyNote() ?
+              <div style={{ clear: 'both' }} />
+              : <span />
+          }
 
           <div className="comment-text">
             {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
