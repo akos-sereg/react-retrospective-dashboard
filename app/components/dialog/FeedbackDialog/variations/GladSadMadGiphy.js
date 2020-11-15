@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import '../style.scss';
 import { moodSelected, giphySelected } from '../actions';
 import assetGlad from '../../../../assets/favorite.png';
@@ -64,6 +65,13 @@ class GladSadMadGiphy extends React.Component {
     const searchText = this.state.giphySearchText;
 
     this.setState(() => ({ ...this.state, isLoadingGiphys: true }));
+    const self = this;
+    setTimeout(() => {
+      if (self.state.isLoadingGiphys) {
+        this.setState(() => ({ ...this.state, isLoadingGiphys: false }));
+        toastr.warning('Could not fetch data from Giphy in a timely manner. Please try again.');
+      }
+    }, 5000);
     const giphyResults = await this.giphyService.search(searchText);
     this.setState(() => ({ ...this.state, isLoadingGiphys: false }));
 
@@ -80,9 +88,19 @@ class GladSadMadGiphy extends React.Component {
       event.stopPropagation();
     }
 
-    const randomIndex = Math.floor(Math.random() * this.state.giphyResults.data.length);
-    this.setState(() => ({ ...this.state, giphyResultIndex: randomIndex }));
+    const currentIndex = this.state.giphyResultIndex;
+    let randomIndex = Math.floor(Math.random() * this.state.giphyResults.data.length);
 
+    // make an effort to choose a different gif from the previous one
+    for (let i = 0; i !== 3; i += 1) {
+      if (randomIndex !== currentIndex) {
+        break;
+      }
+
+      randomIndex = Math.floor(Math.random() * this.state.giphyResults.data.length);
+    }
+
+    this.setState(() => ({ ...this.state, giphyResultIndex: randomIndex }));
     this.props.dispatch(giphySelected(this.state.giphyResults.data[randomIndex].images.downsized.url));
   }
 
