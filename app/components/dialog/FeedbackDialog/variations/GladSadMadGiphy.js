@@ -27,6 +27,7 @@ class GladSadMadGiphy extends React.Component {
 
     this.giphyService = new GiphyService();
     this.maxHeight = 180;
+    this.giphyTimeoutMs = 5000;
   }
 
   getClassNames() {
@@ -71,7 +72,7 @@ class GladSadMadGiphy extends React.Component {
         this.setState(() => ({ ...this.state, isLoadingGiphys: false }));
         toastr.warning('Could not fetch data from Giphy in a timely manner. Please try again.');
       }
-    }, 5000);
+    }, this.giphyTimeoutMs);
     const giphyResults = await this.giphyService.search(searchText);
     this.setState(() => ({ ...this.state, isLoadingGiphys: false }));
 

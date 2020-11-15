@@ -52,7 +52,7 @@ class UnpublishedFeedback extends React.Component {
   }
 
   isGiphyNote() {
-    return this.props.feedback.giphyImage != null
+    return this.props.feedback.giphyImage != null;
   }
 
   render() {

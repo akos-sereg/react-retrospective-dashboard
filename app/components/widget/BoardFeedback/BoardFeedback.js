@@ -40,6 +40,15 @@ class BoardFeedback extends React.Component {
     toastr.success('Your vote will be reflected on the board soon.');
   }
 
+  isGiphyNote() {
+    const matchResult = this.props.feedback.comment.match(/(.*)\[GIPHY:(.*)\]/);
+    if (matchResult && matchResult.length >= 3) {
+      [this.props.feedback.comment, this.props.feedback.giphyImage] = [matchResult[1], matchResult[2]];
+    }
+
+    return this.props.feedback.giphyImage != null;
+  }
+
   render() {
     const { moodIndicator, moodIndicatorAutomationId, moodIndicatorText } = this.props.getMoodInficatorAsset(this.props.feedback.glad);
     const classNames = ['quote-container-board-feedback'];
@@ -51,12 +60,37 @@ class BoardFeedback extends React.Component {
       noteClassNames.push('graybg-board-feedback');
     }
 
+    let moodIndicatorImage = moodIndicator;
+    if (!this.isGiphyNote()) {
+      noteClassNames.push('note-fixed-height');
+    } else {
+      moodIndicatorImage = this.props.feedback.giphyImage;
+    }
+
     return (
       <div className={classNames.join(' ')}>
         <blockquote className={noteClassNames.join(' ')}>
 
-          {moodIndicator == null ? null :
-            (<div className="comment-image-board-feedback"><img automation-id="sticker-mood-indicator-image" automation-value={moodIndicatorAutomationId} src={moodIndicator} width="60" alt="mood indicator" /></div>)}
+          {moodIndicatorImage == null ? null :
+            (
+              <div className="comment-image-board-feedback">
+                <img
+                  automation-id="sticker-mood-indicator-image"
+                  automation-value={moodIndicatorAutomationId}
+                  src={moodIndicatorImage}
+                  width={this.isGiphyNote() ? 250 : 60}
+                  alt="mood indicator"
+                />
+              </div>
+            )
+          }
+
+          {
+            this.isGiphyNote() ?
+              <div style={{ clear: 'both' }} />
+              : <span />
+          }
+
           <div className="comment-text-board-feedback" automation-id="sticker-comment-div">
             {moodIndicatorText ? (<p><b>{moodIndicatorText}</b><br /></p>) : null}
             <span automation-id="sticker-comment">{this.props.feedback.comment}</span>

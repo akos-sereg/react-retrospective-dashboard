@@ -139,9 +139,9 @@ class ParticipantPage extends React.Component {
         // giphy image to be included in comment
         const feedbacksPayload = [];
         feedbacks.forEach((f) => {
-          const feedbackPayload = { f };
+          const feedbackPayload = { ...f };
           if (f.giphyImage) {
-            feedbackPayload.comment = `${f.comment}[GIPHY:${f.giphyImage}]`;
+            feedbackPayload.comment += `[GIPHY:${f.giphyImage}]`;
           }
           feedbacksPayload.push(feedbackPayload);
         });
