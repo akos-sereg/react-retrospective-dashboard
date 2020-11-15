@@ -21,6 +21,7 @@ class GladSadMadGiphy extends React.Component {
       giphySearchText: '',
       giphyResults: null,
       giphyResultIndex: null,
+      isLoadingGiphys: false,
     };
 
     this.giphyService = new GiphyService();
@@ -62,7 +63,10 @@ class GladSadMadGiphy extends React.Component {
 
     const searchText = this.state.giphySearchText;
 
+    this.setState(() => ({ ...this.state, isLoadingGiphys: true }));
     const giphyResults = await this.giphyService.search(searchText);
+    this.setState(() => ({ ...this.state, isLoadingGiphys: false }));
+
     this.setState(() => ({ ...this.state, giphyResults, giphyResultIndex: 0 }));
 
     if (giphyResults && giphyResults.data && giphyResults.data.length > 0
@@ -139,7 +143,13 @@ class GladSadMadGiphy extends React.Component {
           Search from Giphy
         </div>
         <TextInput name="giphy-search" onChange={(e) => this.handleGiphySearchTextChange(e)} width="200px" />
-        <Button label="Search" onClick={async (e) => this.searchGiphy(e)} buttonType="primary" size="sm" />
+        <Button
+          label="Search"
+          onClick={async (e) => this.searchGiphy(e)}
+          buttonType="primary"
+          size="sm"
+          isDisabled={this.state.isLoadingGiphys}
+        />
         {this.state.giphyResultIndex !== null ? <Button label="Shuffle" onClick={(e) => this.shuffle(e)} buttonType="primary" size="sm" marginLeft={12} /> : <div />}
 
         <div style={{ clear: 'both' }} />
