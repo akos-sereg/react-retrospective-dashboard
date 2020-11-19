@@ -50,6 +50,33 @@
   }
 }
 
+.gsm-float-left-giphy {
+  position: relative;
+  div {
+    outline: none;
+    float: left;
+    width: 33%;
+    text-align: center;
+    border: solid 1px #ffffff;
+    padding: 10px;
+    height: 150px;
+
+    p {
+      background-color: #ffffff;
+      color: #ffffff;
+      margin-top: 15px;
+      padding: 3px;
+      border-radius: 5px;
+      font-family: "Lucida Console";
+    }
+  }
+
+  div:hover {
+    border: solid 1px #329ECD;
+    border-radius: 5px;
+  }
+}
+
 .ssc-float-left {
   position: relative;
   div {
@@ -155,4 +182,14 @@
 .feedback-dialog-buttons {
   float: right;
   position: relative;
+}
+
+.giphy-image-center {
+  text-align: center;
+  width: 100%;
+
+  img {
+    border: solid 1px #111111;
+    padding: 2px;
+  }
 }

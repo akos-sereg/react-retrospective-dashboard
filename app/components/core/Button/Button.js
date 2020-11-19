@@ -13,6 +13,10 @@ class Button extends React.Component {
       classNames.push('button-wrapper-left');
     }
 
+    if (this.props.size) {
+      classNames.push(`btn-${this.props.size}`);
+    }
+
     const styles = {};
     if (this.props.marginTop) {
       styles.marginTop = `${this.props.marginTop}px`;
@@ -46,7 +50,8 @@ Button.propTypes = {
   marginLeft: PropTypes.string,
   testId: PropTypes.string,
   automationId: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  size: PropTypes.string
 };
 
 export default Button;

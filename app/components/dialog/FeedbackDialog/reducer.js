@@ -2,6 +2,7 @@ import {
   CREATE_FEEDBACK_CLICKED,
   FEEDBACK_DIALOG_CLOSING,
   MOOD_SELECTED,
+  GIPHY_SELECTED,
   EDIT_FEEDBACK_CLICKED,
 } from '../../../utils/constants';
 
@@ -31,6 +32,16 @@ function feedbackDialogReducer(state = {}, action) {
         feedback: {
           ...state.feedback,
           glad: action.payload.glad
+        }
+      };
+
+    case GIPHY_SELECTED:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          giphyImage: action.payload.giphyImage,
+          giphyImageHeight: action.payload.height,
         }
       };
 

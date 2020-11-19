@@ -8,6 +8,7 @@ import './style.scss';
 import '../../../styles/global-styles.scss';
 import Button from '../../core/Button';
 import GladSadMad from './variations/GladSadMad';
+import GladSadMadGiphy from './variations/GladSadMadGiphy';
 import StartStopContinue from './variations/StartStopContinue';
 import FourLs from './variations/FourLs';
 import PlusMinusInteresting from './variations/PlusMinusInteresting';
@@ -57,7 +58,11 @@ class FeedbackDialog extends React.Component {
       return;
     }
 
-    this.props.onSave({ glad: this.props.feedback.glad, comment: this.state.commentText });
+    this.props.onSave({
+      glad: this.props.feedback.glad,
+      comment: this.state.commentText,
+      giphyImage: this.props.feedback.giphyImage,
+    });
     this.props.dispatch(feedbackDialogClosing());
   }
 
@@ -71,6 +76,7 @@ class FeedbackDialog extends React.Component {
       id: this.props.feedback.id,
       glad: this.props.feedback.glad,
       comment: this.state.commentText,
+      giphyImage: this.props.feedback.giphyImage,
     });
 
     this.props.dispatch(feedbackDialogClosing());
@@ -84,7 +90,7 @@ class FeedbackDialog extends React.Component {
   render() {
     const customStyles = {
       content: {
-        top: '30%',
+        top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
@@ -126,6 +132,10 @@ class FeedbackDialog extends React.Component {
 
           {this.props.boardType === 'cus' ?
             <Custom customTitles={this.state.customTitles} feedback={this.props.feedback} dispatch={this.props.dispatch} />
+            : <div /> }
+
+          {this.props.boardType === 'gsmg' ?
+            <GladSadMadGiphy feedback={this.props.feedback} dispatch={this.props.dispatch} />
             : <div /> }
 
           <div className="div-clear" />

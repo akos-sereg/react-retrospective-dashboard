@@ -17,6 +17,7 @@ import logo from '../../assets/meeting-black.png';
 import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
 import { publishingFeedbacks, legacyClientAllowed } from '../../services/actions';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForGsm } from '../../components/dialog/FeedbackDialog/variations/GladSadMad';
+import { getMoodIndicatorAsset as getMoodIndicatorAssetForGsmGiphy } from '../../components/dialog/FeedbackDialog/variations/GladSadMadGiphy';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForSsc } from '../../components/dialog/FeedbackDialog/variations/StartStopContinue';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetFor4Ls } from '../../components/dialog/FeedbackDialog/variations/FourLs';
 import { getMoodIndicatorAsset as getMoodIndicatorAssetForPmi } from '../../components/dialog/FeedbackDialog/variations/PlusMinusInteresting';
@@ -97,8 +98,13 @@ class ParticipantPage extends React.Component {
       return;
     }
 
+    const feedbackPayload = { ...feedback };
+    if (feedback.giphyImage) {
+      feedbackPayload.comment += `[GIPHY:${feedback.giphyImage}]`;
+    }
+
     const isPublished = await this.participantApi.publish(
-      [feedback],
+      [feedbackPayload],
       this.state.nickname,
       this.props.match.params.code,
       this.props.match.params.token
@@ -129,8 +135,20 @@ class ParticipantPage extends React.Component {
       'Are you sure you want to Publish All?',
       async () => {
         const feedbacks = this.commentsService.getFeedbackList();
+
+        // giphy image to be included in comment
+        const feedbacksPayload = [];
+        feedbacks.forEach((f) => {
+          const feedbackPayload = { ...f };
+          if (f.giphyImage) {
+            feedbackPayload.comment += `[GIPHY:${f.giphyImage}]`;
+          }
+          feedbacksPayload.push(feedbackPayload);
+        });
+
+        // send to api
         const isPublished = await this.participantApi.publish(
-          feedbacks,
+          feedbacksPayload,
           this.state.nickname,
           this.props.match.params.code,
           this.props.match.params.token
@@ -171,11 +189,12 @@ class ParticipantPage extends React.Component {
       case 'pmi':
         getMoodInficatorAsset = getMoodIndicatorAssetForPmi;
         break;
-      case 'cus': {
+      case 'cus':
         getMoodInficatorAsset = getMoodIndicatorAssetForCustom;
         break;
-      }
-
+      case 'gsmg':
+        getMoodInficatorAsset = getMoodIndicatorAssetForGsmGiphy;
+        break;
       default:
         getMoodInficatorAsset = () => {};
         break;

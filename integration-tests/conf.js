@@ -17,7 +17,7 @@ const config = {
 
     chromeOptions: {
       /* remove the following line to run e2e tests non-headless */
-      args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
+      args: [ "--disable-gpu", "--window-size=800,600" ]
     }
   },
 

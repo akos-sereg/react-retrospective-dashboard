@@ -30,6 +30,8 @@ and use `ParticipantApi.instance = new ParticipantApiMock(dispatch);` to instant
 
 This configuration is the default.
 
+For loal development, use mocked Giphy service: `app/services/GiphyService.js`, set `useMocks` to `true`.
+
 ## Release
 
 1. `$ npm run build`
@@ -119,6 +121,12 @@ Start Selenium from command line
 
 ```
 $ webdriver-manager start
+```
+
+Switch to another command line and start frontend app
+
+```
+$ npm start
 ```
 
 Switch to another command line and start E2E tests
